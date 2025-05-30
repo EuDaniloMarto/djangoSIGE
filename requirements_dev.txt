@@ -1,0 +1,15 @@
+-r requirements.txt
+
+black==22.3.0; python_full_version >= '3.6.2'
+isort==5.13.2; python_full_version >= '3.8.0'
+
+flake8==6.1.0; python_full_version >= '3.8.1'
+flake8-django==1.4; python_full_version >= '3.7.2' and python_full_version < '4.0.0'
+mypy==1.8.0; python_version >= '3.8'
+
+djlint==1.35.2; python_version >= '3.8' and python_version < '4.0'
+
+pre-commit==3.5.0; python_version >= '3.8'
+
+pytest==7.4.4; python_version >= '3.7'
+pytest-django==4.5.2; python_version >= '3.5'
