@@ -1,7 +1,7 @@
 {% block js %}
-    
-  {% load static %}
-  <script type="text/javascript">
+    {% load static %}
+
+    <script type="text/javascript">
   	var cmun_path = '{% static 'tabelas/municipios/' %}'
 
   	var mun_inicial = [];
@@ -10,6 +10,5 @@
   	{% endfor %}
 
     $.Admin.pessoaForm.init(cmun_path, mun_inicial);
-  </script>  
-  
+    </script>
 {% endblock %}
