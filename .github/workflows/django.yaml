@@ -1,0 +1,43 @@
+# .github/workflows/ci.yaml
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8.16'
+          cache: 'pipenv'
+
+      - name: Install Pipenv
+        run: pip install pipenv
+
+      - name: Install dependencies with Pipenv
+        run: pipenv sync --dev
+        env:
+          PIPENV_VERBOSITY: "-1"
+
+      - name: Run pre-commit hooks
+        run: pipenv run pre-commit run --all-files --show-diff-on-failure
+
+      - name: Run Django Tests with Pytest
+        run: pipenv run pytest
+        env:
+          DEBUG: True
+          DATABASE_URL: "sqlite:///test.db"
+          SECRET_KEY: e6*gt)ib#5-wx!mhdt!6=90mjsa1s0#$fmg^b$(g@*-r%f1u82

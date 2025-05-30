@@ -1,0 +1,51 @@
+default_stages: [pre-commit]
+
+default_language_version:
+  python: python3.8
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: debug-statements
+
+  - repo: https://github.com/psf/black
+    rev: 22.3.0 # Ajustado: Black 24.x não suporta Python 3.8
+    hooks:
+      - id: black
+        args: [--line-length=120]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1 # Ajustado: Versões mais recentes podem ter problemas de build no Python 3.8
+    hooks:
+      - id: isort
+        args: [--profile=black, --line-length=120]
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.1.0 # Ajustado: Flake8 7.x não suporta mais Python 3.8
+    hooks:
+      - id: flake8
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0 # Ajustado: Mypy 1.14+ está removendo o suporte para Python 3.8
+    hooks:
+      - id: mypy
+        args: [--no-strict-optional]
+
+  - repo: https://github.com/djLint/djLint
+    rev: v1.35.2 # Ajustado: Versão 1.36.4 pode ter problemas de compatibilidade com Python 3.8 em certos cenários
+    hooks:
+      - id: djlint
+        name: djlint-format
+        args: [--extension=html,htm,txt, --check]
+
+ci:
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
