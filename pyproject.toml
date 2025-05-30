@@ -31,7 +31,7 @@ disable = ["H006", "H007", "H017"]
 ignore = ["D001", "D002"]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "djangosige.configs.settings"
+DJANGO_SETTINGS_MODULE = "config.settings"
 python_files = "tests.py test_*.py *_test.py"
 addopts = "--strict-markers --reuse-db -W ignore::DeprecationWarning"
 min_version = "7.0"
