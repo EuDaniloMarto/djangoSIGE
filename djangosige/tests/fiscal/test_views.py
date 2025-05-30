@@ -3,9 +3,9 @@
 from django.urls import reverse
 from django.utils import timezone
 
-from djangosige.apps.fiscal.models import GrupoFiscal, NaturezaOperacao, NotaFiscalEntrada, NotaFiscalSaida
-from djangosige.apps.vendas.models import PedidoVenda
+from djangosige.fiscal.models import GrupoFiscal, NaturezaOperacao, NotaFiscalEntrada, NotaFiscalSaida
 from djangosige.tests.test_case import BaseTestCase, replace_none_values_in_dictionary
+from djangosige.vendas.models import PedidoVenda
 
 AUT_XML_FORMSET_DATA = {
     "aut_form-0-cpf_cnpj": "",

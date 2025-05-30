@@ -2,10 +2,10 @@
 
 import re
 
+from django.conf import settings
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 
-from django.conf import settings
 
 class LoginRequiredMiddleware(MiddlewareMixin):
     def __init__(self, get_response=None, *args, **kwargs):
