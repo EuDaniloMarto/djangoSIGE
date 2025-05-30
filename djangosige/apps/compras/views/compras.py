@@ -3,6 +3,7 @@
 import io
 from datetime import datetime
 
+from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -15,7 +16,6 @@ from djangosige.apps.compras.forms import ItensCompraFormSet, OrcamentoCompraFor
 from djangosige.apps.compras.models import ItensCompra, OrcamentoCompra, Pagamento, PedidoCompra
 from djangosige.apps.estoque.models import EntradaEstoque, ItensMovimento, ProdutoEstocado
 from djangosige.apps.login.models import Usuario
-from djangosige.configs.settings import MEDIA_ROOT
 
 from .report_compras import CompraReport
 
@@ -515,7 +515,7 @@ class GerarPDFCompra(CustomView):
             usuario = Usuario.objects.get(pk=user_id)
             m_empresa = MinhaEmpresa.objects.get(m_usuario=usuario)
             flogo = m_empresa.m_empresa.logo_file
-            logo_path = "{0}{1}".format(MEDIA_ROOT, flogo.name)
+            logo_path = "{0}{1}".format(settings.MEDIA_ROOT, flogo.name)
             if flogo != "imagens/logo.png":
                 compra_report.topo_pagina.inserir_logo(logo_path)
 

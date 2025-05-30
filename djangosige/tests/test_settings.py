@@ -1,7 +1,7 @@
-import os
 import warnings
 
-from djangosige.configs import *
+from django.conf import settings
+
 
 warnings.filterwarnings(
     "ignore",
@@ -10,4 +10,6 @@ warnings.filterwarnings(
     r"django\.db\.models\.fields",
 )
 
-FIXTURE_DIRS.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures"))
+settings.FIXTURE_DIRS.append(
+    str(settings.APPS_DIR / "tests/fixtures")
+)

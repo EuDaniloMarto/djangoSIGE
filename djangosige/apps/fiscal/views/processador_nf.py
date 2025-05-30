@@ -2,6 +2,7 @@
 
 from ssl import SSLError
 
+from django.conf import settings
 from pysignfe.nf_e import nf_e
 from pysignfe.nfe.manual_600.nfe_310 import Det as Det_310
 from pysignfe.nfe.manual_600.nfe_310 import Dup as Dup_310
@@ -41,7 +42,6 @@ from djangosige.apps.fiscal.models import (
 from djangosige.apps.vendas.models import ItensVenda
 from djangosige.apps.vendas.models import Pagamento as PagamentoVenda
 from djangosige.apps.vendas.models import PedidoVenda
-from djangosige.configs.settings import MEDIA_ROOT
 
 
 class ProcessadorNotaFiscal(object):
@@ -1210,7 +1210,7 @@ class ProcessadorNotaFiscal(object):
                 ambiente=int(nota_obj.tp_amb),
                 estado=nota_obj.estado,
                 consumidor=nota_obj.consumidor,
-                caminho=MEDIA_ROOT,
+                caminho=settings.MEDIA_ROOT,
             )
         temp_list = []
         for err in processo.envio.erros:
@@ -1287,7 +1287,7 @@ class ProcessadorNotaFiscal(object):
                     contingencia=nota_obj.contingencia,
                     consultar_servico=False,
                     numero_lote=nota_obj.numero_lote,
-                    caminho=MEDIA_ROOT,
+                    caminho=settings.MEDIA_ROOT,
                 )
 
                 # HTTP 200 - OK
@@ -1431,7 +1431,7 @@ class ProcessadorNotaFiscal(object):
                     ambiente=int(nota_obj.tp_amb),
                     estado=nota_obj.estado,
                     contingencia=nota_obj.contingencia,
-                    caminho=MEDIA_ROOT,
+                    caminho=settings.MEDIA_ROOT,
                 )
 
                 # HTTP 200 - OK
@@ -1590,7 +1590,7 @@ class ProcessadorNotaFiscal(object):
                     estado=empresa.uf_padrao,
                     contingencia=False,
                     salvar_arquivos=salvar_arquivos,
-                    caminho=MEDIA_ROOT,
+                    caminho=settings.MEDIA_ROOT,
                 )
 
                 self.processo = processo
@@ -1641,7 +1641,7 @@ class ProcessadorNotaFiscal(object):
                 estado=empresa.uf_padrao,
                 nfce=nfce,
                 contingencia=False,
-                caminho=MEDIA_ROOT,
+                caminho=settings.MEDIA_ROOT,
             )
 
             self.processo = processo
@@ -1677,7 +1677,7 @@ class ProcessadorNotaFiscal(object):
             ambiente=int(ambiente),
             estado=uf,
             contingencia=False,
-            caminho=MEDIA_ROOT,
+            caminho=settings.MEDIA_ROOT,
         )
 
         self.processo = processo
@@ -1719,7 +1719,7 @@ class ProcessadorNotaFiscal(object):
             ambiente=int(ambiente),
             estado=uf,
             contingencia=False,
-            caminho=MEDIA_ROOT,
+            caminho=settings.MEDIA_ROOT,
         )
 
         self.processo = processo
@@ -1760,7 +1760,7 @@ class ProcessadorNotaFiscal(object):
             ambiente=int(ambiente),
             estado=uf,
             contingencia=False,
-            caminho=MEDIA_ROOT,
+            caminho=settings.MEDIA_ROOT,
         )
 
         self.processo = processo

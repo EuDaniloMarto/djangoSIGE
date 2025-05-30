@@ -3,6 +3,7 @@
 import operator
 from functools import reduce
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.models import Permission, User
@@ -23,7 +24,6 @@ from django.views.generic.edit import UpdateView
 from djangosige.apps.base.views_mixins import SuperUserRequiredMixin
 from djangosige.apps.cadastro.forms import MinhaEmpresaForm
 from djangosige.apps.cadastro.models import MinhaEmpresa
-from djangosige.configs.settings import DEFAULT_FROM_EMAIL
 
 from .forms import PasswordResetForm, PerfilUsuarioForm, SetPasswordForm, UserLoginForm, UserRegistrationForm
 from .models import Usuario
@@ -141,7 +141,7 @@ class ForgotPasswordView(FormView):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
 
-        if not DEFAULT_FROM_EMAIL:
+        if not settings.DEFAULT_FROM_EMAIL:
             form.add_error(field=None, error="Envio de email não configurado.")
             return self.form_invalid(form)
 
@@ -167,7 +167,7 @@ class ForgotPasswordView(FormView):
                         sended = send_mail(
                             subject,
                             email_mensagem,
-                            DEFAULT_FROM_EMAIL,
+                            settings.DEFAULT_FROM_EMAIL,
                             [
                                 associated_user.email,
                             ],

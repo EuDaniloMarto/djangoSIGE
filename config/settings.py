@@ -92,21 +92,21 @@ MIDDLEWARE = [
 # https://docs.djangoproject.com/en/3.1/ref/settings/#static-url
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#staticfiles-dirs
-STATICFILES_DIRS = [str(BASE_DIR / "static")]
+STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
 # Arquivos de mídia
 # ----------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/3.1/ref/settings/#media-url
 MEDIA_URL = "media/"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#std:setting-MEDIA_ROOT
-MEDIA_ROOT = str(BASE_DIR / "media/")
+MEDIA_ROOT = str(APPS_DIR / "media/")
 
 # Templates
 # ----------------------------------------------------------------------------
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(BASE_DIR / "templates")],
+        "DIRS": [str(APPS_DIR / "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -123,7 +123,7 @@ TEMPLATES = [
 
 # Fixtures
 # ----------------------------------------------------------------------------
-FIXTURE_DIRS = [str(BASE_DIR / "fixtures")]
+FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
 
 # Segurança
 # ----------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 import io
 from datetime import datetime
 
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -13,7 +14,6 @@ from djangosige.apps.cadastro.models import MinhaEmpresa
 from djangosige.apps.login.models import Usuario
 from djangosige.apps.vendas.forms import ItensVendaFormSet, OrcamentoVendaForm, PagamentoFormSet, PedidoVendaForm
 from djangosige.apps.vendas.models import ItensVenda, OrcamentoVenda, Pagamento, PedidoVenda
-from djangosige.configs.settings import MEDIA_ROOT
 
 from .report_vendas import VendaReport
 
@@ -455,7 +455,7 @@ class GerarPDFVenda(CustomView):
             usuario = Usuario.objects.get(pk=user_id)
             m_empresa = MinhaEmpresa.objects.get(m_usuario=usuario)
             flogo = m_empresa.m_empresa.logo_file
-            logo_path = "{0}{1}".format(MEDIA_ROOT, flogo.name)
+            logo_path = "{0}{1}".format(settings.MEDIA_ROOT, flogo.name)
             if flogo != "imagens/logo.png":
                 venda_report.topo_pagina.inserir_logo(logo_path)
 

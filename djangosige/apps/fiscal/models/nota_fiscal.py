@@ -4,11 +4,10 @@ import os
 import re
 from decimal import Decimal
 
+from django.conf import settings
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 from django.template.defaultfilters import date
-
-from djangosige.configs.settings import APP_ROOT, MEDIA_ROOT
 
 IND_PAG_ESCOLHAS = (
     ("0", "Pagamento à vista"),
@@ -152,10 +151,10 @@ class NotaFiscal(models.Model):
     @property
     def caminho_proc_completo(self):
         if self.arquivo_proc:
-            if APP_ROOT in self.arquivo_proc.name:
+            if settings.APPS_DIR in self.arquivo_proc.name:
                 return self.arquivo_proc.name
             else:
-                return os.path.join(APP_ROOT, self.arquivo_proc.url)
+                return os.path.join(settings.APPS_DIR, self.arquivo_proc.url)
         else:
             return ""
 
@@ -289,7 +288,7 @@ class ConfiguracaoNotaFiscal(models.Model):
             return True
 
     def get_certificado_a1(self):
-        return os.path.join(MEDIA_ROOT, self.arquivo_certificado_a1.name)
+        return os.path.join(settings.MEDIA_ROOT, self.arquivo_certificado_a1.name)
 
 
 class ErrosValidacaoNotaFiscal(models.Model):

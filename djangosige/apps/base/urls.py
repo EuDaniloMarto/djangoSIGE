@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.conf.urls import url
-
-from djangosige.configs import DEBUG
 
 from . import views
 
@@ -11,7 +10,7 @@ urlpatterns = [
     url(r"^$", views.IndexView.as_view(), name="index"),
 ]
 
-if DEBUG:
+if settings.DEBUG:
     urlpatterns += [
         url(r"^404/$", views.handler404),
         url(r"^500/$", views.handler500),

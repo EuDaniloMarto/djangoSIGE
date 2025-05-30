@@ -2,12 +2,12 @@
 
 import os
 
+from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
 from djangosige.apps.login.models import Usuario
-from djangosige.configs.settings import MEDIA_ROOT
 
 from .base import Pessoa
 
@@ -28,7 +28,7 @@ class Empresa(Pessoa):
     @property
     def caminho_completo_logo(self):
         if self.logo_file.name != "imagens/logo.png":
-            return os.path.join(MEDIA_ROOT, self.logo_file.name)
+            return os.path.join(settings.MEDIA_ROOT, self.logo_file.name)
         else:
             return ""
 
