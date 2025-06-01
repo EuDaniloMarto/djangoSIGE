@@ -2,15 +2,14 @@
 
 import re
 
+from django.conf import settings
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
-
-from .configs.settings import LOGIN_NOT_REQUIRED
 
 
 class LoginRequiredMiddleware(MiddlewareMixin):
     def __init__(self, get_response=None, *args, **kwargs):
-        self.exceptions = tuple(re.compile(url) for url in LOGIN_NOT_REQUIRED)
+        self.exceptions = tuple(re.compile(url) for url in settings.LOGIN_NOT_REQUIRED)
         self.get_response = get_response
 
         return super(LoginRequiredMiddleware, self).__init__(get_response, *args, **kwargs)

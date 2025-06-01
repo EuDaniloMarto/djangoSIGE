@@ -2,8 +2,8 @@
 
 from django.test import TestCase
 
-from djangosige.apps.cadastro.models import Produto
-from djangosige.apps.estoque.models import EntradaEstoque, ItensMovimento, LocalEstoque, SaidaEstoque
+from djangosige.cadastro.models import Produto
+from djangosige.estoque.models import EntradaEstoque, ItensMovimento, LocalEstoque, SaidaEstoque
 
 
 class MovimentoEstoqueModelTestCase(TestCase):
