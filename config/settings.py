@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "djangosige.apps.DjangosigeConfig",
     "djangosige.base",
     "djangosige.login",
     "djangosige.cadastro",
@@ -92,7 +93,7 @@ MIDDLEWARE = [
 # https://docs.djangoproject.com/en/3.1/ref/settings/#static-url
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#staticfiles-dirs
-STATICFILES_DIRS = [str(APPS_DIR / "static")]
+# STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
 # Arquivos de mídia
 # ----------------------------------------------------------------------------
@@ -106,7 +107,8 @@ MEDIA_ROOT = str(APPS_DIR / "media/")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(APPS_DIR / "templates")],
+        # "DIRS": [str(APPS_DIR / "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -123,7 +125,7 @@ TEMPLATES = [
 
 # Fixtures
 # ----------------------------------------------------------------------------
-FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
+# FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
 
 # Segurança
 # ----------------------------------------------------------------------------
