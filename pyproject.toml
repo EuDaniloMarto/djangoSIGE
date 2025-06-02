@@ -1,7 +1,54 @@
+[tool.poetry]
+name = "djangosige"
+version = "1.1.0"
+description = "Sistema Integrado de Gestão Empresarial baseado em Django"
+authors = ["Thiago Pena <thiagopena01@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "3.1.14"
+dj-database-url = "0.5.0"
+python-decouple = "3.1"
+geraldo = {url = "https://github.com/thiagopena/geraldo/archive/master.zip#sha256=295474be791f259c83ac36e9e133eddad2702f88548d3dde5f71b35de0a319a9"}
+pysignfe = {url = "https://github.com/thiagopena/PySIGNFe/archive/master.zip#sha256=72c71249846ea61e18324a215f9aa361631acfe17f2923a0309d2a1124dd7c87"}
+signxml = "2.5.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "22.3.0"
+isort = "5.13.2"
+mypy = "1.8.0"
+mypy-extensions = "1.1.0"
+djlint = "1.35.2"
+bandit = "1.7.10"
+vulture = "^2.14"
+pre-commit = "3.5.0"
+django-extensions = "3.1.3"
+django-debug-toolbar = "3.2.3"
+
+
+[tool.poetry.group.tests.dependencies]
+pytest = "^8.3.5"
+pytest-django = "^4.11.1"
+pytest-cov = "4.1.0"
+pytest-sugar = "^1.0.0"
+factory-boy = "^3.3.3"
+
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "6.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 
 [tool.black]
 line-length = 120
 target-version = ['py38']
+
 
 [tool.isort]
 profile = "black"
@@ -23,6 +70,7 @@ exclude = [
     "node_modules/",
 ]
 
+
 [tool.djlint]
 extension = "html,htm,txt"
 indent = 4
@@ -30,8 +78,18 @@ blank_line_after_tag = "load,extends,include"
 disable = ["H006", "H007", "H017"]
 ignore = ["D001", "D002"]
 
+
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings"
 python_files = "tests.py test_*.py *_test.py"
 addopts = "--strict-markers --reuse-db -W ignore::DeprecationWarning"
 min_version = "7.0"
+
+
+[vulture]
+exclude = [".venv/", "migrations/", "tests/", "**/apps.py", "config/"]
+min_confidence = 80
+
+
+[bandit]
+exclude = [".venv/", "migrations/", "tests/"]

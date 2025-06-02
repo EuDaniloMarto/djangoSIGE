@@ -1,9 +1,0 @@
-Django==3.1.14
-
-dj-database-url==0.5.0
-python-decouple==3.1
-
-Geraldo @ https://github.com/thiagopena/geraldo/archive/master.zip#sha256=295474be791f259c83ac36e9e133eddad2702f88548d3dde5f71b35de0a319a9
-PySIGNFe @ https://github.com/thiagopena/PySIGNFe/archive/master.zip#sha256=72c71249846ea61e18324a215f9aa361631acfe17f2923a0309d2a1124dd7c87
-
-signxml==2.5.2
