@@ -1,34 +1,45 @@
-# -*- coding: utf-8 -*-
+from http import HTTPStatus
 
-from django.conf import settings
-from django.urls import resolve, reverse
+from django.contrib.auth import get_user_model
+from django.test import TestCase
+from django.urls import reverse
 
-from djangosige.dashboard.views import IndexView
-from djangosige.tests.test_case import BaseTestCase
+UserModel = get_user_model()
 
 
-class BaseViewsTestCase(BaseTestCase):
-    def test_home_page_resolves(self):
-        view = resolve("/")
-        self.assertEqual(view.func.__name__, IndexView.as_view().__name__)
+class TestCaseDashboardView(TestCase):
+    def setUp(self):
+        self.credenciais = {
+            "username": "john_doe",
+            "password": "johndoe123",
+        }
+        UserModel.objects.create_user(**self.credenciais)
 
-    def test_home_page_get_request(self):
-        url = reverse("base:index")
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_usuario_autenticado_pode_acessar_pagina_dashboard(self):
+        self.client.login(**self.credenciais)
+        response = self.client.get(reverse("dashboard_index"))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
-    def test_404_page(self):
-        response = self.client.get("/404/")
-        self.assertTemplateUsed(response, "404.html")
-        self.assertEqual(response.status_code, 404)
+    def test_usuario_nao_atenticado_nao_pode_acessar_pagina_dashboard(self):
+        response = self.client.get(reverse("dashboard_index"))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
-    def test_500_page(self):
-        response = self.client.get("/500/")
-        # Se settings.DEBUG=True temos views personalizadas,
-        # caso contrário /500/ retornar 404
-        if settings.DEBUG:
-            self.assertTemplateUsed(response, "500.html")
-            self.assertEqual(response.status_code, 500)
-        else:
-            self.assertTemplateUsed(response, "404.html")
-            self.assertEqual(response.status_code, 404)
+    def test_atributo_data_atual_esta_na_resposta_da_view_dashboard(self):
+        self.client.login(**self.credenciais)
+        response = self.client.get(reverse("dashboard_index"))
+        self.assertIn("data_atual", response.context)
+
+    def test_atributo_quantidade_cadastro_esta_na_resposta_da_view_dashboard(self):
+        self.client.login(**self.credenciais)
+        response = self.client.get(reverse("dashboard_index"))
+        self.assertIn("quantidade_cadastro", response.context)
+
+    def test_atributo_agenda_hoje_esta_na_resposta_da_view_dashboard(self):
+        self.client.login(**self.credenciais)
+        response = self.client.get(reverse("dashboard_index"))
+        self.assertIn("agenda_hoje", response.context)
+
+    def test_atributo_alertas_esta_na_resposta_da_view_dashboard(self):
+        self.client.login(**self.credenciais)
+        response = self.client.get(reverse("dashboard_index"))
+        self.assertIn("alertas", response.context)
