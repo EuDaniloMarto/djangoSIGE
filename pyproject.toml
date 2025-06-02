@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "djangosige"
+version = "0.1.0"
+description = "Sistema integrado de gestão empresarial baseado em Django"
+authors = ["Thiago Pena <thiagopena01@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
