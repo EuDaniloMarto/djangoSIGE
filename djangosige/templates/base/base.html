@@ -52,7 +52,7 @@
                         <a href="javascript:void(0);" class="bars"></a>
                         <div class="navbar-brand">
                             <!-- Main icone, data e horario -->
-                            <span><a href="{% url 'base:index' %}">Django<b style="color:#e76d64;">SIGE</b></a></span>
+                            <span><a href="{% url 'dashboard_index' %}">Django<b style="color:#e76d64;">SIGE</b></a></span>
                             <!--<span style="padding-left:30px;">Bem-vindo(a), <strong class="username-strong"></strong></span>-->
                             <span style="padding-left:25px;"><i class="material-icons">&#xE8DF;</i></span>
                             <span>{% now "l, j/m/Y" %}</span>
@@ -137,7 +137,7 @@
                     <div class="menu">
                         <ul class="list">
                             <li>
-                                <a href="{% url 'base:index' %}">
+                                <a href="{% url 'dashboard_index' %}">
                                     <i class="material-icons">&#xE88A;</i>
                                     <span>Página Inicial</span>
                                 </a>

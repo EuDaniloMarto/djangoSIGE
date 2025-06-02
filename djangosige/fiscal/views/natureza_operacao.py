@@ -2,7 +2,7 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from djangosige.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 from djangosige.fiscal.forms import NaturezaOperacaoForm
 from djangosige.fiscal.models import NaturezaOperacao
 
