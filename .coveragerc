@@ -1,0 +1,16 @@
+[run]
+source =
+    djangosige # Medir cobertura do diretório atual
+
+omit =
+    */migrations/*
+    */tests/*
+    */venv/*
+    */env/*
+
+[report]
+show_missing = True
+exclude_lines =
+    pragma: no cover
+    raise NotImplementedError
+    if __name__ == '__main__':
