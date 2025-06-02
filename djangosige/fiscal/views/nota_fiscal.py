@@ -5,14 +5,14 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from djangosige.base.custom_views import (
+from djangosige.dashboard.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomTemplateView,
     CustomUpdateView,
     CustomView,
 )
-from djangosige.base.views_mixins import FormValidationMessageMixin
+from djangosige.dashboard.views_mixins import FormValidationMessageMixin
 from djangosige.cadastro.models import MinhaEmpresa
 from djangosige.fiscal.forms import (
     AutXMLFormSet,

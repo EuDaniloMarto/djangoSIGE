@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import View
 
-from djangosige.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from djangosige.dashboard.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 from djangosige.vendas.forms import CondicaoPagamentoForm
 from djangosige.vendas.models import CondicaoPagamento
 

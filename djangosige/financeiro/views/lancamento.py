@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from djangosige.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView, CustomView
+from djangosige.dashboard.custom_views import CustomCreateView, CustomListView, CustomUpdateView, CustomView
 from djangosige.compras.models import PedidoCompra
 from djangosige.estoque.models import ItensMovimento, ProdutoEstocado, SaidaEstoque
 from djangosige.financeiro.forms import ContaPagarForm, ContaReceberForm, EntradaForm, SaidaForm
