@@ -11,10 +11,10 @@ shell:
 	python manage.py shell
 
 test:
-	coverage run --source='djangosige' manage.py test && coverage report
+	pytest -cov
 
 format:
 	black . && isort .
 
-lint:
-	flake8 . && djlint djangosige/ --lint
+bandit:
+	bandit -r . -f html -o bandit_report.html --severity-level high
