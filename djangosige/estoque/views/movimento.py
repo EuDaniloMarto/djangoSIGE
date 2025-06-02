@@ -7,7 +7,7 @@ from itertools import chain
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from djangosige.dashboard.custom_views import CustomCreateView, CustomDetailView, CustomListView
+from djangosige.custom_views import CustomCreateView, CustomDetailView, CustomListView
 from djangosige.estoque.forms import (
     EntradaEstoqueForm,
     ItensMovimentoFormSet,

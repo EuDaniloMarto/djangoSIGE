@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.dashboard.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 from djangosige.cadastro.forms import (
     BancoFormSet,
     DocumentoFormSet,
@@ -12,6 +11,7 @@ from djangosige.cadastro.forms import (
     TelefoneFormSet,
 )
 from djangosige.cadastro.models import Banco, Documento, Email, Endereco, PessoaFisica, PessoaJuridica, Site, Telefone
+from djangosige.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 
 
 class AdicionarPessoaView(CustomCreateView):

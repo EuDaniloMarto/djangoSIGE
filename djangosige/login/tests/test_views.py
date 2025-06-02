@@ -32,7 +32,7 @@ class UserFormViewTestCase(BaseTestCase):
         }
         response = self.client.post(url, data, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "base/index.html")
+        self.assertTemplateUsed(response, "dashboard/dashboard_index.html")
 
 
 class UserRegistrationFormViewTestCase(BaseTestCase):

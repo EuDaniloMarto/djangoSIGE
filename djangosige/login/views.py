@@ -21,9 +21,9 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.generic import DeleteView, FormView, ListView, TemplateView, View
 from django.views.generic.edit import UpdateView
 
-from djangosige.dashboard.views_mixins import SuperUserRequiredMixin
 from djangosige.cadastro.forms import MinhaEmpresaForm
 from djangosige.cadastro.models import MinhaEmpresa
+from djangosige.views_mixins import SuperUserRequiredMixin
 
 from .forms import PasswordResetForm, PerfilUsuarioForm, SetPasswordForm, UserLoginForm, UserRegistrationForm
 from .models import Usuario
@@ -77,7 +77,7 @@ class UserFormView(View):
         form = self.form_class(None)
 
         if request.user.is_authenticated:
-            return redirect("base:index")
+            return redirect("dashboard_index")
         return render(request, self.template_name, {"form": form})
 
     def post(self, request):
@@ -90,7 +90,7 @@ class UserFormView(View):
                 if not request.POST.get("remember_me", None):
                     request.session.set_expiry(0)
                 login(request, user)
-                return redirect("base:index")
+                return redirect("dashboard_index")
 
         return render(request, self.template_name, {"form": form})
 

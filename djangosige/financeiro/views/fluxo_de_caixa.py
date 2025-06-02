@@ -5,7 +5,7 @@ from datetime import datetime
 from django.contrib import messages
 from django.urls import reverse_lazy
 
-from djangosige.dashboard.custom_views import CustomListView
+from djangosige.custom_views import CustomListView
 from djangosige.financeiro.models import MovimentoCaixa
 
 
