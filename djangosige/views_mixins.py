@@ -17,7 +17,7 @@ class SuperUserRequiredMixin(object):
                 "Apenas o administrador tem permissão para realizar esta operação.",
                 "permission_warning",
             )
-            return redirect("base:index")
+            return redirect("dashboard_index")
         return super(SuperUserRequiredMixin, self).dispatch(request, *args, **kwargs)
 
 
@@ -32,7 +32,7 @@ class CheckPermissionMixin(object):
                 "Usuário não tem permissão para realizar esta operação.",
                 "permission_warning",
             )
-            return redirect("base:index")
+            return redirect("dashboard_index")
         return super(CheckPermissionMixin, self).dispatch(request, *args, **kwargs)
 
     def check_user_permissions(self, request):

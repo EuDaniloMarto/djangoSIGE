@@ -22,7 +22,7 @@ class LoginRequiredMiddleware(MiddlewareMixin):
         if request.user.is_authenticated:
             for url in self.exceptions:
                 if url.match(request.path):
-                    return redirect("base:index")
+                    return redirect("dashboard_index")
             return None
 
         for url in self.exceptions:

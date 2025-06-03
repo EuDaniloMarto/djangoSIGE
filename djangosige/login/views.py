@@ -83,7 +83,7 @@ class UserFormView(View):
         form = self.form_class(None)
 
         if request.user.is_authenticated:
-            return redirect("base:index")
+            return redirect("dashboard_index")
         return render(request, self.template_name, {"form": form})
 
     def post(self, request):
@@ -96,7 +96,7 @@ class UserFormView(View):
                 if not request.POST.get("remember_me", None):
                     request.session.set_expiry(0)
                 login(request, user)
-                return redirect("base:index")
+                return redirect("dashboard_index")
 
         return render(request, self.template_name, {"form": form})
 

@@ -1,7 +1,7 @@
 from django.urls import include, path
 
 urlpatterns = [
-    path("", include("djangosige.base.urls")),
+    path("", include("djangosige.dashboard.urls")),
     path("login/", include("djangosige.login.urls")),
     path("cadastro/", include("djangosige.cadastro.urls")),
     path("fiscal/", include("djangosige.fiscal.urls")),
