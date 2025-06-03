@@ -1,7 +1,5 @@
 """Configurações do projeto DjangoSIGE"""
 
-# TODO: remover
-import os
 from pathlib import Path
 
 from decouple import Csv, config
@@ -10,10 +8,6 @@ from dj_database_url import parse as dburl
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 APPS_DIR = BASE_DIR / "djangosige"
-
-# TODO: remover
-APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-PROJECT_ROOT = os.path.abspath(os.path.dirname(APP_ROOT))
 
 # --- Geral ------------------------------------------------------------------
 DEBUG = config("DEBUG", default=False, cast=bool)
@@ -43,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "djangosige",
     "djangosige.apps.base",
     "djangosige.apps.login",
     "djangosige.apps.cadastro",
@@ -92,7 +87,7 @@ MIDDLEWARE = [
 
 # --- Arquivos estáticos -----------------------------------------------------
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(APPS_DIR / "static")]
+# STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
 # --- Arquivos de mídia ------------------------------------------------------
 MEDIA_URL = "media/"
@@ -102,7 +97,7 @@ MEDIA_ROOT = str(APPS_DIR / "media")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(APPS_DIR / "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -118,7 +113,7 @@ TEMPLATES = [
 ]
 
 # --- Fixture ----------------------------------------------------------------
-FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
+# FIXTURE_DIRS = []
 
 # --- Segurança --------------------------------------------------------------
 SECRET_KEY = config("SECRET_KEY")
