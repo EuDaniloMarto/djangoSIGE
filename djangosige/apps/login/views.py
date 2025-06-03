@@ -1,37 +1,38 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout, get_user_model
-from django.views.generic import View, TemplateView, FormView, ListView, DeleteView
-from django.views.generic.edit import UpdateView
-
-from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
-from django.contrib.auth.models import Permission
-
-from django.db import DatabaseError
-from django.db.models.query_utils import Q
-from django.core.exceptions import ValidationError
-from django.core.mail import send_mail
-from django.urls import reverse_lazy
-from django.contrib.auth.models import User
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template import loader
-
-from djangosige.apps.base.views_mixins import SuperUserRequiredMixin
-
-from .forms import UserLoginForm, UserRegistrationForm, PasswordResetForm, SetPasswordForm, PerfilUsuarioForm
-from .models import Usuario
-from djangosige.configs.settings import DEFAULT_FROM_EMAIL
-
-from djangosige.apps.cadastro.forms import MinhaEmpresaForm
-from djangosige.apps.cadastro.models import MinhaEmpresa
-
 import operator
 from functools import reduce
 
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import get_user_model, login, logout
+from django.contrib.auth.models import Permission, User
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+from django.db import DatabaseError
+from django.db.models.query_utils import Q
+from django.shortcuts import redirect, render
+from django.template import loader
+from django.urls import reverse_lazy
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.views.generic import DeleteView, FormView, ListView, TemplateView, View
+from django.views.generic.edit import UpdateView
+
+from djangosige.apps.base.views_mixins import SuperUserRequiredMixin
+from djangosige.apps.cadastro.forms import MinhaEmpresaForm
+from djangosige.apps.cadastro.models import MinhaEmpresa
+
+from .forms import (
+    PasswordResetForm,
+    PerfilUsuarioForm,
+    SetPasswordForm,
+    UserLoginForm,
+    UserRegistrationForm,
+)
+from .models import Usuario
 
 DEFAULT_PERMISSION_MODELS = ['cliente', 'fornecedor', 'produto',
                              'empresa', 'transportadora', 'unidade', 'marca', 'categoria', 'orcamentocompra', 'pedidocompra', 'condicaopagamento', 'orcamentovenda', 'pedidovenda',
@@ -114,7 +115,7 @@ class ForgotPasswordView(FormView):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
 
-        if not DEFAULT_FROM_EMAIL:
+        if not settings.DEFAULT_FROM_EMAIL:
             form.add_error(
                 field=None, error=u"Envio de email não configurado.")
             return self.form_invalid(form)
@@ -140,7 +141,7 @@ class ForgotPasswordView(FormView):
                         email_template_name = 'login/trocar_senha_email.html'
                         email_mensagem = loader.render_to_string(
                             email_template_name, c)
-                        sended = send_mail(subject, email_mensagem, DEFAULT_FROM_EMAIL, [
+                        sended = send_mail(subject, email_mensagem, settings.DEFAULT_FROM_EMAIL, [
                                            associated_user.email, ], fail_silently=False)
 
                         if sended == 1:

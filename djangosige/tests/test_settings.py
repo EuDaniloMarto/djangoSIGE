@@ -1,6 +1,6 @@
-import os
-from djangosige.configs import *
 import warnings
+
+from django.conf import settings
 
 
 warnings.filterwarnings(
@@ -8,5 +8,4 @@ warnings.filterwarnings(
     RuntimeWarning, r'django\.db\.models\.fields',
 )
 
-FIXTURE_DIRS.append(os.path.join(os.path.dirname(
-    os.path.abspath(__file__)), 'fixtures'))
+settings.FIXTURE_DIRS.append(str(settings.APPS_DIR / 'tests/fixtures'))

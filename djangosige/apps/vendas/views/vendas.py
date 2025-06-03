@@ -1,20 +1,34 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
+import io
+from datetime import datetime
+
+from django.conf import settings
 from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from geraldo.generators import PDFGenerator
 
-from djangosige.apps.base.custom_views import CustomView, CustomCreateView, CustomListView, CustomUpdateView
-
-from djangosige.apps.vendas.forms import OrcamentoVendaForm, PedidoVendaForm, ItensVendaFormSet, PagamentoFormSet
-from djangosige.apps.vendas.models import OrcamentoVenda, PedidoVenda, ItensVenda, Pagamento
+from djangosige.apps.base.custom_views import (
+    CustomCreateView,
+    CustomListView,
+    CustomUpdateView,
+    CustomView,
+)
 from djangosige.apps.cadastro.models import MinhaEmpresa
 from djangosige.apps.login.models import Usuario
-from djangosige.configs.settings import MEDIA_ROOT
-
-from geraldo.generators import PDFGenerator
-from datetime import datetime
-import io
+from djangosige.apps.vendas.forms import (
+    ItensVendaFormSet,
+    OrcamentoVendaForm,
+    PagamentoFormSet,
+    PedidoVendaForm,
+)
+from djangosige.apps.vendas.models import (
+    ItensVenda,
+    OrcamentoVenda,
+    Pagamento,
+    PedidoVenda,
+)
 
 from .report_vendas import VendaReport
 
@@ -454,7 +468,7 @@ class GerarPDFVenda(CustomView):
             usuario = Usuario.objects.get(pk=user_id)
             m_empresa = MinhaEmpresa.objects.get(m_usuario=usuario)
             flogo = m_empresa.m_empresa.logo_file
-            logo_path = '{0}{1}'.format(MEDIA_ROOT, flogo.name)
+            logo_path = '{0}{1}'.format(settings.MEDIA_ROOT, flogo.name)
             if flogo != 'imagens/logo.png':
                 venda_report.topo_pagina.inserir_logo(logo_path)
 
