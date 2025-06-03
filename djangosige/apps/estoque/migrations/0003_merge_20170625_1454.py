@@ -8,9 +8,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('estoque', '0002_initial_data'),
-        ('estoque', '0002_auto_20170625_1450'),
+        ("estoque", "0002_initial_data"),
+        ("estoque", "0002_auto_20170625_1450"),
     ]
 
-    operations = [
-    ]
+    operations = []

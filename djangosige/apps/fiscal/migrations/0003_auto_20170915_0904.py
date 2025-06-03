@@ -8,13 +8,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-         ('fiscal', '0001_initial'),
+        ("fiscal", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='notafiscal',
-            name='ind_pres',
-            field=models.CharField(choices=[('0', 'Não se aplica'), ('1', 'Operação presencial'), ('2', 'Operação não presencial, pela Internet'), ('3', 'Operação não presencial, Teleatendimento'), ('4', 'NFC-e em operação com entrega a domicílio'), ('5', 'Operação presencial, fora do estabelecimento'), ('9', 'Operação não presencial, outros.')], default='0', max_length=1),
+            model_name="notafiscal",
+            name="ind_pres",
+            field=models.CharField(
+                choices=[
+                    ("0", "Não se aplica"),
+                    ("1", "Operação presencial"),
+                    ("2", "Operação não presencial, pela Internet"),
+                    ("3", "Operação não presencial, Teleatendimento"),
+                    ("4", "NFC-e em operação com entrega a domicílio"),
+                    ("5", "Operação presencial, fora do estabelecimento"),
+                    ("9", "Operação não presencial, outros."),
+                ],
+                default="0",
+                max_length=1,
+            ),
         ),
     ]
