@@ -87,7 +87,6 @@ MIDDLEWARE = [
 
 # --- Arquivos estáticos -----------------------------------------------------
 STATIC_URL = "/static/"
-# STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
 # --- Arquivos de mídia ------------------------------------------------------
 MEDIA_URL = "media/"
@@ -112,9 +111,6 @@ TEMPLATES = [
     },
 ]
 
-# --- Fixture ----------------------------------------------------------------
-# FIXTURE_DIRS = []
-
 # --- Segurança --------------------------------------------------------------
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY", default="16&yg*=-du53b$7o&!t&v0mlnzdr=a_3rx7ke3t7ux)((o$n++")
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
