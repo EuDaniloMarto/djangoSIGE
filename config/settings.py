@@ -104,7 +104,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "djangosige.base.context_version.sige_version",
+                "djangosige.context_version.sige_version",
                 "djangosige.login.context_user.foto_usuario",
             ],
         },

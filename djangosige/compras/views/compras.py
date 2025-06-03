@@ -10,12 +10,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from geraldo.generators import PDFGenerator
 
-from djangosige.base.custom_views import (
-    CustomCreateView,
-    CustomListView,
-    CustomUpdateView,
-    CustomView,
-)
 from djangosige.cadastro.models import MinhaEmpresa
 from djangosige.compras.forms import (
     ItensCompraFormSet,
@@ -28,6 +22,12 @@ from djangosige.compras.models import (
     OrcamentoCompra,
     Pagamento,
     PedidoCompra,
+)
+from djangosige.custom_views import (
+    CustomCreateView,
+    CustomListView,
+    CustomUpdateView,
+    CustomView,
 )
 from djangosige.estoque.models import EntradaEstoque, ItensMovimento, ProdutoEstocado
 from djangosige.login.models import Usuario
