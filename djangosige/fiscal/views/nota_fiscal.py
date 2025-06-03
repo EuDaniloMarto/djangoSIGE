@@ -5,16 +5,16 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import (
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomTemplateView,
     CustomUpdateView,
     CustomView,
 )
-from djangosige.apps.base.views_mixins import FormValidationMessageMixin
-from djangosige.apps.cadastro.models import MinhaEmpresa
-from djangosige.apps.fiscal.forms import (
+from djangosige.base.views_mixins import FormValidationMessageMixin
+from djangosige.cadastro.models import MinhaEmpresa
+from djangosige.fiscal.forms import (
     AutXMLFormSet,
     BaixarNotaForm,
     CancelamentoNotaFiscalForm,
@@ -27,7 +27,7 @@ from djangosige.apps.fiscal.forms import (
     NotaFiscalEntradaForm,
     NotaFiscalSaidaForm,
 )
-from djangosige.apps.fiscal.models import (
+from djangosige.fiscal.models import (
     AutXML,
     ConfiguracaoNotaFiscal,
     ErrosValidacaoNotaFiscal,
@@ -36,8 +36,8 @@ from djangosige.apps.fiscal.models import (
     NotaFiscalSaida,
     RespostaSefazNotaFiscal,
 )
-from djangosige.apps.login.models import Usuario
-from djangosige.apps.vendas.models import ItensVenda, PedidoVenda
+from djangosige.login.models import Usuario
+from djangosige.vendas.models import ItensVenda, PedidoVenda
 
 try:
     from .processador_nf import ProcessadorNotaFiscal

@@ -7,16 +7,16 @@ from django.db.models import F
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from djangosige.apps.cadastro.models import (
+from djangosige.cadastro.models import (
     Cliente,
     Empresa,
     Fornecedor,
     Produto,
     Transportadora,
 )
-from djangosige.apps.compras.models import OrcamentoCompra, PedidoCompra
-from djangosige.apps.financeiro.models import Entrada, MovimentoCaixa, Saida
-from djangosige.apps.vendas.models import OrcamentoVenda, PedidoVenda
+from djangosige.compras.models import OrcamentoCompra, PedidoCompra
+from djangosige.financeiro.models import Entrada, MovimentoCaixa, Saida
+from djangosige.vendas.models import OrcamentoVenda, PedidoVenda
 
 
 class IndexView(TemplateView):

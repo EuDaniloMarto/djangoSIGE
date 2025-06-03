@@ -7,7 +7,7 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 
-from djangosige.apps.vendas.models import ItensVenda, Pagamento
+from djangosige.vendas.models import ItensVenda, Pagamento
 
 REPORT_FONT = "Times"
 REPORT_FONT_BOLD = REPORT_FONT + "-Bold"

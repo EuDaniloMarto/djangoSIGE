@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.urls import resolve, reverse
 
-from djangosige.apps.base.views import IndexView
+from djangosige.base.views import IndexView
 from djangosige.tests.test_case import BaseTestCase
 
 

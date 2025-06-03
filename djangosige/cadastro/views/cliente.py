@@ -2,8 +2,8 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.cadastro.forms import ClienteForm
-from djangosige.apps.cadastro.models import Cliente
+from djangosige.cadastro.forms import ClienteForm
+from djangosige.cadastro.models import Cliente
 
 from .base import AdicionarPessoaView, EditarPessoaView, PessoasListView
 

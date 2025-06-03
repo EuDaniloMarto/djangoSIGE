@@ -5,8 +5,8 @@ from datetime import datetime
 from django.contrib import messages
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import CustomListView
-from djangosige.apps.financeiro.models import MovimentoCaixa
+from djangosige.base.custom_views import CustomListView
+from djangosige.financeiro.models import MovimentoCaixa
 
 
 class FluxoCaixaView(CustomListView):

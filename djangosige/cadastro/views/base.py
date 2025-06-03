@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.apps.base.custom_views import (
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomUpdateView,
 )
-from djangosige.apps.cadastro.forms import (
+from djangosige.cadastro.forms import (
     BancoFormSet,
     DocumentoFormSet,
     EmailFormSet,
@@ -15,7 +15,7 @@ from djangosige.apps.cadastro.forms import (
     SiteFormSet,
     TelefoneFormSet,
 )
-from djangosige.apps.cadastro.models import (
+from djangosige.cadastro.models import (
     Banco,
     Documento,
     Email,

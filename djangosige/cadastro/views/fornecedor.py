@@ -2,8 +2,8 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.cadastro.forms import FornecedorForm
-from djangosige.apps.cadastro.models import Fornecedor
+from djangosige.cadastro.forms import FornecedorForm
+from djangosige.cadastro.models import Fornecedor
 
 from .base import AdicionarPessoaView, EditarPessoaView, PessoasListView
 

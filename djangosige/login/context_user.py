@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.apps.cadastro.models import MinhaEmpresa
+from djangosige.cadastro.models import MinhaEmpresa
 
 from .models import Usuario
 

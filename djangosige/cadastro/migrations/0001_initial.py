@@ -8,7 +8,7 @@ import django.core.validators
 import django.db.models.deletion
 from django.db import migrations, models
 
-import djangosige.apps.cadastro.models.empresa
+import djangosige.cadastro.models.empresa
 
 
 class Migration(migrations.Migration):
@@ -677,7 +677,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         default="imagens/logo.png",
                         null=True,
-                        upload_to=djangosige.apps.cadastro.models.empresa.logo_directory_path,
+                        upload_to=djangosige.cadastro.models.empresa.logo_directory_path,
                     ),
                 ),
                 ("cnae", models.CharField(blank=True, max_length=10, null=True)),

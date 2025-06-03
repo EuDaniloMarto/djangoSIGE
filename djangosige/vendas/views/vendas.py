@@ -9,26 +9,21 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from geraldo.generators import PDFGenerator
 
-from djangosige.apps.base.custom_views import (
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomUpdateView,
     CustomView,
 )
-from djangosige.apps.cadastro.models import MinhaEmpresa
-from djangosige.apps.login.models import Usuario
-from djangosige.apps.vendas.forms import (
+from djangosige.cadastro.models import MinhaEmpresa
+from djangosige.login.models import Usuario
+from djangosige.vendas.forms import (
     ItensVendaFormSet,
     OrcamentoVendaForm,
     PagamentoFormSet,
     PedidoVendaForm,
 )
-from djangosige.apps.vendas.models import (
-    ItensVenda,
-    OrcamentoVenda,
-    Pagamento,
-    PedidoVenda,
-)
+from djangosige.vendas.models import ItensVenda, OrcamentoVenda, Pagamento, PedidoVenda
 
 from .report_vendas import VendaReport
 

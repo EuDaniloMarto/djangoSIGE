@@ -5,7 +5,7 @@ from decimal import Decimal
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from djangosige.apps.cadastro.models import Produto
+from djangosige.cadastro.models import Produto
 
 DEFAULT_LOCAL_ID = 1
 

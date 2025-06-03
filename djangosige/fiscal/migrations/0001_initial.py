@@ -8,7 +8,7 @@ import django.core.validators
 import django.db.models.deletion
 from django.db import migrations, models
 
-import djangosige.apps.fiscal.models.nota_fiscal
+import djangosige.fiscal.models.nota_fiscal
 
 
 class Migration(migrations.Migration):
@@ -1090,7 +1090,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         max_length=2055,
                         null=True,
-                        upload_to=djangosige.apps.fiscal.models.nota_fiscal.arquivo_proc_path,
+                        upload_to=djangosige.fiscal.models.nota_fiscal.arquivo_proc_path,
                     ),
                 ),
                 ("numero_lote", models.CharField(blank=True, max_length=16, null=True)),

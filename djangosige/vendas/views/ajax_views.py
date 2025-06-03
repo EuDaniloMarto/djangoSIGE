@@ -5,7 +5,7 @@ import json
 from django.http import HttpResponse
 from django.views.generic import View
 
-from djangosige.apps.vendas.models import PedidoVenda
+from djangosige.vendas.models import PedidoVenda
 
 
 class InfoVenda(View):

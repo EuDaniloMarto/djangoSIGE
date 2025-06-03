@@ -3,15 +3,15 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.cadastro.models import Banco, MinhaEmpresa
-from djangosige.apps.financeiro.models import (
+from djangosige.cadastro.models import Banco, MinhaEmpresa
+from djangosige.financeiro.models import (
     STATUS_CONTA_ENTRADA_ESCOLHAS,
     STATUS_CONTA_SAIDA_ESCOLHAS,
     Entrada,
     PlanoContasGrupo,
     Saida,
 )
-from djangosige.apps.login.models import Usuario
+from djangosige.login.models import Usuario
 
 
 class LancamentoForm(forms.ModelForm):

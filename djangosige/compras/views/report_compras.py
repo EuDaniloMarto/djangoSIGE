@@ -4,8 +4,8 @@ from geraldo import ReportBand
 from geraldo.widgets import ObjectValue
 from reportlab.lib.units import cm
 
-from djangosige.apps.compras.models import ItensCompra, Pagamento
-from djangosige.apps.vendas.views.report_vendas import (
+from djangosige.compras.models import ItensCompra, Pagamento
+from djangosige.vendas.views.report_vendas import (
     REPORT_FONT,
     REPORT_FONT_BOLD,
     DadosPagamento,

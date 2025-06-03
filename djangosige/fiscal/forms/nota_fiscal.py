@@ -4,8 +4,8 @@ from django import forms
 from django.forms import inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.cadastro.models import Empresa
-from djangosige.apps.fiscal.models import (
+from djangosige.cadastro.models import Empresa
+from djangosige.fiscal.models import (
     MOD_NFE_ESCOLHAS,
     TP_AMB_ESCOLHAS,
     AutXML,

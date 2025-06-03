@@ -2,13 +2,13 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import (
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomUpdateView,
 )
-from djangosige.apps.estoque.forms import LocalEstoqueForm
-from djangosige.apps.estoque.models import LocalEstoque
+from djangosige.estoque.forms import LocalEstoqueForm
+from djangosige.estoque.models import LocalEstoque
 
 
 class AdicionarLocalEstoqueView(CustomCreateView):

@@ -6,7 +6,7 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-import djangosige.apps.login.models
+import djangosige.login.models
 
 
 class Migration(migrations.Migration):
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                     models.ImageField(
                         blank=True,
                         default="imagens/user.png",
-                        upload_to=djangosige.apps.login.models.user_directory_path,
+                        upload_to=djangosige.login.models.user_directory_path,
                     ),
                 ),
                 (

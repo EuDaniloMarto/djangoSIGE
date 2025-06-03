@@ -8,8 +8,8 @@ from django.db import models
 from django.template.defaultfilters import date
 from django.urls import reverse_lazy
 
-from djangosige.apps.estoque.models import DEFAULT_LOCAL_ID
-from djangosige.apps.fiscal.models import COFINS, PIS
+from djangosige.estoque.models import DEFAULT_LOCAL_ID
+from djangosige.fiscal.models import COFINS, PIS
 
 locale.setlocale(locale.LC_ALL, "")
 

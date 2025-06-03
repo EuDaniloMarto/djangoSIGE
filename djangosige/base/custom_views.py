@@ -5,7 +5,7 @@ from django.views.generic import ListView, TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
-from djangosige.apps.base.views_mixins import (
+from djangosige.base.views_mixins import (
     CheckPermissionMixin,
     FormValidationMessageMixin,
 )

@@ -2,13 +2,13 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import (
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomUpdateView,
 )
-from djangosige.apps.fiscal.forms import NaturezaOperacaoForm
-from djangosige.apps.fiscal.models import NaturezaOperacao
+from djangosige.fiscal.forms import NaturezaOperacaoForm
+from djangosige.fiscal.models import NaturezaOperacao
 
 
 class AdicionarNaturezaOperacaoView(CustomCreateView):

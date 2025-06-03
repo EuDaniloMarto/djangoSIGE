@@ -2,9 +2,9 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import CustomListView
-from djangosige.apps.cadastro.models import Produto
-from djangosige.apps.estoque.models import LocalEstoque
+from djangosige.base.custom_views import CustomListView
+from djangosige.cadastro.models import Produto
+from djangosige.estoque.models import LocalEstoque
 
 
 class ConsultaEstoqueView(CustomListView):

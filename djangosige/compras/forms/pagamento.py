@@ -4,7 +4,7 @@ from django import forms
 from django.forms import inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.compras.models import Compra, Pagamento
+from djangosige.compras.models import Compra, Pagamento
 
 
 class PagamentoForm(forms.ModelForm):

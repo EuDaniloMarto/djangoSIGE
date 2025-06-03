@@ -4,7 +4,7 @@ from django import forms
 from django.forms import inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.cadastro.models import Transportadora, Veiculo
+from djangosige.cadastro.models import Transportadora, Veiculo
 
 
 class TransportadoraForm(forms.ModelForm):

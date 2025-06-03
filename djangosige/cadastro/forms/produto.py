@@ -5,14 +5,8 @@ from decimal import Decimal
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.cadastro.models import (
-    Categoria,
-    Fornecedor,
-    Marca,
-    Produto,
-    Unidade,
-)
-from djangosige.apps.estoque.models import LocalEstoque
+from djangosige.cadastro.models import Categoria, Fornecedor, Marca, Produto, Unidade
+from djangosige.estoque.models import LocalEstoque
 
 
 class ProdutoForm(forms.ModelForm):

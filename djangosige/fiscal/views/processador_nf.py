@@ -9,7 +9,7 @@ from pysignfe.nfe.manual_600.nfe_310 import Dup as Dup_310
 from pysignfe.nfe.manual_600.nfe_310 import NFe as NFe_310
 from pysignfe.nfe.manual_600.nfe_310 import autXML as autXML_310
 
-from djangosige.apps.cadastro.models import (
+from djangosige.cadastro.models import (
     COD_UF,
     Cliente,
     Empresa,
@@ -22,8 +22,8 @@ from djangosige.apps.cadastro.models import (
     Transportadora,
     Unidade,
 )
-from djangosige.apps.compras.models import ItensCompra, PedidoCompra
-from djangosige.apps.fiscal.models import (
+from djangosige.compras.models import ItensCompra, PedidoCompra
+from djangosige.fiscal.models import (
     COFINS,
     ICMS,
     ICMSSN,
@@ -39,9 +39,9 @@ from djangosige.apps.fiscal.models import (
     NotaFiscalSaida,
     RespostaSefazNotaFiscal,
 )
-from djangosige.apps.vendas.models import ItensVenda
-from djangosige.apps.vendas.models import Pagamento as PagamentoVenda
-from djangosige.apps.vendas.models import PedidoVenda
+from djangosige.vendas.models import ItensVenda
+from djangosige.vendas.models import Pagamento as PagamentoVenda
+from djangosige.vendas.models import PedidoVenda
 
 
 class ProcessadorNotaFiscal(object):

@@ -21,9 +21,9 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.generic import DeleteView, FormView, ListView, TemplateView, View
 from django.views.generic.edit import UpdateView
 
-from djangosige.apps.base.views_mixins import SuperUserRequiredMixin
-from djangosige.apps.cadastro.forms import MinhaEmpresaForm
-from djangosige.apps.cadastro.models import MinhaEmpresa
+from djangosige.base.views_mixins import SuperUserRequiredMixin
+from djangosige.cadastro.forms import MinhaEmpresaForm
+from djangosige.cadastro.models import MinhaEmpresa
 
 from .forms import (
     PasswordResetForm,

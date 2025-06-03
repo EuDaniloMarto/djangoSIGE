@@ -4,7 +4,7 @@ from django import forms
 from django.forms import inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.vendas.models import ItensVenda, OrcamentoVenda, PedidoVenda, Venda
+from djangosige.vendas.models import ItensVenda, OrcamentoVenda, PedidoVenda, Venda
 
 
 class VendaForm(forms.ModelForm):

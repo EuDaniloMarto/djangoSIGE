@@ -2,7 +2,7 @@
 
 from django.urls import reverse
 
-from djangosige.apps.cadastro.models import (
+from djangosige.cadastro.models import (
     Categoria,
     Cliente,
     Empresa,

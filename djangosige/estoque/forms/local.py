@@ -3,7 +3,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.estoque.models import LocalEstoque
+from djangosige.estoque.models import LocalEstoque
 
 
 class LocalEstoqueForm(forms.ModelForm):

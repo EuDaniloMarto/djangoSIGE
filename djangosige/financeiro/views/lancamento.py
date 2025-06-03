@@ -8,22 +8,22 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import (
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomUpdateView,
     CustomView,
 )
-from djangosige.apps.compras.models import PedidoCompra
-from djangosige.apps.estoque.models import ItensMovimento, ProdutoEstocado, SaidaEstoque
-from djangosige.apps.financeiro.forms import (
+from djangosige.compras.models import PedidoCompra
+from djangosige.estoque.models import ItensMovimento, ProdutoEstocado, SaidaEstoque
+from djangosige.financeiro.forms import (
     ContaPagarForm,
     ContaReceberForm,
     EntradaForm,
     SaidaForm,
 )
-from djangosige.apps.financeiro.models import Entrada, Lancamento, MovimentoCaixa, Saida
-from djangosige.apps.vendas.models import PedidoVenda
+from djangosige.financeiro.models import Entrada, Lancamento, MovimentoCaixa, Saida
+from djangosige.vendas.models import PedidoVenda
 
 
 class MovimentoCaixaMixin(object):

@@ -3,7 +3,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.cadastro.models import Cliente
+from djangosige.cadastro.models import Cliente
 
 
 class ClienteForm(forms.ModelForm):

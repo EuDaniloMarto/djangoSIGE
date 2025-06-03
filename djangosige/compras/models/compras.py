@@ -8,8 +8,8 @@ from django.db import models
 from django.template.defaultfilters import date
 from django.urls import reverse_lazy
 
-from djangosige.apps.estoque.models import DEFAULT_LOCAL_ID
-from djangosige.apps.vendas.models import (
+from djangosige.estoque.models import DEFAULT_LOCAL_ID
+from djangosige.vendas.models import (
     MOD_FRETE_ESCOLHAS,
     STATUS_ORCAMENTO_ESCOLHAS,
     TIPOS_DESCONTO_ESCOLHAS,
