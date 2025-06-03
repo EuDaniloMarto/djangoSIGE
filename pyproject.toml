@@ -25,6 +25,15 @@ djlint = "1.35.2"
 flake8 = "5.0.4"
 flake8-django = "^1.4"
 
+
+[tool.poetry.group.testes.dependencies]
+pytest = "8.3.5"
+pytest-django = "^4.11.1"
+pytest-cov = "5.0.0"
+pytest-sugar = "^1.0.0"
+factory-boy = "^3.3.3"
+django-coverage-plugin = "^3.1.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
@@ -65,3 +74,18 @@ indent_size = 2
 
 [tool.djlint.js]
 indent_size = 2
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--ds=config.settings --reuse-db --import-mode=importlib"
+python_files = [
+    "tests.py",
+    "test_*.py",
+]
+norecursedirs = ["node_modules"]
+
+# ==== Coverage ====
+[tool.coverage.run]
+include = ["djangosige/**"]
+omit = ["*/migrations/*", "*/tests/*"]
+plugins = ["django_coverage_plugin"]
