@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.tests.test_case import BaseTestCase, replace_none_values_in_dictionary
-from djangosige.apps.financeiro.models import (
-    MovimentoCaixa,
-    Entrada,
-    Saida,
-    PlanoContasGrupo,
-    PlanoContasSubgrupo,
-)
-from djangosige.apps.estoque.models import SaidaEstoque
-
-from django.urls import reverse
-from django.db.models import Q
-
-from datetime import datetime, timedelta
-from decimal import Decimal
 import json
 import locale
+from datetime import datetime, timedelta
+from decimal import Decimal
+
+from django.db.models import Q
+from django.urls import reverse
+
+from djangosige.estoque.models import SaidaEstoque
+from djangosige.financeiro.models import (Entrada, MovimentoCaixa,
+                                          PlanoContasGrupo,
+                                          PlanoContasSubgrupo, Saida)
+from djangosige.tests.test_case import (BaseTestCase,
+                                        replace_none_values_in_dictionary)
 
 try:
     locale.setlocale(locale.LC_ALL, "pt_BR.utf8")

@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.tests.test_case import BaseTestCase, replace_none_values_in_dictionary
-from djangosige.apps.cadastro.models import Fornecedor, Produto
-from djangosige.apps.compras.models import OrcamentoCompra, PedidoCompra, ItensCompra
-from djangosige.apps.estoque.models import LocalEstoque, DEFAULT_LOCAL_ID
+from datetime import datetime, timedelta
+
 from django.urls import reverse
 
-from datetime import datetime, timedelta
+from djangosige.cadastro.models import Fornecedor, Produto
+from djangosige.compras.models import (ItensCompra, OrcamentoCompra,
+                                       PedidoCompra)
+from djangosige.estoque.models import DEFAULT_LOCAL_ID, LocalEstoque
+from djangosige.tests.test_case import (BaseTestCase,
+                                        replace_none_values_in_dictionary)
 
 COMPRA_FORMSET_DATA = {
     "produtos_form-0-produto": 1,

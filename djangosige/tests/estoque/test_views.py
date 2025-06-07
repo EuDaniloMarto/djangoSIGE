@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.tests.test_case import BaseTestCase
-from djangosige.apps.cadastro.models import Produto
-from djangosige.apps.estoque.models import (
-    LocalEstoque,
-    DEFAULT_LOCAL_ID,
-    ProdutoEstocado,
-    EntradaEstoque,
-    SaidaEstoque,
-    TransferenciaEstoque,
-)
 from django.urls import reverse
+
+from djangosige.cadastro.models import Produto
+from djangosige.estoque.models import (DEFAULT_LOCAL_ID, EntradaEstoque,
+                                       LocalEstoque, ProdutoEstocado,
+                                       SaidaEstoque, TransferenciaEstoque)
+from djangosige.tests.test_case import BaseTestCase
 
 MOVIMENTO_ESTOQUE_FORMSET_DATA = {
     "itens_form-0-produto": 1,
