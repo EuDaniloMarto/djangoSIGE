@@ -1,21 +1,25 @@
-# -*- coding: utf-8 -*-
+"""Configurações das URLs do projeto djangosige"""
 
-from django.conf.urls import url, include
+from django.urls import path, include
 from django.contrib import admin
+from django.conf import settings
 from django.conf.urls.static import static
-from .configs.settings import DEBUG, MEDIA_ROOT, MEDIA_URL
+
 
 urlpatterns = [
-    url(r"^admin/", admin.site.urls),
-    url(r"^", include("djangosige.apps.base.urls")),
-    url(r"^login/", include("djangosige.apps.login.urls")),
-    url(r"^cadastro/", include("djangosige.apps.cadastro.urls")),
-    url(r"^fiscal/", include("djangosige.apps.fiscal.urls")),
-    url(r"^vendas/", include("djangosige.apps.vendas.urls")),
-    url(r"^compras/", include("djangosige.apps.compras.urls")),
-    url(r"^financeiro/", include("djangosige.apps.financeiro.urls")),
-    url(r"^estoque/", include("djangosige.apps.estoque.urls")),
+    path("admin/", admin.site.urls),
+    path("", include("djangosige.apps.base.urls")),
+    path("login/", include("djangosige.apps.login.urls")),
+    path("cadastro/", include("djangosige.apps.cadastro.urls")),
+    path("fiscal/", include("djangosige.apps.fiscal.urls")),
+    path("vendas/", include("djangosige.apps.vendas.urls")),
+    path("compras/", include("djangosige.apps.compras.urls")),
+    path("financeiro/", include("djangosige.apps.financeiro.urls")),
+    path("estoque/", include("djangosige.apps.estoque.urls")),
 ]
 
-if DEBUG is True:
-    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns = [
+        *urlpatterns,
+        *static(settings.MEDIA_ULR, documento_root=settings.MEDIA_ROOT),
+    ]

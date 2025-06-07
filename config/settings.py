@@ -1,41 +1,47 @@
-import os
+"""Configurações do projeto djangosige"""
+
+from pathlib import Path
 from decouple import config, Csv
 from dj_database_url import parse as dburl
-from .configs import (
-    DEFAULT_DATABASE_URL,
-    DEFAULT_FROM_EMAIL,
-    EMAIL_HOST,
-    EMAIL_HOST_USER,
-    EMAIL_HOST_PASSWORD,
-    EMAIL_PORT,
-    EMAIL_USE_TLS,
+
+
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+
+APPS_DIR = BASE_DIR / "djangosige"
+
+
+# --- Geral
+# ----------------------------------------------------------------------------
+DEBUG = config("DEBUG", default=False, cast=bool)
+TIME_ZONE = "America/Sao_Paulo"
+LANGUAGE_CODE = "pt-br"
+USE_I18N = True
+USE_TZ = True
+
+# --- Banco de dados
+# ----------------------------------------------------------------------------
+DATABASES = {
+    "default": config("DATABASE_URL", default="sqlite:///db.sqlite3", cast=dburl)
+}
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# --- URLs
+# ----------------------------------------------------------------------------
+ROOT_URLCONF = "config.urls"
+WSGI_APPLICATION = "config.wsgi.application"
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS", default=["127.0.0.1", "localhost", "0.0.0.0"], cast=Csv()
+)
+LOGIN_NOT_REQUIRED = (
+    r"^/login/$",
+    r"/login/esqueceu/",
+    r"/login/trocarsenha/",
+    r"/logout/",
 )
 
-APP_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-PROJECT_ROOT = os.path.abspath(os.path.dirname(APP_ROOT))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=False, cast=bool)
-
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default=[], cast=Csv())
-
-if not DEFAULT_DATABASE_URL:
-    DEFAULT_DATABASE_URL = "sqlite:///" + os.path.join(APP_ROOT, "db.sqlite3")
-
-DATABASES = {
-    "default": config("DATABASE_URL", default=DEFAULT_DATABASE_URL, cast=dburl),
-}
-
-
-# Application definition
-
+# Apps
+# ----------------------------------------------------------------------------
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -43,7 +49,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # djangosige apps:
     "djangosige.apps.base",
     "djangosige.apps.login",
     "djangosige.apps.cadastro",
@@ -54,49 +59,9 @@ INSTALLED_APPS = [
     "djangosige.apps.estoque",
 ]
 
-
-MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # Middleware para paginas que exigem login
-    "djangosige.middleware.LoginRequiredMiddleware",
-]
-
-ROOT_URLCONF = "djangosige.urls"
-
-TEMPLATES = [
-    {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(APP_ROOT, "templates"),
-        ],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
-                # contexto para a versao do sige
-                "djangosige.apps.base.context_version.sige_version",
-                # contexto para a foto de perfil do usuario
-                "djangosige.apps.login.context_user.foto_usuario",
-            ],
-        },
-    },
-]
-
-WSGI_APPLICATION = "djangosige.wsgi.application"
-
-
-# Password validation
-# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
-
+# Autenticação
+# ----------------------------------------------------------------------------
+AUTH_USER_MODEL = "auth.User"
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -112,44 +77,60 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Middleware
+# ----------------------------------------------------------------------------
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "djangosige.middleware.LoginRequiredMiddleware",
+]
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.10/topics/i18n/
-
-# LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = "pt-br"
-
-# TIME_ZONE = 'UTC'
-TIME_ZONE = "America/Sao_Paulo"
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
+# Arquivos estáticos
+# ----------------------------------------------------------------------------
 STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [str(APPS_DIR / "djangosige")]
 
-STATICFILES_DIRS = [
-    os.path.join(APP_ROOT, "static"),
-]
-
-FIXTURE_DIRS = [
-    os.path.join(APP_ROOT, "fixtures"),
-]
-
-MEDIA_ROOT = os.path.join(APP_ROOT, "media/")
+# Arquivos de Mídia
+# ----------------------------------------------------------------------------
 MEDIA_URL = "media/"
+MEDIA_ROOT = str(APPS_DIR / "media")
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# Templates
+# ----------------------------------------------------------------------------
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [str(APPS_DIR / "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "djangosige.apps.base.context_version.sige_version",
+                "djangosige.apps.login.context_user.foto_usuario",
+            ],
+        },
+    },
+]
 
-LOGIN_NOT_REQUIRED = (
-    r"^/login/$",
-    r"/login/esqueceu/",
-    r"/login/trocarsenha/",
-    r"/logout/",
+# FIXTURES
+# ----------------------------------------------------------------------------
+FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
+
+# SECURITY
+# ------------------------------------------------------------------------------
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+X_FRAME_OPTIONS = "DENY"
+SECRET_KEY = config(
+    "SECRET_KEY", default="wtyo881vmwl*!nwyeptchv_4!g(j8-)9_myvr2a7j=+kq7-&rn"
 )
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
