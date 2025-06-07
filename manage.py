@@ -2,9 +2,9 @@
 import os
 import sys
 
-if __name__ == "__main__":
-    settings = 'djangosige.tests.test_settings' if 'test' in sys.argv else 'djangosige.configs'
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings)
+
+def main():
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
@@ -21,3 +21,7 @@ if __name__ == "__main__":
             )
         raise
     execute_from_command_line(sys.argv)
+
+
+if __name__ == "__main__":
+    main()

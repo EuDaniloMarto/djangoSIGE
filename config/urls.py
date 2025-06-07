@@ -21,5 +21,5 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns = [
         *urlpatterns,
-        *static(settings.MEDIA_ULR, documento_root=settings.MEDIA_ROOT),
+        *static(settings.MEDIA_URL, documento_root=settings.MEDIA_ROOT),
     ]

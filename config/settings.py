@@ -94,7 +94,7 @@ MIDDLEWARE = [
 # ----------------------------------------------------------------------------
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [str(APPS_DIR / "djangosige")]
+STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
 # Arquivos de Mídia
 # ----------------------------------------------------------------------------
@@ -123,7 +123,7 @@ TEMPLATES = [
 
 # FIXTURES
 # ----------------------------------------------------------------------------
-FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
+FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
 
 # SECURITY
 # ------------------------------------------------------------------------------
