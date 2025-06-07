@@ -8,25 +8,33 @@ from djangosige.apps.compras.models import Compra, Pagamento
 
 
 class PagamentoForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         super(PagamentoForm, self).__init__(*args, **kwargs)
-        self.fields['valor_parcela'].localize = True
+        self.fields["valor_parcela"].localize = True
 
     class Meta:
         model = Pagamento
-        fields = ('indice_parcela', 'vencimento', 'valor_parcela',)
+        fields = (
+            "indice_parcela",
+            "vencimento",
+            "valor_parcela",
+        )
         widgets = {
-            'indice_parcela': forms.TextInput(attrs={'class': 'form-control', 'readonly': True}),
-            'vencimento': forms.DateInput(attrs={'class': 'form-control datepicker'}),
-            'valor_parcela': forms.TextInput(attrs={'class': 'form-control decimal-mask'}),
+            "indice_parcela": forms.TextInput(
+                attrs={"class": "form-control", "readonly": True}
+            ),
+            "vencimento": forms.DateInput(attrs={"class": "form-control datepicker"}),
+            "valor_parcela": forms.TextInput(
+                attrs={"class": "form-control decimal-mask"}
+            ),
         }
         labels = {
-            'indice_parcela': _('Ind. Parcela'),
-            'vencimento': _('Vencimento'),
-            'valor_parcela': _('Valor'),
+            "indice_parcela": _("Ind. Parcela"),
+            "vencimento": _("Vencimento"),
+            "valor_parcela": _("Valor"),
         }
 
 
 PagamentoFormSet = inlineformset_factory(
-    Compra, Pagamento, form=PagamentoForm, extra=1, can_delete=True)
+    Compra, Pagamento, form=PagamentoForm, extra=1, can_delete=True
+)
