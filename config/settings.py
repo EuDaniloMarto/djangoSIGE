@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "djangosige",
     "django.contrib.staticfiles",
     "djangosige.apps.base",
     "djangosige.apps.login",
@@ -94,7 +95,7 @@ MIDDLEWARE = [
 # ----------------------------------------------------------------------------
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [str(APPS_DIR / "static")]
+# STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
 # Arquivos de Mídia
 # ----------------------------------------------------------------------------
@@ -106,7 +107,7 @@ MEDIA_ROOT = str(APPS_DIR / "media")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(APPS_DIR / "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -123,7 +124,7 @@ TEMPLATES = [
 
 # FIXTURES
 # ----------------------------------------------------------------------------
-FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
+# FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
 
 # SECURITY
 # ------------------------------------------------------------------------------
