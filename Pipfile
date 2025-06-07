@@ -16,6 +16,9 @@ pytest-sugar = "*"
 pytest = "*"
 pytest-django = "*"
 pytest-cov = "*"
+pytest-sugar = "*"
+ruff = "*"
+djlint = "*"
 
 [requires]
 python_version = "3.8"
