@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.tests.test_case import BaseTestCase
+from djangosige.tests.tests_case import BaseTestCase
 from djangosige.apps.cadastro.models import Cliente
 from djangosige.apps.vendas.models import CondicaoPagamento, OrcamentoVenda, PedidoVenda
 from djangosige.apps.estoque.models import LocalEstoque, DEFAULT_LOCAL_ID
