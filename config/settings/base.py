@@ -31,6 +31,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    "djangosige.apps.DjangosigeConfig",
     "djangosige.base",
     "djangosige.login",
     "djangosige.cadastro",
