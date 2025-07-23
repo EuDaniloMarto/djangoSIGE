@@ -2,9 +2,8 @@
 
 from pathlib import Path
 
-from decouple import config, Csv
+from decouple import Csv, config
 from dj_database_url import parse as db_url
-
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 APPS_DIR = BASE_DIR / "djangosige"
@@ -32,14 +31,14 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "djangosige.apps.base",
-    "djangosige.apps.login",
-    "djangosige.apps.cadastro",
-    "djangosige.apps.vendas",
-    "djangosige.apps.compras",
-    "djangosige.apps.fiscal",
-    "djangosige.apps.financeiro",
-    "djangosige.apps.estoque",
+    "djangosige.base",
+    "djangosige.login",
+    "djangosige.cadastro",
+    "djangosige.vendas",
+    "djangosige.compras",
+    "djangosige.fiscal",
+    "djangosige.financeiro",
+    "djangosige.estoque",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -103,8 +102,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "djangosige.apps.base.context_version.sige_version",
-                "djangosige.apps.login.context_user.foto_usuario",
+                "djangosige.base.context_version.sige_version",
+                "djangosige.login.context_user.foto_usuario",
             ],
         },
     },
