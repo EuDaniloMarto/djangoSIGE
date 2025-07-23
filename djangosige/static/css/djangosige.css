@@ -1,0 +1,20 @@
+:root {
+    --azul_turquesa: #248FBF;
+    --vermelho-alaranjado: #F05A28;
+}
+
+.bg-azul_turquesa {
+    background-color: var(--azul_turquesa) !important;
+}
+
+.bg-vermelho-alaranjado {
+    background-color: var(--vermelho-alaranjado) !important;
+}
+
+.text-azul_turquesa {
+    color: var(--azul_turquesa) !important;
+}
+
+.text-vermelho-alaranjado {
+    color: var(--vermelho-alaranjado) !important;
+}

@@ -1,4 +1,5 @@
 from django.urls import path, include
+from . import views
 
 
 urlpatterns = [
@@ -10,5 +11,12 @@ urlpatterns = [
     path("compras/", include("djangosige.compras.urls")),
     path("financeiro/", include("djangosige.financeiro.urls")),
     path("estoque/", include("djangosige.estoque.urls")),
-    # path("dev/", include([])),
+    path(
+        "dev/",
+        include(
+            [
+                path("", views.HomeView.as_view(), name="home"),
+            ]
+        )
+    ),
 ]

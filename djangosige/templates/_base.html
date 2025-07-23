@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load i18n static %}
+
+<html lang='{{ LANGUAGE_CODE|default:"en"}}'>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <title>DjangoSIGE / {% block title %}{% endblock title %}</title>
+        <link rel="stylesheet" href='{% static "bootstrap/dist/css/bootstrap.css" %}' />
+        <link rel="stylesheet" href='{% static "bootstrap-icons/font/bootstrap-icons.css" %}' />
+        <link rel="stylesheet" href='{% static "css/djangosige.css" %}' />
+        <script defer src='{% static "@popperjs/core/dist/umd/popper.js" %}'></script>
+        <script defer src='{% static "bootstrap/dist/js/bootstrap.js" %}'></script>
+    </head>
+    <body class="bg-secondary-subtled-flex d-flex flex-column min-vh-100">
+        {% block base %}
+            {% block navbar %}
+            <header class="py-2 mb-4 bg-azul_turquesa ">
+                <section class="container-fluid">
+                    <section class="d-flex align-items-center justify-content-between position-sticky">
+                        <section class="d-lg-none">
+                            <button class="btn btn btn-outline-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasGlobalMenu" aria-controls="offcanvasGlobalMenu">
+                                <i class="bi bi-list"></i>
+                            </button>
+                        </section>
+                        <a class="navbar-brand" href="{% url 'home' %}">
+                            <span class="h2 text-white">{% include "_logo.html" %}</span>
+                        </a>
+                        <section class="d-none d-lg-block">
+                            {% include "_sidemenu.html" %}
+                        </section>
+                        <section class="btn-group">
+                            <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person-badge"></i> Perfil</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-building"></i> Minha Empresa</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-people"></i> Usuários</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-question-square"></i> Ajuda</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+                            </ul>
+                        </section>
+                    </section>
+                </section>
+            </header>
+
+            <aside class="offcanvas offcanvas-start bg-azul_turquesa" tabindex="-1" id="offcanvasGlobalMenu" aria-labelledby="offcanvasGlobalMenuLabel">
+                <header class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasGlobalMenuLabel">
+                        {% include "_logo.html" %}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </header>
+                <main class="offcanvas-body h-100">
+                    {% include "_sidemenu.html" %}
+                </main>
+            </aside>
+            {% endblock navbar %}
+
+            <main class="container-fluid flex-grow-1">
+                {% block content %}
+                {% endblock content %}
+            </main>
+
+            <footer class="container-fluid bg-azul_turquesa text-white text-center py-3 mt-5">
+                <p>&copy; 2025 {% include "_logo.html" %}</p>
+            </footer>
+        {% endblock base %}
+    </body>
+</html>
