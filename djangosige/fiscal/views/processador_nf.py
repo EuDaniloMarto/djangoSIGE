@@ -1,22 +1,45 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.apps.fiscal.models import NotaFiscalSaida, NotaFiscalEntrada, ConfiguracaoNotaFiscal, AutXML, \
-    ErrosValidacaoNotaFiscal, RespostaSefazNotaFiscal, NaturezaOperacao, GrupoFiscal, \
-    ICMS, ICMSUFDest, ICMSSN, IPI, PIS, COFINS
-from djangosige.configs.settings import MEDIA_ROOT
-from djangosige.apps.cadastro.models import COD_UF, PessoaJuridica, PessoaFisica, Fornecedor, Cliente, Empresa, Transportadora, Endereco, Telefone, Produto, Unidade
-from djangosige.apps.compras.models import PedidoCompra, ItensCompra
-from djangosige.apps.vendas.models import PedidoVenda, ItensVenda
-
-from djangosige.apps.vendas.models import Pagamento as PagamentoVenda
-
-from pysignfe.nf_e import nf_e
-from pysignfe.nfe.manual_600.nfe_310 import NFe as NFe_310
-from pysignfe.nfe.manual_600.nfe_310 import Det as Det_310
-from pysignfe.nfe.manual_600.nfe_310 import autXML as autXML_310
-from pysignfe.nfe.manual_600.nfe_310 import Dup as Dup_310
-
 from ssl import SSLError
+
+from cadastro.models import (
+    COD_UF,
+    Cliente,
+    Empresa,
+    Endereco,
+    Fornecedor,
+    PessoaFisica,
+    PessoaJuridica,
+    Produto,
+    Telefone,
+    Transportadora,
+    Unidade,
+)
+from compras.models import ItensCompra, PedidoCompra
+from pysignfe.nf_e import nf_e
+from pysignfe.nfe.manual_600.nfe_310 import Det as Det_310
+from pysignfe.nfe.manual_600.nfe_310 import Dup as Dup_310
+from pysignfe.nfe.manual_600.nfe_310 import NFe as NFe_310
+from pysignfe.nfe.manual_600.nfe_310 import autXML as autXML_310
+from vendas.models import ItensVenda, PedidoVenda
+from vendas.models import Pagamento as PagamentoVenda
+
+from fiscal.models import (
+    COFINS,
+    ICMS,
+    ICMSSN,
+    IPI,
+    PIS,
+    AutXML,
+    ConfiguracaoNotaFiscal,
+    ErrosValidacaoNotaFiscal,
+    GrupoFiscal,
+    ICMSUFDest,
+    NaturezaOperacao,
+    NotaFiscalEntrada,
+    NotaFiscalSaida,
+    RespostaSefazNotaFiscal,
+)
 
 
 class ProcessadorNotaFiscal(object):

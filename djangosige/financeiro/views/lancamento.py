@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.http import JsonResponse
-
-from djangosige.apps.base.custom_views import CustomView, CustomCreateView, CustomListView, CustomUpdateView
-
-from djangosige.apps.financeiro.forms import ContaPagarForm, ContaReceberForm, SaidaForm, EntradaForm
-from djangosige.apps.financeiro.models import Lancamento, Saida, Entrada, MovimentoCaixa
-from djangosige.apps.vendas.models import PedidoVenda
-from djangosige.apps.compras.models import PedidoCompra
-from djangosige.apps.estoque.models import SaidaEstoque, ItensMovimento, ProdutoEstocado
-
-from itertools import chain
 from datetime import datetime
+from itertools import chain
+
+from base.custom_views import (
+    CustomCreateView,
+    CustomListView,
+    CustomUpdateView,
+    CustomView,
+)
+from compras.models import PedidoCompra
+from django.contrib import messages
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from estoque.models import ItensMovimento, ProdutoEstocado, SaidaEstoque
+from vendas.models import PedidoVenda
+
+from financeiro.forms import ContaPagarForm, ContaReceberForm, EntradaForm, SaidaForm
+from financeiro.models import Entrada, Lancamento, MovimentoCaixa, Saida
 
 
 class MovimentoCaixaMixin(object):

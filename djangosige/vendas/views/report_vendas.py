@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.apps.vendas.models import ItensVenda, Pagamento
-
+from geraldo import Report, ReportBand, SubReport
+from geraldo.graphics import Image, Line
+from geraldo.widgets import Label, ObjectValue, SystemField
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 
-from geraldo import Report, ReportBand, SubReport
-from geraldo.widgets import Label, SystemField, ObjectValue
-from geraldo.graphics import Image, Line
-from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+from vendas.models import ItensVenda, Pagamento
 
 REPORT_FONT = 'Times'
 REPORT_FONT_BOLD = REPORT_FONT + '-Bold'

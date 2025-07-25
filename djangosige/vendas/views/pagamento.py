@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from django.core import serializers
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import View
-from django.http import HttpResponse
-from django.core import serializers
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
-
-from djangosige.apps.vendas.forms import CondicaoPagamentoForm
-from djangosige.apps.vendas.models import CondicaoPagamento
+from vendas.forms import CondicaoPagamentoForm
+from vendas.models import CondicaoPagamento
 
 
 class AdicionarCondicaoPagamentoView(CustomCreateView):

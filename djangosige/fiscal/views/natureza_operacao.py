@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
-
-from djangosige.apps.fiscal.forms import NaturezaOperacaoForm
-from djangosige.apps.fiscal.models import NaturezaOperacao
+from fiscal.forms import NaturezaOperacaoForm
+from fiscal.models import NaturezaOperacao
 
 
 class AdicionarNaturezaOperacaoView(CustomCreateView):

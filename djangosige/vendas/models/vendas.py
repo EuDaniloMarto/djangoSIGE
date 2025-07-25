@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
-from django.template.defaultfilters import date
-from django.core.validators import MinValueValidator
-from django.urls import reverse_lazy
-
+import locale
 from decimal import Decimal
 
-from djangosige.apps.fiscal.models import PIS, COFINS
-from djangosige.apps.estoque.models import DEFAULT_LOCAL_ID
+from django.core.validators import MinValueValidator
+from django.db import models
+from django.template.defaultfilters import date
+from django.urls import reverse_lazy
+from estoque.models import DEFAULT_LOCAL_ID
+from fiscal.models import COFINS, PIS
 
-import locale
 locale.setlocale(locale.LC_ALL, '')
 
 STATUS_ORCAMENTO_ESCOLHAS = (

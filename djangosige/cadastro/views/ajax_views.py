@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import View
-from django.http import HttpResponse
 from django.core import serializers
+from django.http import HttpResponse
+from django.views.generic import View
+from fiscal.models import ICMS, ICMSSN, IPI, ICMSUFDest
 
-from djangosige.apps.cadastro.models import Pessoa, Cliente, Fornecedor, Transportadora, Produto
-from djangosige.apps.fiscal.models import ICMS, ICMSSN, IPI, ICMSUFDest
+from cadastro.models import Cliente, Fornecedor, Pessoa, Produto, Transportadora
 
 
 class InfoCliente(View):

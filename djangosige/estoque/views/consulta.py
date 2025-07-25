@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from base.custom_views import CustomListView
+from cadastro.models import Produto
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import CustomListView
-
-from djangosige.apps.cadastro.models import Produto
-from djangosige.apps.estoque.models import LocalEstoque
+from estoque.models import LocalEstoque
 
 
 class ConsultaEstoqueView(CustomListView):

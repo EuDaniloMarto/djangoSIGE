@@ -1,10 +1,27 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 
-from djangosige.apps.cadastro.forms import PessoaJuridicaForm, PessoaFisicaForm, EnderecoFormSet, TelefoneFormSet, EmailFormSet, \
-    SiteFormSet, BancoFormSet, DocumentoFormSet
-from djangosige.apps.cadastro.models import PessoaFisica, PessoaJuridica, Endereco, Telefone, Email, Site, Banco, Documento
+from cadastro.forms import (
+    BancoFormSet,
+    DocumentoFormSet,
+    EmailFormSet,
+    EnderecoFormSet,
+    PessoaFisicaForm,
+    PessoaJuridicaForm,
+    SiteFormSet,
+    TelefoneFormSet,
+)
+from cadastro.models import (
+    Banco,
+    Documento,
+    Email,
+    Endereco,
+    PessoaFisica,
+    PessoaJuridica,
+    Site,
+    Telefone,
+)
 
 
 class AdicionarPessoaView(CustomCreateView):

@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
-from django.contrib import messages
-
-from djangosige.apps.base.custom_views import CustomListView
-
-from djangosige.apps.financeiro.models import MovimentoCaixa
-
 from datetime import datetime
+
+from base.custom_views import CustomListView
+from django.contrib import messages
+from django.urls import reverse_lazy
+
+from financeiro.models import MovimentoCaixa
 
 
 class FluxoCaixaView(CustomListView):

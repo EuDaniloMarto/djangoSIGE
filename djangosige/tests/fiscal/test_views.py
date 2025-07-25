@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.tests.test_case import BaseTestCase, replace_none_values_in_dictionary
 from django.urls import reverse
 from django.utils import timezone
+from fiscal.models import (
+    GrupoFiscal,
+    NaturezaOperacao,
+    NotaFiscalEntrada,
+    NotaFiscalSaida,
+)
+from vendas.models import PedidoVenda
 
-from djangosige.apps.fiscal.models import NaturezaOperacao, GrupoFiscal, NotaFiscalSaida, NotaFiscalEntrada
-from djangosige.apps.vendas.models import PedidoVenda
-
+from tests.test_case import BaseTestCase, replace_none_values_in_dictionary
 
 AUT_XML_FORMSET_DATA = {
     'aut_form-0-cpf_cnpj': '',

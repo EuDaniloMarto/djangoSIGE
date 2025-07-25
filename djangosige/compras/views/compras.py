@@ -1,23 +1,32 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.http import HttpResponse
-
-from djangosige.apps.base.custom_views import CustomView, CustomCreateView, CustomListView, CustomUpdateView
-
-from djangosige.apps.compras.forms import OrcamentoCompraForm, PedidoCompraForm, ItensCompraFormSet, PagamentoFormSet
-from djangosige.apps.compras.models import OrcamentoCompra, PedidoCompra, ItensCompra, Pagamento
-from djangosige.apps.cadastro.models import MinhaEmpresa
-from djangosige.apps.estoque.models import ProdutoEstocado, EntradaEstoque, ItensMovimento
-from djangosige.apps.login.models import Usuario
-from djangosige.configs.settings import MEDIA_ROOT
-from .report_compras import CompraReport
-
-from geraldo.generators import PDFGenerator
-from datetime import datetime
 import io
+from datetime import datetime
+
+from base.custom_views import (
+    CustomCreateView,
+    CustomListView,
+    CustomUpdateView,
+    CustomView,
+)
+from cadastro.models import MinhaEmpresa
+from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from estoque.models import EntradaEstoque, ItensMovimento, ProdutoEstocado
+from geraldo.generators import PDFGenerator
+from login.models import Usuario
+
+from compras.forms import (
+    ItensCompraFormSet,
+    OrcamentoCompraForm,
+    PagamentoFormSet,
+    PedidoCompraForm,
+)
+from compras.models import ItensCompra, OrcamentoCompra, Pagamento, PedidoCompra
+
+from .report_compras import CompraReport
 
 
 class AdicionarCompraView(CustomCreateView):

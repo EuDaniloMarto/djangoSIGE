@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.tests.test_case import BaseTestCase
+from base.views import IndexView
 from django.urls import resolve, reverse
-from djangosige.apps.base.views import IndexView
-from djangosige.configs import DEBUG
+
+from tests.test_case import BaseTestCase
+
+from django.conf import settings
 
 
 class BaseViewsTestCase(BaseTestCase):
@@ -27,7 +29,7 @@ class BaseViewsTestCase(BaseTestCase):
         response = self.client.get("/500/")
         # Se DEBUG=True temos views personalizadas,
         # caso contrário /500/ retornar 404
-        if DEBUG:
+        if settings.DEBUG:
             self.assertTemplateUsed(response, '500.html')
             self.assertEqual(response.status_code, 500)
         else:

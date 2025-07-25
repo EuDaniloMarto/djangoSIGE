@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
-
-from djangosige.apps.estoque.forms import LocalEstoqueForm
-from djangosige.apps.estoque.models import LocalEstoque
+from estoque.forms import LocalEstoqueForm
+from estoque.models import LocalEstoque
 
 
 class AdicionarLocalEstoqueView(CustomCreateView):

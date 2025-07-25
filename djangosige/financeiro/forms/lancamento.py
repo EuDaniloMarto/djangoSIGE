@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from cadastro.models import Banco, MinhaEmpresa
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from djangosige.apps.financeiro.models import Saida, Entrada, STATUS_CONTA_ENTRADA_ESCOLHAS, STATUS_CONTA_SAIDA_ESCOLHAS
-from djangosige.apps.financeiro.models import PlanoContasGrupo
-from djangosige.apps.login.models import Usuario
-from djangosige.apps.cadastro.models import MinhaEmpresa, Banco
+from login.models import Usuario
+
+from financeiro.models import (
+    STATUS_CONTA_ENTRADA_ESCOLHAS,
+    STATUS_CONTA_SAIDA_ESCOLHAS,
+    Entrada,
+    PlanoContasGrupo,
+    Saida,
+)
 
 
 class LancamentoForm(forms.ModelForm):

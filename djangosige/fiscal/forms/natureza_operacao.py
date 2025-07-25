@@ -3,7 +3,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.fiscal.models import NaturezaOperacao
+from fiscal.models import NaturezaOperacao
 
 
 class NaturezaOperacaoForm(forms.ModelForm):

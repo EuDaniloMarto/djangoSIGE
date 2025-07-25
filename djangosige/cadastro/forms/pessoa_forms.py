@@ -3,7 +3,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from djangosige.apps.cadastro.models import PessoaJuridica, PessoaFisica
+from cadastro.models import PessoaFisica, PessoaJuridica
 
 
 class PessoaJuridicaForm(forms.ModelForm):

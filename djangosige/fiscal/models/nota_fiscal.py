@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
-from django.core.validators import RegexValidator, MinValueValidator
-from django.template.defaultfilters import date
-
-from decimal import Decimal
 import os
 import re
+from decimal import Decimal
 
-from djangosige.configs.settings import MEDIA_ROOT, APP_ROOT
-
+from django.conf import settings
+from django.core.validators import MinValueValidator, RegexValidator
+from django.db import models
+from django.template.defaultfilters import date
 
 IND_PAG_ESCOLHAS = (
     (u'0', u'Pagamento à vista'),
@@ -161,10 +159,10 @@ class NotaFiscal(models.Model):
     @property
     def caminho_proc_completo(self):
         if self.arquivo_proc:
-            if APP_ROOT in self.arquivo_proc.name:
+            if settings.APP_ROOT in self.arquivo_proc.name:
                 return self.arquivo_proc.name
             else:
-                return os.path.join(APP_ROOT, self.arquivo_proc.url)
+                return os.path.join(settings.APP_ROOT, self.arquivo_proc.url)
         else:
             return ''
 

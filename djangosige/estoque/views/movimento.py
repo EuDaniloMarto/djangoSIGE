@@ -1,16 +1,26 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
-
-from itertools import chain
 from datetime import datetime
 from decimal import Decimal
+from itertools import chain
 
-from djangosige.apps.base.custom_views import CustomDetailView, CustomCreateView, CustomListView
+from base.custom_views import CustomCreateView, CustomDetailView, CustomListView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
-from djangosige.apps.estoque.forms import EntradaEstoqueForm, SaidaEstoqueForm, TransferenciaEstoqueForm, ItensMovimentoFormSet
-from djangosige.apps.estoque.models import MovimentoEstoque, EntradaEstoque, SaidaEstoque, TransferenciaEstoque, ProdutoEstocado
+from estoque.forms import (
+    EntradaEstoqueForm,
+    ItensMovimentoFormSet,
+    SaidaEstoqueForm,
+    TransferenciaEstoqueForm,
+)
+from estoque.models import (
+    EntradaEstoque,
+    MovimentoEstoque,
+    ProdutoEstocado,
+    SaidaEstoque,
+    TransferenciaEstoque,
+)
 
 
 class MovimentoEstoqueMixin(object):

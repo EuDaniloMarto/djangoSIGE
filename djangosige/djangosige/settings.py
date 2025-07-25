@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
-from decouple import config, Csv
+from decouple import Csv, config
 from dj_database_url import parse as db_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,14 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djangosige.apps.base',
-    'djangosige.apps.login',
-    'djangosige.apps.cadastro',
-    'djangosige.apps.vendas',
-    'djangosige.apps.compras',
-    'djangosige.apps.fiscal',
-    'djangosige.apps.financeiro',
-    'djangosige.apps.estoque',
+    'base',
+    'login',
+    'cadastro',
+    'vendas',
+    'compras',
+    'fiscal',
+    'financeiro',
+    'estoque',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'djangosige.middleware.LoginRequiredMiddleware',
+    'middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'djangosige.urls'
@@ -75,8 +75,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'djangosige.apps.base.context_version.sige_version',
-                'djangosige.apps.login.context_user.foto_usuario',
+                'base.context_version.sige_version',
+                'login.context_user.foto_usuario',
             ],
         },
     },

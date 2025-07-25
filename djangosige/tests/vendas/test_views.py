@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.tests.test_case import BaseTestCase
-from djangosige.apps.cadastro.models import Cliente
-from djangosige.apps.vendas.models import CondicaoPagamento, OrcamentoVenda, PedidoVenda
-from djangosige.apps.estoque.models import LocalEstoque, DEFAULT_LOCAL_ID
-from django.urls import reverse
-
 from datetime import datetime, timedelta
 
+from cadastro.models import Cliente
+from django.urls import reverse
+from estoque.models import DEFAULT_LOCAL_ID, LocalEstoque
+from vendas.models import CondicaoPagamento, OrcamentoVenda, PedidoVenda
+
+from tests.test_case import BaseTestCase
 
 VENDA_FORMSET_DATA = {
     'produtos_form-0-produto': 1,

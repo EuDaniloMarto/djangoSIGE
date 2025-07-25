@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
+from base.custom_views import CustomCreateView, CustomTemplateView, CustomUpdateView
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomUpdateView, CustomTemplateView
-
-from djangosige.apps.financeiro.models import PlanoContasGrupo, PlanoContasSubgrupo
-from djangosige.apps.financeiro.forms import PlanoContasGrupoForm, PlanoContasSubgrupoFormSet
+from financeiro.forms import PlanoContasGrupoForm, PlanoContasSubgrupoFormSet
+from financeiro.models import PlanoContasGrupo, PlanoContasSubgrupo
 
 
 class PlanoContasView(CustomTemplateView):

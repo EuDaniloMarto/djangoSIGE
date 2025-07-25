@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
 
+from base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from cadastro.models import MinhaEmpresa
 from django.urls import reverse_lazy
+from login.models import Usuario
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
-
-from djangosige.apps.fiscal.forms import GrupoFiscalForm, ICMSForm, ICMSSNForm, ICMSUFDestForm, IPIForm, PISForm, COFINSForm
-from djangosige.apps.fiscal.models import GrupoFiscal, ICMS, ICMSSN, ICMSUFDest, IPI
-from djangosige.apps.cadastro.models import MinhaEmpresa
-from djangosige.apps.login.models import Usuario
+from fiscal.forms import (
+    COFINSForm,
+    GrupoFiscalForm,
+    ICMSForm,
+    ICMSSNForm,
+    ICMSUFDestForm,
+    IPIForm,
+    PISForm,
+)
+from fiscal.models import ICMS, ICMSSN, IPI, GrupoFiscal, ICMSUFDest
 
 
 class AdicionarGrupoFiscalView(CustomCreateView):

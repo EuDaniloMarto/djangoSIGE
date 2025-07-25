@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from django.db import models
-from django.core.validators import MinValueValidator
 from decimal import Decimal
 
-from djangosige.apps.cadastro.models import Produto
+from cadastro.models import Produto
+from django.core.validators import MinValueValidator
+from django.db import models
 
 DEFAULT_LOCAL_ID = 1
 
