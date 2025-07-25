@@ -1,16 +1,17 @@
-# -*- coding: utf-8 -*-
-
-from django.conf.urls import url
 from django.conf import settings
+from django.urls import path
+
 from . import views
 
 app_name = 'base'
+
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
+    path('', views.pagina_inicial, name='index'),
 ]
 
 if settings.DEBUG:
-    urlpatterns += [
-        url(r'^404/$', views.handler404),
-        url(r'^500/$', views.handler500),
+    urlpatterns = [
+        *urlpatterns,
+        path('404/', views.handler404),
+        path('500/', views.handler500),
     ]
