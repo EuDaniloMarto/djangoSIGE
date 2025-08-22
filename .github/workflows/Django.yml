@@ -1,0 +1,45 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verificar Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Versão 3.8.16 do Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8.16
+
+      - name: Cache das Dependências do Python
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Instalar Dependências do Sistema
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements/dev.txt
+
+      - name: Configurar as variáveis de Ambiente
+        run: |
+          python contrib/env_gen.py
+
+      - name: Gerar os Arquivos de Migração
+        run: |
+          python manage.py makemigrations
+
+      - name: Rodar os Testes
+        run: |
+            python manage.py test
