@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import url
-from . import views
 from django.conf import settings
+from django.urls import re_path as url
+
+from . import views
 
 app_name = 'base'
 urlpatterns = [
