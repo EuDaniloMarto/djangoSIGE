@@ -6,7 +6,7 @@ from dj_database_url import parse as db_url
 
 
 # Diretório base do projeto
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Diretório de aplicativos
 APPS_DIR = BASE_DIR / "djangosige"
