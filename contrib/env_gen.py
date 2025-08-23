@@ -5,7 +5,6 @@ Django SECRET_KEY generator.
 """
 from django.utils.crypto import get_random_string
 
-
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
 CONFIG_STRING = """
@@ -13,7 +12,7 @@ DEBUG=True
 SECRET_KEY=%s
 ALLOWED_HOSTS=127.0.0.1, .localhost
 #DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/NAME
-#DEFAULT_FROM_EMAIL=
+#settings.DEFAULT_FROM_EMAIL=
 #EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
 #EMAIL_HOST=
 #EMAIL_PORT=

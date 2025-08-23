@@ -64,21 +64,21 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Aplicativos
 # ------------------------------------------------------------------------------
 INSTALLED_APPS = [
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.admin",
-    # 'djangosige.apps.base',
-    # 'djangosige.apps.login',
-    # 'djangosige.apps.cadastro',
-    # 'djangosige.apps.vendas',
-    # 'djangosige.apps.compras',
-    # 'djangosige.apps.fiscal',
-    # 'djangosige.apps.financeiro',
-    # 'djangosige.apps.estoque',
+    "djangosige.apps.base",
+    "djangosige.apps.login",
+    "djangosige.apps.cadastro",
+    "djangosige.apps.vendas",
+    "djangosige.apps.compras",
+    "djangosige.apps.fiscal",
+    "djangosige.apps.financeiro",
+    "djangosige.apps.estoque",
 ]
 
 # Autenticação
@@ -126,7 +126,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # 'djangosige.middleware.LoginRequiredMiddleware',
+    "djangosige.middleware.LoginRequiredMiddleware",
 ]
 
 # Arquivos estáticos
@@ -159,8 +159,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                # 'djangosige.apps.base.context_version.sige_version',
-                # 'djangosige.apps.login.context_user.foto_usuario',
+                "djangosige.apps.base.context_version.sige_version",
+                "djangosige.apps.login.context_user.foto_usuario",
             ],
         },
     },
@@ -169,7 +169,7 @@ TEMPLATES = [
 # Arquivos de fixture
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#fixture-dirs
-FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
+FIXTURE_DIRS = [str(APPS_DIR / "fixtures"),]
 
 # Segurança
 # ------------------------------------------------------------------------------
