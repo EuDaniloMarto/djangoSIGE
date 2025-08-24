@@ -2,7 +2,7 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from djangosige.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 
 from djangosige.apps.fiscal.forms import GrupoFiscalForm, ICMSForm, ICMSSNForm, ICMSUFDestForm, IPIForm, PISForm, COFINSForm
 from djangosige.apps.fiscal.models import GrupoFiscal, ICMS, ICMSSN, ICMSUFDest, IPI

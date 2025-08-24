@@ -3,7 +3,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomUpdateView, CustomTemplateView
+from djangosige.custom_views import CustomCreateView, CustomUpdateView, CustomTemplateView
 
 from djangosige.apps.financeiro.models import PlanoContasGrupo, PlanoContasSubgrupo
 from djangosige.apps.financeiro.forms import PlanoContasGrupoForm, PlanoContasSubgrupoFormSet

@@ -3,7 +3,7 @@
 from django.urls import reverse_lazy
 from django.contrib import messages
 
-from djangosige.apps.base.custom_views import CustomListView
+from djangosige.custom_views import CustomListView
 
 from djangosige.apps.financeiro.models import MovimentoCaixa
 

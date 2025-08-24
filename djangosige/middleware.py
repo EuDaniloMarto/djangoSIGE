@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import re
-from django.shortcuts import redirect
-from django.utils.deprecation import MiddlewareMixin
 
 from django.conf import settings
+from django.shortcuts import redirect
+from django.utils.deprecation import MiddlewareMixin
 
 
 class LoginRequiredMiddleware(MiddlewareMixin):
@@ -20,7 +20,7 @@ class LoginRequiredMiddleware(MiddlewareMixin):
         if request.user.is_authenticated:
             for url in self.exceptions:
                 if url.match(request.path):
-                    return redirect('base:index')
+                    return redirect('djangosige_pagina_inicial')
             return None
 
         for url in self.exceptions:

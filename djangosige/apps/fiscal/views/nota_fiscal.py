@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.http import HttpResponse
 
-from djangosige.apps.base.custom_views import CustomView, CustomCreateView, CustomListView, CustomUpdateView, CustomTemplateView
-from djangosige.apps.base.views_mixins import FormValidationMessageMixin
+from djangosige.custom_views import CustomView, CustomCreateView, CustomListView, CustomUpdateView, CustomTemplateView
+from djangosige.views_mixins import FormValidationMessageMixin
 
 from djangosige.apps.fiscal.forms import NotaFiscalSaidaForm, NotaFiscalEntradaForm, AutXMLFormSet, ConfiguracaoNotaFiscalForm, EmissaoNotaFiscalForm, CancelamentoNotaFiscalForm, \
     ConsultarCadastroForm, InutilizarNotasForm, ConsultarNotaForm, BaixarNotaForm, ManifestacaoDestinatarioForm

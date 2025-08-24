@@ -7,7 +7,7 @@ from itertools import chain
 from datetime import datetime
 from decimal import Decimal
 
-from djangosige.apps.base.custom_views import CustomDetailView, CustomCreateView, CustomListView
+from djangosige.custom_views import CustomDetailView, CustomCreateView, CustomListView
 
 from djangosige.apps.estoque.forms import EntradaEstoqueForm, SaidaEstoqueForm, TransferenciaEstoqueForm, ItensMovimentoFormSet
 from djangosige.apps.estoque.models import MovimentoEstoque, EntradaEstoque, SaidaEstoque, TransferenciaEstoque, ProdutoEstocado

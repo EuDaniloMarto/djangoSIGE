@@ -2,7 +2,7 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from djangosige.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 
 from djangosige.apps.estoque.forms import LocalEstoqueForm
 from djangosige.apps.estoque.models import LocalEstoque

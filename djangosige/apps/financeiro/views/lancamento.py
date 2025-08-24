@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.http import JsonResponse
 
-from djangosige.apps.base.custom_views import CustomView, CustomCreateView, CustomListView, CustomUpdateView
+from djangosige.custom_views import CustomView, CustomCreateView, CustomListView, CustomUpdateView
 
 from djangosige.apps.financeiro.forms import ContaPagarForm, ContaReceberForm, SaidaForm, EntradaForm
 from djangosige.apps.financeiro.models import Lancamento, Saida, Entrada, MovimentoCaixa

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from djangosige.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from djangosige.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 
 from djangosige.apps.cadastro.forms import PessoaJuridicaForm, PessoaFisicaForm, EnderecoFormSet, TelefoneFormSet, EmailFormSet, \
     SiteFormSet, BancoFormSet, DocumentoFormSet

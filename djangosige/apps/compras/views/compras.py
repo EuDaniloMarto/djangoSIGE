@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from geraldo.generators import PDFGenerator
 
-from djangosige.apps.base.custom_views import (
+from djangosige.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomUpdateView,
