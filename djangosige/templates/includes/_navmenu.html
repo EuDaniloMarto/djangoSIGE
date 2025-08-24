@@ -1,0 +1,23 @@
+<!--
+Menu de navegação responsivo com seis links de navegação: cadastros, vendas, compras, fiscal, financeiro, estoque.
+-->
+<nav class="h-100 nav nav-underline flex-column flex-lg-row d-flex justify-content-around">
+  <a href=""
+     class="nav-link text-center text-capitalize text-dark {% if page == 'cadastros' %}active{% endif %}"
+     {% if page == 'cadastros' %}aria-current="page"{% endif %}>cadastros</a>
+  <a href=""
+     class="nav-link text-center text-capitalize text-dark {% if page == 'vendas' %}active{% endif %}"
+     {% if page == 'vendas' %}aria-current="page"{% endif %}>vendas</a>
+  <a href=""
+     class="nav-link text-center text-capitalize text-dark {% if page == 'compras' %}active{% endif %}"
+     {% if page == 'compras' %}aria-current="page"{% endif %}>compras</a>
+  <a href=""
+     class="nav-link text-center text-capitalize text-dark {% if page == 'fiscal' %}active{% endif %}"
+     {% if page == 'fiscal' %}aria-current="page"{% endif %}>fiscal</a>
+  <a href=""
+     class="nav-link text-center text-capitalize text-dark {% if page == 'financeiro' %}active{% endif %}"
+     {% if page == 'financeiro' %}aria-current="page"{% endif %}>financeiro</a>
+  <a href=""
+     class="nav-link text-center text-capitalize text-dark {% if page == 'estoque' %}active{% endif %}"
+     {% if page == 'estoque' %}aria-current="page"{% endif %}>estoque</a>
+</nav>
