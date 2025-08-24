@@ -7,3 +7,6 @@ Geraldo @ https://github.com/thiagopena/geraldo/archive/master.zip#sha256=295474
 PySIGNFe @ https://github.com/thiagopena/PySIGNFe/archive/master.zip#sha256=72c71249846ea61e18324a215f9aa361631acfe17f2923a0309d2a1124dd7c87
 
 signxml==2.5.2
+
+crispy-bootstrap5==2025.6
+django-crispy-forms==2.4
