@@ -32,6 +32,11 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
 
+# https://docs.djangoproject.com/en/dev/ref/settings/#internal-ips
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "localhost",
+]
 
 # Banco de dados
 # ------------------------------------------------------------------------------
@@ -71,15 +76,25 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "djangosige.apps.base",
-    "djangosige.apps.login",
-    "djangosige.apps.cadastro",
-    "djangosige.apps.vendas",
-    "djangosige.apps.compras",
-    "djangosige.apps.fiscal",
-    "djangosige.apps.financeiro",
-    "djangosige.apps.estoque",
 ]
+
+if DEBUG:
+    INSTALLED_APPS.extend(["debug_toolbar", "django_extensions"])
+
+INSTALLED_APPS.extend(
+    [
+        "crispy_forms",
+        "crispy_bootstrap5",
+        "djangosige.apps.base",
+        "djangosige.apps.login",
+        "djangosige.apps.cadastro",
+        "djangosige.apps.vendas",
+        "djangosige.apps.compras",
+        "djangosige.apps.fiscal",
+        "djangosige.apps.financeiro",
+        "djangosige.apps.estoque",
+    ]
+)
 
 # Autenticação
 # ------------------------------------------------------------------------------
@@ -129,6 +144,9 @@ MIDDLEWARE = [
     "djangosige.middleware.LoginRequiredMiddleware",
 ]
 
+if DEBUG:
+    MIDDLEWARE.extend(["debug_toolbar.middleware.DebugToolbarMiddleware"])
+
 # Arquivos estáticos
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
@@ -166,10 +184,17 @@ TEMPLATES = [
     },
 ]
 
+# Crispy Forms
+# ------------------------------------------------------------------------------
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
 # Arquivos de fixture
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#fixture-dirs
-FIXTURE_DIRS = [str(APPS_DIR / "fixtures"),]
+FIXTURE_DIRS = [
+    str(APPS_DIR / "fixtures"),
+]
 
 # Segurança
 # ------------------------------------------------------------------------------
