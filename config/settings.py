@@ -85,6 +85,7 @@ INSTALLED_APPS.extend(
     [
         "crispy_forms",
         "crispy_bootstrap5",
+        "djangosige",
         "djangosige.apps.base",
         "djangosige.apps.login",
         "djangosige.apps.cadastro",
@@ -154,7 +155,7 @@ STATIC_ROOT = str(BASE_DIR / "staticfiles")
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = [str(APPS_DIR / "static")]
+STATICFILES_DIRS = []
 
 # Arquivos de mídia
 # ------------------------------------------------------------------------------
@@ -169,7 +170,7 @@ MEDIA_URL = "/media/"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(APPS_DIR / "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -192,9 +193,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 # Arquivos de fixture
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#fixture-dirs
-FIXTURE_DIRS = [
-    str(APPS_DIR / "fixtures"),
-]
+# FIXTURE_DIRS = [
+#     str(APPS_DIR / "fixtures"),
+# ]
 
 # Segurança
 # ------------------------------------------------------------------------------
