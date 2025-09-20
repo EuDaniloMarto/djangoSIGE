@@ -41,7 +41,8 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    # "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "djangosige.middleware.LoginRequiredMiddleware"
 ]
 WSGI_APPLICATION = "config.wsgi.application"
 
@@ -54,14 +55,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "djangosige.apps.base",
-    # "djangosige.apps.login",
-    # "djangosige.apps.cadastro",
-    # "djangosige.apps.vendas",
-    # "djangosige.apps.compras",
-    # "djangosige.apps.fiscal",
-    # "djangosige.apps.financeiro",
-    # "djangosige.apps.estoque",
+    "djangosige.apps.base",
+    "djangosige.apps.login",
+    "djangosige.apps.cadastro",
+    "djangosige.apps.vendas",
+    "djangosige.apps.compras",
+    "djangosige.apps.fiscal",
+    "djangosige.apps.financeiro",
+    "djangosige.apps.estoque",
 ]
 
 # Security
@@ -79,8 +80,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                # "djangosige.apps.base.context_version.sige_version",
-                # "djangosige.apps.login.context_user.foto_usuario",
+                "djangosige.apps.base.context_version.sige_version",
+                "djangosige.apps.login.context_user.foto_usuario",
             ],
         },
     },
