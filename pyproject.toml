@@ -1,0 +1,46 @@
+[project]
+name = "djangosige"
+version = "0.1.0"
+description = "Sistema Integrado de Gestão Empresarial baseado em Django"
+authors = [{ name = "Thiago Pena", email = "thiagopena01@gmail.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "django (==3.1)",
+    "python-decouple (>=3.8,<4.0)",
+    "dj-database-url (<=3)",
+    "geraldo @ https://github.com/thiagopena/geraldo/archive/master.zip",
+    "pysignfe @ https://github.com/thiagopena/PySIGNFe/archive/master.zip",
+    "signxml (>=4.2.0,<5.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (<8)",
+    "pytest-django (>=4.11.1,<5.0.0)",
+    "pytest-cov (<7)",
+    "pytest-sugar (>=1.1.1,<2.0.0)",
+    "black (<25)",
+    "isort (<6)",
+    "flake8 (<7)",
+    "flake8-django (<2)",
+    "django-coverage-plugin (<4)",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "djangosige.configs.settings"
+python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
+
+[tool.coverage.run]
+include = ["djangosige/apps/**"]
+omit = ["*/migrations/*", "*/tests/*"]
+plugins = ["django_coverage_plugin"]
+
+[tool.isort]
+profile = "black"
