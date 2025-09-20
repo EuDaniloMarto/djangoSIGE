@@ -47,7 +47,7 @@ MIDDLEWARE = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 # Models
-FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
+# FIXTURE_DIRS = [str(APPS_DIR / "fixtures")]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "djangosige",
     "djangosige.apps.base",
     "djangosige.apps.login",
     "djangosige.apps.cadastro",
@@ -72,7 +73,7 @@ SECRET_KEY = config("SECRET_KEY")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(APPS_DIR / "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -118,7 +119,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 # Static files
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(APPS_DIR / "static")]
+# STATICFILES_DIRS = [str(APPS_DIR / "static")]
 
 # File Uploads
 MEDIA_URL = "media/"
