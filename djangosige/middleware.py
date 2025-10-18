@@ -4,7 +4,7 @@ import re
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 
-from .configs.settings import LOGIN_NOT_REQUIRED
+from .settings import LOGIN_NOT_REQUIRED
 
 
 class LoginRequiredMiddleware(MiddlewareMixin):

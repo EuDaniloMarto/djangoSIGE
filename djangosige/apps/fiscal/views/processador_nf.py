@@ -3,7 +3,7 @@
 from djangosige.apps.fiscal.models import NotaFiscalSaida, NotaFiscalEntrada, ConfiguracaoNotaFiscal, AutXML, \
     ErrosValidacaoNotaFiscal, RespostaSefazNotaFiscal, NaturezaOperacao, GrupoFiscal, \
     ICMS, ICMSUFDest, ICMSSN, IPI, PIS, COFINS
-from djangosige.configs.settings import MEDIA_ROOT
+from djangosige.settings import MEDIA_ROOT
 from djangosige.apps.cadastro.models import COD_UF, PessoaJuridica, PessoaFisica, Fornecedor, Cliente, Empresa, Transportadora, Endereco, Telefone, Produto, Unidade
 from djangosige.apps.compras.models import PedidoCompra, ItensCompra
 from djangosige.apps.vendas.models import PedidoVenda, ItensVenda

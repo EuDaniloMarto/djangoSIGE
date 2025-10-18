@@ -8,7 +8,7 @@ from decimal import Decimal
 import os
 import re
 
-from djangosige.configs.settings import MEDIA_ROOT, APP_ROOT
+from djangosige.settings import MEDIA_ROOT, APP_ROOT
 
 
 IND_PAG_ESCOLHAS = (

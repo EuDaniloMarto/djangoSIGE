@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 from .base import Pessoa
 from djangosige.apps.login.models import Usuario
-from djangosige.configs.settings import MEDIA_ROOT
+from djangosige.settings import MEDIA_ROOT
 
 
 def logo_directory_path(instance, filename):

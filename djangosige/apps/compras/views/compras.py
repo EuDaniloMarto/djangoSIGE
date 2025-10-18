@@ -12,7 +12,7 @@ from djangosige.apps.compras.models import OrcamentoCompra, PedidoCompra, ItensC
 from djangosige.apps.cadastro.models import MinhaEmpresa
 from djangosige.apps.estoque.models import ProdutoEstocado, EntradaEstoque, ItensMovimento
 from djangosige.apps.login.models import Usuario
-from djangosige.configs.settings import MEDIA_ROOT
+from djangosige.settings import MEDIA_ROOT
 from .report_compras import CompraReport
 
 from geraldo.generators import PDFGenerator

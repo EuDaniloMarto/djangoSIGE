@@ -10,7 +10,7 @@ from djangosige.apps.vendas.forms import OrcamentoVendaForm, PedidoVendaForm, It
 from djangosige.apps.vendas.models import OrcamentoVenda, PedidoVenda, ItensVenda, Pagamento
 from djangosige.apps.cadastro.models import MinhaEmpresa
 from djangosige.apps.login.models import Usuario
-from djangosige.configs.settings import MEDIA_ROOT
+from djangosige.settings import MEDIA_ROOT
 
 from geraldo.generators import PDFGenerator
 from datetime import datetime
