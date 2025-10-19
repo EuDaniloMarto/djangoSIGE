@@ -55,6 +55,17 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.contrib.sites",
+    "crispy_forms",
+    "crispy_bootstrap5",
+]
+if DEBUG:
+    INSTALLED_APPS += [
+        "whitenoise.runserver_nostatic",
+        "debug_toolbar",
+        "django_extensions",
+    ]
+
+INSTALLED_APPS += [
     "djangosige.apps.base.apps.BaseConfig",
     "djangosige.apps.login.apps.LoginConfig",
     "djangosige.apps.cadastro.apps.CadastroConfig",
@@ -96,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -105,6 +117,10 @@ MIDDLEWARE = [
     "djangosige.middleware.LoginRequiredMiddleware",
 ]
 
+if DEBUG:
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
 
 # Static/Media
 # ------------------------------------------------------------------------------
@@ -115,6 +131,12 @@ STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATICFILES_DIRS = [
     str(BASE_DIR / "static"),
 ]
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Configuração de Media Files
 MEDIA_URL = "/media/"
@@ -143,6 +165,18 @@ TEMPLATES = [
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+if DEBUG:
+    DEBUG_TOOLBAR_CONFIG = {
+        "DISABLE_PANELS": [
+            "debug_toolbar.panels.redirects.RedirectsPanel",
+            # Disable profiling panel due to an issue with Python 3.12+:
+            # https://github.com/jazzband/django-debug-toolbar/issues/1875
+            "debug_toolbar.panels.profiling.ProfilingPanel",
+        ],
+        "SHOW_TEMPLATE_CONTEXT": True,
+    }
+    INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 
 # Segurança
 # ------------------------------------------------------------------------------
