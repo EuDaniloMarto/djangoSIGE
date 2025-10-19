@@ -9,7 +9,7 @@ from dj_database_url import parse as dburl
 # Acessa a pasta raiz do projeto Django (onde fica manage.py)
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # project_name/
-APPS_DIR = BASE_DIR / "apps"
+APPS_DIR = BASE_DIR / "djangosige"
 
 
 # GERAL
