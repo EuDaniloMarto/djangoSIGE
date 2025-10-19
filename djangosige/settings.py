@@ -125,11 +125,11 @@ if DEBUG:
 # Static/Media
 # ------------------------------------------------------------------------------
 STATIC_URL = "/static/"
-STATIC_ROOT = str(BASE_DIR / "staticfiles")
+STATIC_ROOT = str(APPS_DIR / "staticfiles")
 
 # Arquivos estáticos em desenvolvimento
 STATICFILES_DIRS = [
-    str(BASE_DIR / "static"),
+    str(APPS_DIR / "static"),
 ]
 
 STORAGES = {
@@ -140,7 +140,7 @@ STORAGES = {
 
 # Configuração de Media Files
 MEDIA_URL = "/media/"
-MEDIA_ROOT = str(BASE_DIR / "media")
+MEDIA_ROOT = str(APPS_DIR / "media")
 
 
 # Templates
@@ -148,7 +148,7 @@ MEDIA_ROOT = str(BASE_DIR / "media")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(BASE_DIR / "templates")],
+        "DIRS": [str(APPS_DIR / "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
