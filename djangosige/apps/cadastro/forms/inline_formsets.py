@@ -1,44 +1,49 @@
-# -*- coding: utf-8 -*-
 
 from django import forms
 from django.forms import inlineformset_factory
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
-from djangosige.apps.cadastro.models import Pessoa, Endereco, Telefone, Email, Site, Banco, Documento
+from djangosige.apps.cadastro.models import Banco
+from djangosige.apps.cadastro.models import Documento
+from djangosige.apps.cadastro.models import Email
+from djangosige.apps.cadastro.models import Endereco
+from djangosige.apps.cadastro.models import Pessoa
+from djangosige.apps.cadastro.models import Site
+from djangosige.apps.cadastro.models import Telefone
 
 
 class EnderecoForm(forms.ModelForm):
 
     class Meta:
         model = Endereco
-        fields = ('tipo_endereco', 'logradouro', 'numero', 'bairro',
-                  'complemento', 'pais', 'cpais', 'uf', 'cep', 'municipio', 'cmun',)
+        fields = ("tipo_endereco", "logradouro", "numero", "bairro",
+                  "complemento", "pais", "cpais", "uf", "cep", "municipio", "cmun")
 
         labels = {
-            'tipo_endereco': _('Tipo'),
-            'logradouro': _("Logradouro"),
-            'numero': _("Número"),
-            'bairro': _("Bairro"),
-            'complemento': _("Complemento"),
-            'pais': _("País"),
-            'cpais': _("Código do País"),
-            'municipio': _("Município (sem acentuação)"),
-            'cmun': _("Código do município"),
-            'cep': _("CEP (Apenas dígitos)"),
-            'uf': _("UF"),
+            "tipo_endereco": _("Tipo"),
+            "logradouro": _("Logradouro"),
+            "numero": _("Número"),
+            "bairro": _("Bairro"),
+            "complemento": _("Complemento"),
+            "pais": _("País"),
+            "cpais": _("Código do País"),
+            "municipio": _("Município (sem acentuação)"),
+            "cmun": _("Código do município"),
+            "cep": _("CEP (Apenas dígitos)"),
+            "uf": _("UF"),
         }
         widgets = {
-            'tipo_endereco': forms.Select(attrs={'class': 'form-control'}),
-            'logradouro': forms.TextInput(attrs={'class': 'form-control'}),
-            'numero': forms.TextInput(attrs={'class': 'form-control'}),
-            'bairro': forms.TextInput(attrs={'class': 'form-control'}),
-            'complemento': forms.TextInput(attrs={'class': 'form-control'}),
-            'pais': forms.TextInput(attrs={'class': 'form-control'}),
-            'cpais': forms.TextInput(attrs={'class': 'form-control'}),
-            'municipio': forms.Select(attrs={'class': 'form-control'}),
-            'cmun': forms.TextInput(attrs={'class': 'form-control'}),
-            'cep': forms.TextInput(attrs={'class': 'form-control'}),
-            'uf': forms.Select(attrs={'class': 'form-control'}),
+            "tipo_endereco": forms.Select(attrs={"class": "form-control"}),
+            "logradouro": forms.TextInput(attrs={"class": "form-control"}),
+            "numero": forms.TextInput(attrs={"class": "form-control"}),
+            "bairro": forms.TextInput(attrs={"class": "form-control"}),
+            "complemento": forms.TextInput(attrs={"class": "form-control"}),
+            "pais": forms.TextInput(attrs={"class": "form-control"}),
+            "cpais": forms.TextInput(attrs={"class": "form-control"}),
+            "municipio": forms.Select(attrs={"class": "form-control"}),
+            "cmun": forms.TextInput(attrs={"class": "form-control"}),
+            "cep": forms.TextInput(attrs={"class": "form-control"}),
+            "uf": forms.Select(attrs={"class": "form-control"}),
         }
 
 
@@ -46,14 +51,14 @@ class TelefoneForm(forms.ModelForm):
 
     class Meta:
         model = Telefone
-        fields = ('tipo_telefone', 'telefone',)
+        fields = ("tipo_telefone", "telefone")
         labels = {
-            'tipo_telefone': _("Telefone"),
-            'telefone': _(''),
+            "tipo_telefone": _("Telefone"),
+            "telefone": _(""),
         }
         widgets = {
-            'tipo_telefone': forms.Select(attrs={'class': 'form-control'}),
-            'telefone': forms.TextInput(attrs={'class': 'form-control'}),
+            "tipo_telefone": forms.Select(attrs={"class": "form-control"}),
+            "telefone": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 
@@ -61,12 +66,12 @@ class EmailForm(forms.ModelForm):
 
     class Meta:
         model = Email
-        fields = ('email',)
+        fields = ("email",)
         labels = {
-            'email': _('Email')
+            "email": _("Email")
         }
         widgets = {
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            "email": forms.EmailInput(attrs={"class": "form-control"}),
         }
 
 
@@ -74,12 +79,12 @@ class SiteForm(forms.ModelForm):
 
     class Meta:
         model = Site
-        fields = ('site',)
+        fields = ("site",)
         labels = {
-            'site': _('Site'),
+            "site": _("Site"),
         }
         widgets = {
-            'site': forms.TextInput(attrs={'class': 'form-control'}),
+            "site": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 
@@ -87,18 +92,18 @@ class BancoForm(forms.ModelForm):
 
     class Meta:
         model = Banco
-        fields = ('banco', 'agencia', 'conta', 'digito',)
+        fields = ("banco", "agencia", "conta", "digito")
         labels = {
-            'banco': _('Banco'),
-            'agencia': _('Agência'),
-            'conta': _('Conta'),
-            'digito': _('Dígito'),
+            "banco": _("Banco"),
+            "agencia": _("Agência"),
+            "conta": _("Conta"),
+            "digito": _("Dígito"),
         }
         widgets = {
-            'banco': forms.Select(attrs={'class': 'form-control'}),
-            'agencia': forms.TextInput(attrs={'class': 'form-control'}),
-            'conta': forms.TextInput(attrs={'class': 'form-control'}),
-            'digito': forms.TextInput(attrs={'class': 'form-control'}),
+            "banco": forms.Select(attrs={"class": "form-control"}),
+            "agencia": forms.TextInput(attrs={"class": "form-control"}),
+            "conta": forms.TextInput(attrs={"class": "form-control"}),
+            "digito": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 
@@ -106,14 +111,14 @@ class DocumentoForm(forms.ModelForm):
 
     class Meta:
         model = Documento
-        fields = ('tipo', 'documento',)
+        fields = ("tipo", "documento")
         labels = {
-            'tipo': _('Tipo'),
-            'documento': _('Documento'),
+            "tipo": _("Tipo"),
+            "documento": _("Documento"),
         }
         widgets = {
-            'tipo': forms.TextInput(attrs={'class': 'form-control'}),
-            'documento': forms.TextInput(attrs={'class': 'form-control'}),
+            "tipo": forms.TextInput(attrs={"class": "form-control"}),
+            "documento": forms.TextInput(attrs={"class": "form-control"}),
         }
 
 
