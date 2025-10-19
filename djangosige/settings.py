@@ -130,13 +130,18 @@ STATIC_ROOT = str(APPS_DIR / "staticfiles")
 # Arquivos estáticos em desenvolvimento
 STATICFILES_DIRS = [
     str(APPS_DIR / "static"),
+    str(BASE_DIR / "node_modules"),
 ]
 
-STORAGES = {
+STORAGE = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
 
 # Configuração de Media Files
 MEDIA_URL = "/media/"
