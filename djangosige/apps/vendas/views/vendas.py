@@ -1,20 +1,26 @@
-# -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
+import io
+from datetime import datetime
+
 from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from geraldo.generators import PDFGenerator
 
-from djangosige.apps.base.custom_views import CustomView, CustomCreateView, CustomListView, CustomUpdateView
-
-from djangosige.apps.vendas.forms import OrcamentoVendaForm, PedidoVendaForm, ItensVendaFormSet, PagamentoFormSet
-from djangosige.apps.vendas.models import OrcamentoVenda, PedidoVenda, ItensVenda, Pagamento
+from djangosige.apps.base.custom_views import CustomCreateView
+from djangosige.apps.base.custom_views import CustomListView
+from djangosige.apps.base.custom_views import CustomUpdateView
+from djangosige.apps.base.custom_views import CustomView
 from djangosige.apps.cadastro.models import MinhaEmpresa
 from djangosige.apps.login.models import Usuario
-from djangosige.settings import MEDIA_ROOT
-
-from geraldo.generators import PDFGenerator
-from datetime import datetime
-import io
+from djangosige.apps.vendas.forms import ItensVendaFormSet
+from djangosige.apps.vendas.forms import OrcamentoVendaForm
+from djangosige.apps.vendas.forms import PagamentoFormSet
+from djangosige.apps.vendas.forms import PedidoVendaForm
+from djangosige.apps.vendas.models import ItensVenda
+from djangosige.apps.vendas.models import OrcamentoVenda
+from djangosige.apps.vendas.models import Pagamento
+from djangosige.apps.vendas.models import PedidoVenda
 
 from .report_vendas import VendaReport
 
@@ -32,11 +38,11 @@ class AdicionarVendaView(CustomCreateView):
         self.object = None
 
         form = self.get_form(form_class)
-        form.initial['vendedor'] = request.user.first_name or request.user
-        form.initial['data_emissao'] = datetime.today().strftime('%d/%m/%Y')
+        form.initial["vendedor"] = request.user.first_name or request.user
+        form.initial["data_emissao"] = datetime.today().strftime("%d/%m/%Y")
 
-        produtos_form = ItensVendaFormSet(prefix='produtos_form')
-        pagamento_form = PagamentoFormSet(prefix='pagamento_form')
+        produtos_form = ItensVendaFormSet(prefix="produtos_form")
+        pagamento_form = PagamentoFormSet(prefix="pagamento_form")
 
         return self.render_to_response(self.get_context_data(form=form,
                                                              produtos_form=produtos_form,
@@ -48,21 +54,21 @@ class AdicionarVendaView(CustomCreateView):
         req_post = request.POST.copy()
 
         for key in req_post:
-            if ('desconto' in key or
-                'quantidade' in key or
-                'valor' in key or
-                'frete' in key or
-                'despesas' in key or
-                'seguro' in key or
-                    'total' in key):
-                req_post[key] = req_post[key].replace('.', '')
+            if ("desconto" in key or
+                "quantidade" in key or
+                "valor" in key or
+                "frete" in key or
+                "despesas" in key or
+                "seguro" in key or
+                    "total" in key):
+                req_post[key] = req_post[key].replace(".", "")
 
         request.POST = req_post
 
         form = self.get_form(form_class)
-        produtos_form = ItensVendaFormSet(request.POST, prefix='produtos_form')
+        produtos_form = ItensVendaFormSet(request.POST, prefix="produtos_form")
         pagamento_form = PagamentoFormSet(
-            request.POST, prefix='pagamento_form')
+            request.POST, prefix="pagamento_form")
 
         if (form.is_valid() and produtos_form.is_valid() and pagamento_form.is_valid()):
             self.object = form.save(commit=False)
@@ -88,13 +94,13 @@ class AdicionarVendaView(CustomCreateView):
 class AdicionarOrcamentoVendaView(AdicionarVendaView):
     form_class = OrcamentoVendaForm
     template_name = "vendas/orcamento_venda/orcamento_venda_add.html"
-    success_url = reverse_lazy('vendas:listaorcamentovendaview')
+    success_url = reverse_lazy("vendas:listaorcamentovendaview")
     success_message = "<b>Orçamento de venda %(id)s </b>adicionado com sucesso."
-    permission_codename = 'add_orcamentovenda'
+    permission_codename = "add_orcamentovenda"
 
     def view_context(self, context):
-        context['title_complete'] = 'ADICIONAR ORÇAMENTO DE VENDA'
-        context['return_url'] = reverse_lazy('vendas:listaorcamentovendaview')
+        context["title_complete"] = "ADICIONAR ORÇAMENTO DE VENDA"
+        context["return_url"] = reverse_lazy("vendas:listaorcamentovendaview")
         return context
 
     def get(self, request, *args, **kwargs):
@@ -109,13 +115,13 @@ class AdicionarOrcamentoVendaView(AdicionarVendaView):
 class AdicionarPedidoVendaView(AdicionarVendaView):
     form_class = PedidoVendaForm
     template_name = "vendas/pedido_venda/pedido_venda_add.html"
-    success_url = reverse_lazy('vendas:listapedidovendaview')
+    success_url = reverse_lazy("vendas:listapedidovendaview")
     success_message = "<b>Pedido de venda %(id)s </b>adicionado com sucesso."
-    permission_codename = 'add_pedidovenda'
+    permission_codename = "add_pedidovenda"
 
     def view_context(self, context):
-        context['title_complete'] = 'ADICIONAR PEDIDO DE VENDA'
-        context['return_url'] = reverse_lazy('vendas:listapedidovendaview')
+        context["title_complete"] = "ADICIONAR PEDIDO DE VENDA"
+        context["return_url"] = reverse_lazy("vendas:listapedidovendaview")
         return context
 
     def get(self, request, *args, **kwargs):
@@ -135,79 +141,79 @@ class VendaListView(CustomListView):
 
 
 class OrcamentoVendaListView(VendaListView):
-    template_name = 'vendas/orcamento_venda/orcamento_venda_list.html'
+    template_name = "vendas/orcamento_venda/orcamento_venda_list.html"
     model = OrcamentoVenda
-    context_object_name = 'all_orcamentos'
-    success_url = reverse_lazy('vendas:listaorcamentovendaview')
-    permission_codename = 'view_orcamentovenda'
+    context_object_name = "all_orcamentos"
+    success_url = reverse_lazy("vendas:listaorcamentovendaview")
+    permission_codename = "view_orcamentovenda"
 
     def view_context(self, context):
-        context['title_complete'] = 'ORÇAMENTOS DE VENDA'
-        context['add_url'] = reverse_lazy('vendas:addorcamentovendaview')
+        context["title_complete"] = "ORÇAMENTOS DE VENDA"
+        context["add_url"] = reverse_lazy("vendas:addorcamentovendaview")
         return context
 
 
 class OrcamentoVendaVencidosListView(OrcamentoVendaListView):
-    success_url = reverse_lazy('vendas:listaorcamentovendavencidoview')
+    success_url = reverse_lazy("vendas:listaorcamentovendavencidoview")
 
     def view_context(self, context):
-        context['title_complete'] = 'ORÇAMENTOS DE VENDA VENCIDOS'
-        context['add_url'] = reverse_lazy('vendas:addorcamentovendaview')
+        context["title_complete"] = "ORÇAMENTOS DE VENDA VENCIDOS"
+        context["add_url"] = reverse_lazy("vendas:addorcamentovendaview")
         return context
 
     def get_queryset(self):
-        return OrcamentoVenda.objects.filter(data_vencimento__lte=datetime.now().date(), status='0')
+        return OrcamentoVenda.objects.filter(data_vencimento__lte=datetime.now().date(), status="0")
 
 
 class OrcamentoVendaVencimentoHojeListView(OrcamentoVendaListView):
-    success_url = reverse_lazy('vendas:listaorcamentovendahojeview')
+    success_url = reverse_lazy("vendas:listaorcamentovendahojeview")
 
     def view_context(self, context):
-        context['title_complete'] = 'ORÇAMENTOS DE VENDA COM VENCIMENTO DIA ' + \
-            datetime.now().date().strftime('%d/%m/%Y')
-        context['add_url'] = reverse_lazy('vendas:addorcamentovendaview')
+        context["title_complete"] = "ORÇAMENTOS DE VENDA COM VENCIMENTO DIA " + \
+            datetime.now().date().strftime("%d/%m/%Y")
+        context["add_url"] = reverse_lazy("vendas:addorcamentovendaview")
         return context
 
     def get_queryset(self):
-        return OrcamentoVenda.objects.filter(data_vencimento=datetime.now().date(), status='0')
+        return OrcamentoVenda.objects.filter(data_vencimento=datetime.now().date(), status="0")
 
 
 class PedidoVendaListView(VendaListView):
-    template_name = 'vendas/pedido_venda/pedido_venda_list.html'
+    template_name = "vendas/pedido_venda/pedido_venda_list.html"
     model = PedidoVenda
-    context_object_name = 'all_pedidos'
-    success_url = reverse_lazy('vendas:listapedidovendaview')
-    permission_codename = 'view_pedidovenda'
+    context_object_name = "all_pedidos"
+    success_url = reverse_lazy("vendas:listapedidovendaview")
+    permission_codename = "view_pedidovenda"
 
     def view_context(self, context):
-        context['title_complete'] = 'PEDIDOS DE VENDA'
-        context['add_url'] = reverse_lazy('vendas:addpedidovendaview')
+        context["title_complete"] = "PEDIDOS DE VENDA"
+        context["add_url"] = reverse_lazy("vendas:addpedidovendaview")
         return context
 
 
 class PedidoVendaAtrasadosListView(PedidoVendaListView):
-    success_url = reverse_lazy('vendas:listapedidovendaatrasadosview')
+    success_url = reverse_lazy("vendas:listapedidovendaatrasadosview")
 
     def view_context(self, context):
-        context['title_complete'] = 'PEDIDOS DE VENDA ATRASADOS'
-        context['add_url'] = reverse_lazy('vendas:addpedidovendaview')
+        context["title_complete"] = "PEDIDOS DE VENDA ATRASADOS"
+        context["add_url"] = reverse_lazy("vendas:addpedidovendaview")
         return context
 
     def get_queryset(self):
-        return PedidoVenda.objects.filter(data_entrega__lte=datetime.now().date(), status='0')
+        return PedidoVenda.objects.filter(data_entrega__lte=datetime.now().date(), status="0")
 
 
 class PedidoVendaEntregaHojeListView(PedidoVendaListView):
-    success_url = reverse_lazy('vendas:listapedidovendahojeview')
+    success_url = reverse_lazy("vendas:listapedidovendahojeview")
 
     def view_context(self, context):
-        context['title_complete'] = 'PEDIDOS DE VENDA COM ENTREGA DIA ' + \
-            datetime.now().date().strftime('%d/%m/%Y')
-        context['add_url'] = reverse_lazy('vendas:addpedidovendaview')
+        context["title_complete"] = "PEDIDOS DE VENDA COM ENTREGA DIA " + \
+            datetime.now().date().strftime("%d/%m/%Y")
+        context["add_url"] = reverse_lazy("vendas:addpedidovendaview")
         return context
 
     def get_queryset(self):
-        return PedidoVenda.objects.filter(data_entrega=datetime.now().date(), status='0')
+        return PedidoVenda.objects.filter(data_entrega=datetime.now().date(), status="0")
 
 
 class EditarVendaView(CustomUpdateView):
@@ -222,17 +228,17 @@ class EditarVendaView(CustomUpdateView):
     def get(self, request, form_class, *args, **kwargs):
 
         form = form = self.get_form(form_class)
-        form.initial['total_sem_imposto'] = self.object.get_total_sem_imposto()
+        form.initial["total_sem_imposto"] = self.object.get_total_sem_imposto()
 
         produtos_form = ItensVendaFormSet(
-            instance=self.object, prefix='produtos_form')
+            instance=self.object, prefix="produtos_form")
         itens_list = ItensVenda.objects.filter(venda_id=self.object.id)
-        produtos_form.initial = [{'total_sem_desconto': item.get_total_sem_desconto(),
-                                  'total_impostos': item.get_total_impostos(),
-                                  'total_com_impostos': item.get_total_com_impostos()} for item in itens_list]
+        produtos_form.initial = [{"total_sem_desconto": item.get_total_sem_desconto(),
+                                  "total_impostos": item.get_total_impostos(),
+                                  "total_com_impostos": item.get_total_com_impostos()} for item in itens_list]
 
         pagamento_form = PagamentoFormSet(
-            instance=self.object, prefix='pagamento_form')
+            instance=self.object, prefix="pagamento_form")
 
         if ItensVenda.objects.filter(venda_id=self.object.pk).count():
             produtos_form.extra = 0
@@ -246,22 +252,22 @@ class EditarVendaView(CustomUpdateView):
         req_post = request.POST.copy()
 
         for key in req_post:
-            if ('desconto' in key or
-                'quantidade' in key or
-                'valor' in key or
-                'frete' in key or
-                'despesas' in key or
-                'seguro' in key or
-                    'total' in key):
-                req_post[key] = req_post[key].replace('.', '')
+            if ("desconto" in key or
+                "quantidade" in key or
+                "valor" in key or
+                "frete" in key or
+                "despesas" in key or
+                "seguro" in key or
+                    "total" in key):
+                req_post[key] = req_post[key].replace(".", "")
 
         request.POST = req_post
 
         form = self.get_form(form_class)
         produtos_form = ItensVendaFormSet(
-            request.POST, prefix='produtos_form', instance=self.object)
+            request.POST, prefix="produtos_form", instance=self.object)
         pagamento_form = PagamentoFormSet(
-            request.POST, prefix='pagamento_form', instance=self.object)
+            request.POST, prefix="pagamento_form", instance=self.object)
 
         if (form.is_valid() and produtos_form.is_valid() and pagamento_form.is_valid()):
             self.object = form.save(commit=False)
@@ -288,14 +294,14 @@ class EditarOrcamentoVendaView(EditarVendaView):
     form_class = OrcamentoVendaForm
     model = OrcamentoVenda
     template_name = "vendas/orcamento_venda/orcamento_venda_edit.html"
-    success_url = reverse_lazy('vendas:listaorcamentovendaview')
+    success_url = reverse_lazy("vendas:listaorcamentovendaview")
     success_message = "<b>Orçamento de venda %(id)s </b>editado com sucesso."
-    permission_codename = 'change_orcamentovenda'
+    permission_codename = "change_orcamentovenda"
 
     def view_context(self, context):
-        context['title_complete'] = 'EDITAR ORÇAMENTO DE VENDA N°' + \
+        context["title_complete"] = "EDITAR ORÇAMENTO DE VENDA N°" + \
             str(self.object.id)
-        context['return_url'] = reverse_lazy('vendas:listaorcamentovendaview')
+        context["return_url"] = reverse_lazy("vendas:listaorcamentovendaview")
         return context
 
     def get(self, request, *args, **kwargs):
@@ -313,14 +319,14 @@ class EditarPedidoVendaView(EditarVendaView):
     form_class = PedidoVendaForm
     model = PedidoVenda
     template_name = "vendas/pedido_venda/pedido_venda_edit.html"
-    success_url = reverse_lazy('vendas:listapedidovendaview')
+    success_url = reverse_lazy("vendas:listapedidovendaview")
     success_message = "<b>Pedido de venda %(id)s </b>editado com sucesso."
-    permission_codename = 'change_pedidovenda'
+    permission_codename = "change_pedidovenda"
 
     def view_context(self, context):
-        context['title_complete'] = 'EDITAR PEDIDO DE VENDA N°' + \
+        context["title_complete"] = "EDITAR PEDIDO DE VENDA N°" + \
             str(self.object.id)
-        context['return_url'] = reverse_lazy('vendas:listapedidovendaview')
+        context["return_url"] = reverse_lazy("vendas:listapedidovendaview")
         return context
 
     def get(self, request, *args, **kwargs):
@@ -335,10 +341,10 @@ class EditarPedidoVendaView(EditarVendaView):
 
 
 class GerarPedidoVendaView(CustomView):
-    permission_codename = ['add_pedidovenda', 'change_pedidovenda', ]
+    permission_codename = ["add_pedidovenda", "change_pedidovenda" ]
 
     def get(self, request, *args, **kwargs):
-        orcamento_id = kwargs.get('pk', None)
+        orcamento_id = kwargs.get("pk")
         orcamento = OrcamentoVenda.objects.get(id=orcamento_id)
         itens_venda = orcamento.itens_venda.all()
         pagamentos = orcamento.parcela_pagamento.all()
@@ -350,8 +356,8 @@ class GerarPedidoVendaView(CustomView):
         novo_pedido.venda_ptr = None
         novo_pedido.pk = None
         novo_pedido.id = None
-        novo_pedido.status = '0'
-        orcamento.status = '1'  # Baixado
+        novo_pedido.status = "0"
+        orcamento.status = "1"  # Baixado
         orcamento.save()
         novo_pedido.orcamento = orcamento
         novo_pedido.save()
@@ -368,29 +374,29 @@ class GerarPedidoVendaView(CustomView):
             pagamento.save()
             novo_pedido.parcela_pagamento.add(pagamento)
 
-        return redirect(reverse_lazy('vendas:editarpedidovendaview', kwargs={'pk': novo_pedido.id}))
+        return redirect(reverse_lazy("vendas:editarpedidovendaview", kwargs={"pk": novo_pedido.id}))
 
 
 class CancelarOrcamentoVendaView(CustomView):
-    permission_codename = 'change_orcamentovenda'
+    permission_codename = "change_orcamentovenda"
 
     def get(self, request, *args, **kwargs):
-        venda_id = kwargs.get('pk', None)
+        venda_id = kwargs.get("pk")
         instance = OrcamentoVenda.objects.get(id=venda_id)
-        instance.status = '2'
+        instance.status = "2"
         instance.save()
-        return redirect(reverse_lazy('vendas:editarorcamentovendaview', kwargs={'pk': instance.id}))
+        return redirect(reverse_lazy("vendas:editarorcamentovendaview", kwargs={"pk": instance.id}))
 
 
 class CancelarPedidoVendaView(CustomView):
-    permission_codename = 'change_pedidovenda'
+    permission_codename = "change_pedidovenda"
 
     def get(self, request, *args, **kwargs):
-        venda_id = kwargs.get('pk', None)
+        venda_id = kwargs.get("pk")
         instance = PedidoVenda.objects.get(id=venda_id)
-        instance.status = '2'
+        instance.status = "2"
         instance.save()
-        return redirect(reverse_lazy('vendas:editarpedidovendaview', kwargs={'pk': instance.id}))
+        return redirect(reverse_lazy("vendas:editarpedidovendaview", kwargs={"pk": instance.id}))
 
 
 class GerarCopiaVendaView(CustomView):
@@ -401,7 +407,7 @@ class GerarCopiaVendaView(CustomView):
 
         instance.pk = None
         instance.id = None
-        instance.status = '0'
+        instance.status = "0"
         instance.save()
 
         for item in itens_venda:
@@ -416,36 +422,36 @@ class GerarCopiaVendaView(CustomView):
             pagamento.save()
             instance.parcela_pagamento.add(pagamento)
 
-        return redirect(reverse_lazy(redirect_url, kwargs={'pk': instance.id}))
+        return redirect(reverse_lazy(redirect_url, kwargs={"pk": instance.id}))
 
 
 class GerarCopiaOrcamentoVendaView(GerarCopiaVendaView):
-    permission_codename = 'add_orcamentovenda'
+    permission_codename = "add_orcamentovenda"
 
     def get(self, request, *args, **kwargs):
-        venda_id = kwargs.get('pk', None)
+        venda_id = kwargs.get("pk")
         instance = OrcamentoVenda.objects.get(id=venda_id)
-        redirect_url = 'vendas:editarorcamentovendaview'
+        redirect_url = "vendas:editarorcamentovendaview"
         return super(GerarCopiaOrcamentoVendaView, self).get(request, instance, redirect_url, *args, **kwargs)
 
 
 class GerarCopiaPedidoVendaView(GerarCopiaVendaView):
-    permission_codename = 'add_pedidovenda'
+    permission_codename = "add_pedidovenda"
 
     def get(self, request, *args, **kwargs):
-        venda_id = kwargs.get('pk', None)
+        venda_id = kwargs.get("pk")
         instance = PedidoVenda.objects.get(id=venda_id)
-        redirect_url = 'vendas:editarpedidovendaview'
+        redirect_url = "vendas:editarpedidovendaview"
         return super(GerarCopiaPedidoVendaView, self).get(request, instance, redirect_url, *args, **kwargs)
 
 
 class GerarPDFVenda(CustomView):
 
     def gerar_pdf(self, title, venda, user_id):
-        resp = HttpResponse(content_type='application/pdf')
+        resp = HttpResponse(content_type="application/pdf")
 
         venda_pdf = io.BytesIO()
-        venda_report = VendaReport(queryset=[venda, ])
+        venda_report = VendaReport(queryset=[venda ])
         venda_report.title = title
 
         venda_report.band_page_footer = venda_report.banda_foot
@@ -454,8 +460,8 @@ class GerarPDFVenda(CustomView):
             usuario = Usuario.objects.get(pk=user_id)
             m_empresa = MinhaEmpresa.objects.get(m_usuario=usuario)
             flogo = m_empresa.m_empresa.logo_file
-            logo_path = '{0}{1}'.format(MEDIA_ROOT, flogo.name)
-            if flogo != 'imagens/logo.png':
+            logo_path = f"{MEDIA_ROOT}{flogo.name}"
+            if flogo != "imagens/logo.png":
                 venda_report.topo_pagina.inserir_logo(logo_path)
 
             venda_report.band_page_footer.inserir_nome_empresa(
@@ -477,9 +483,9 @@ class GerarPDFVenda(CustomView):
             venda_report.topo_pagina.inserir_data_entrega(venda.data_entrega)
         venda_report.band_page_header = venda_report.topo_pagina
 
-        if venda.cliente.tipo_pessoa == 'PJ':
+        if venda.cliente.tipo_pessoa == "PJ":
             venda_report.dados_cliente.inserir_informacoes_pj()
-        elif venda.cliente.tipo_pessoa == 'PF':
+        elif venda.cliente.tipo_pessoa == "PF":
             venda_report.dados_cliente.inserir_informacoes_pf()
 
         if venda.cliente.endereco_padrao:
@@ -520,30 +526,30 @@ class GerarPDFVenda(CustomView):
 
 
 class GerarPDFOrcamentoVenda(GerarPDFVenda):
-    permission_codename = 'change_orcamentovenda'
+    permission_codename = "change_orcamentovenda"
 
     def get(self, request, *args, **kwargs):
-        venda_id = kwargs.get('pk', None)
+        venda_id = kwargs.get("pk")
 
         if not venda_id:
-            return HttpResponse('Objeto não encontrado.')
+            return HttpResponse("Objeto não encontrado.")
 
         obj = OrcamentoVenda.objects.get(pk=venda_id)
-        title = 'Orçamento de venda nº {}'.format(venda_id)
+        title = f"Orçamento de venda nº {venda_id}"
 
         return self.gerar_pdf(title, obj, request.user.id)
 
 
 class GerarPDFPedidoVenda(GerarPDFVenda):
-    permission_codename = 'change_pedidovenda'
+    permission_codename = "change_pedidovenda"
 
     def get(self, request, *args, **kwargs):
-        venda_id = kwargs.get('pk', None)
+        venda_id = kwargs.get("pk")
 
         if not venda_id:
-            return HttpResponse('Objeto não encontrado.')
+            return HttpResponse("Objeto não encontrado.")
 
         obj = PedidoVenda.objects.get(pk=venda_id)
-        title = 'Pedido de venda nº {}'.format(venda_id)
+        title = f"Pedido de venda nº {venda_id}"
 
         return self.gerar_pdf(title, obj, request.user.id)
