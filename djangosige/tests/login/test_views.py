@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.urls import reverse
 
-from djangosige.apps.cadastro.models import Empresa, MinhaEmpresa
-from djangosige.apps.login.models import Usuario
+from djangosige.cadastro.models import Empresa, MinhaEmpresa
+from djangosige.login.models import Usuario
 from djangosige.tests.test_case import TEST_PASSWORD, TEST_USERNAME, BaseTestCase
 
 

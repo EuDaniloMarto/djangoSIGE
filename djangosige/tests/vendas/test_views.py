@@ -4,10 +4,10 @@ from datetime import datetime, timedelta
 
 from django.urls import reverse
 
-from djangosige.apps.cadastro.models import Cliente
-from djangosige.apps.estoque.models import DEFAULT_LOCAL_ID, LocalEstoque
-from djangosige.apps.vendas.models import CondicaoPagamento, OrcamentoVenda, PedidoVenda
+from djangosige.cadastro.models import Cliente
+from djangosige.estoque.models import DEFAULT_LOCAL_ID, LocalEstoque
 from djangosige.tests.test_case import BaseTestCase
+from djangosige.vendas.models import CondicaoPagamento, OrcamentoVenda, PedidoVenda
 
 VENDA_FORMSET_DATA = {
     "produtos_form-0-produto": 1,

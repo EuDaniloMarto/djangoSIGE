@@ -8,8 +8,8 @@ from decimal import Decimal
 from django.db.models import Q
 from django.urls import reverse
 
-from djangosige.apps.estoque.models import SaidaEstoque
-from djangosige.apps.financeiro.models import (
+from djangosige.estoque.models import SaidaEstoque
+from djangosige.financeiro.models import (
     Entrada,
     MovimentoCaixa,
     PlanoContasGrupo,
