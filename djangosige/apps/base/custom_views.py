@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import TemplateView, ListView, View
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic.detail import DetailView
-
 from django.shortcuts import redirect
+from django.views.generic import ListView, TemplateView, View
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView
 
-from djangosige.apps.base.views_mixins import CheckPermissionMixin, FormValidationMessageMixin
+from djangosige.apps.base.views_mixins import (
+    CheckPermissionMixin,
+    FormValidationMessageMixin,
+)
 
 
 class CustomView(CheckPermissionMixin, View):
