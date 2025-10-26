@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "djangosige",
     "djangosige.base",
     "djangosige.login",
     "djangosige.cadastro",
@@ -87,7 +88,7 @@ MIDDLEWARE = [
 # --- Arquivos estáticos
 # STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(BASE_DIR / "djangosige" / "static")]
+# STATICFILES_DIRS = []
 
 # --- Arquivos de mídia
 MEDIA_ROOT = str(BASE_DIR / "djangosige" / "media")
@@ -97,7 +98,7 @@ MEDIA_URL = "/media/"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(BASE_DIR / "djangosige" / "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -113,7 +114,7 @@ TEMPLATES = [
 ]
 
 # --- Fixtures
-FIXTURE_DIRS = [str(BASE_DIR / "djangosige" / "fixtures")]
+# FIXTURE_DIRS = [str(BASE_DIR / "djangosige" / "fixtures")]
 
 # --- Email
 
