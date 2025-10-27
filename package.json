@@ -1,0 +1,25 @@
+{
+  "name": "djangosige",
+  "version": "1.0.0",
+  "description": "Sistema Integrado de Gestão Empresarial baseado em Django",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EuDaniloMarto/djangoSIGE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/EuDaniloMarto/djangoSIGE/issues"
+  },
+  "homepage": "https://github.com/EuDaniloMarto/djangoSIGE#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1"
+  }
+}

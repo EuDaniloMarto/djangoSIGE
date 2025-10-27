@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load i18n static %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DjangoSIGe / {% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}">
+  <script defer src="{% static '@popperjs/core/dist/umd/popper.js' %}"></script>
+  <script defer src="{% static 'bootstrap/dist/js/bootstrap.js' %}"></script>
+</head>
+<body class="bg-secondary-subtle">
+  {% block navmenu %}
+  <div class="mb-3 py-3 bg-light shadow-lg sticky-top">
+    <div class="container-xxl">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <button class="d-lg-none btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <i class="bi bi-list"></i>
+          </button>
+          <a href="{% url 'djangosige:pagina_inicial' %}" class="fs-3 link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+            {% include "_logo.html" %}
+          </a>
+        </div>
+        <div class="d-none d-lg-block">
+          {% include "_navmenu.html" %}
+        </div>
+        <div class="d-flex gap-2">
+          <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
+              <li><a class="dropdown-item" href="#">Minha Empresa</a></li>
+              <li><a class="dropdown-item" href="#">Usuários</a></li>
+                <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Ajuda</a></li>
+                <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Sair</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="offcanvas offcanvas-start bg-secondary-subtle" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header bg-light shadow-lg py-3">
+      <h5 class="offcanvas-title fs-3" id="offcanvasExampleLabel">{% include "_logo.html" %}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      {% include "_navmenu.html" %}
+    </div>
+  </div>
+  <div class="container-xxl mb-3 d-none d-lg-flex justify-content-between">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-house"></i></li>
+      </ol>
+    </nav>
+    <div class="d-flex">
+      {{ request.user.username }}
+    </div>
+  </div>
+  {% endblock navmenu %}
+  <div class="container-xxl">
+    {% block content %}{% endblock content %}
+  </div>
+</body>
+</html>

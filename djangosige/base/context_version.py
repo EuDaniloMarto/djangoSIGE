@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from djangosige import __version__
+__version__ = "0.1.0"
 
 
 def sige_version(request):

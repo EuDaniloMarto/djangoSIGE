@@ -88,7 +88,7 @@ MIDDLEWARE = [
 # --- Arquivos estáticos
 # STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATIC_URL = "/static/"
-# STATICFILES_DIRS = []
+STATICFILES_DIRS = [str(BASE_DIR / "node_modules")]
 
 # --- Arquivos de mídia
 MEDIA_ROOT = str(BASE_DIR / "djangosige" / "media")
