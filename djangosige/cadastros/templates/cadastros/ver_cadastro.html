@@ -1,0 +1,131 @@
+{% extends "_base.html" %}
+
+{% block title %}{{ cadastro.descricao }}{% endblock title %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'djangosige:pagina_inicial' %}"><i class="bi bi-house"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'cadastros:listar_cadastros' %}">Cadastro</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ cadastro.descricao }}</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="card card-body mb-3">
+  <div class="row gap-2 align-items-center mb-3">
+    <div class="d-xl-none col-12 col-md-6">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ relacionamento|default:"Geral" }}
+        </button>
+        <ul class="dropdown-menu w-100">
+          <li><a class="dropdown-item" href="#">Geral</a></li>
+          <li><a class="dropdown-item" href="#">Contatos</a></li>
+          <li><a class="dropdown-item" href="#">Endereço</a></li>
+          <li><a class="dropdown-item" href="#">Dados Bancários</a></li>
+          <li><a class="dropdown-item" href="#">Outros Documentos</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6 d-none d-xl-block">
+      <ul class="nav nav-underline">
+        <li class="nav-item">
+          <a
+            class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            href="#"
+          >
+            Geral
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            href="#"
+          >
+            Contatos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            href="#"
+          >
+            Endereço
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a
+            class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            href="#"
+          >
+            Dados Bancários
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a
+            class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            href="#"
+          >
+            Outros Documentos
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col d-flex justify-content-center justify-content-md-end align-items-center gap-2">
+      <button class="btn btn-outline-success">
+        <i class="bi bi-plus"></i>
+      </button>
+      <button class="btn btn-outline-warning">
+        <i class="bi bi-pencil"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mb-3">
+    <form class="row">
+      <div class="mb-3 col-12 col-lg-10">
+        <label for="descricao" class="form-label">Descrição</label>
+        <input type="text" name="descricao" value="{{ cadastro.descricao }}" class="form-control" disabled readonly>
+      </div>
+      <div class="mb-3 col-12 col-lg-2">
+        <label for="tipo_cadastro" class="form-label">Tipo de Cadastro</label>
+        <select name="tipo_cadastro" class="form-select" disabled readonly>
+          <option selected value="PF">{{ cadastro.tipo_cadastros}}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-12 d-flex flex-wrap justify-content-between">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" {% if cadastro.eh_cliente %}checked{% endif %} disabled readonly>
+          <label class="form-check-label" for="checkDefault">
+            É Cliente
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" {% if cadastro.eh_fornecedor %}checked{% endif %} disabled readonly>
+          <label class="form-check-label" for="checkDefault">
+            É Fornecedor
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" {% if cadastro.eh_transportadora %}checked{% endif %} disabled readonly>
+          <label class="form-check-label" for="checkDefault">
+            É Transportadora
+          </label>
+        </div>
+      </div>
+      <div class="mb-3 col-12">
+        <textarea name="observacao" class="form-control" disabled readonly>{{ cadastro.observacao }}</textarea>
+      </div>
+      <div class="mb col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" {% if cadastro.ativo %}checked{% endif %} disabled readonly>
+          <label class="form-check-label" for="checkDefault">
+            Ativo
+          </label>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

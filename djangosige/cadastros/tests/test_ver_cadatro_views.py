@@ -1,16 +1,15 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.urls import reverse
+
+from .factories import CadastroFactory
 
 
 class TestUsuarioNaoEstaLogado(TestCase):
     """O usuário não está logado"""
 
-    def setUp(self):
-        self.URL = reverse("cadastros:listar_cadastros")
-
     def test_status_code_eh_302(self):
-        request = self.client.get(self.URL)
+        cadastro = CadastroFactory()
+        request = self.client.get(cadastro.get_absolute_url())
         self.assertEqual(request.status_code, 302)
 
 
@@ -24,15 +23,14 @@ class TestUsuarioEstaLogado(TestCase):
         )
         return super().setUpTestData()
 
-    def setUp(self):
-        self.URL = reverse("cadastros:listar_cadastros")
-
     def test_status_code_eh_200(self):
         self.client.login(username="usertest", password="passtest")
-        request = self.client.get(self.URL)
+        cadastro = CadastroFactory()
+        request = self.client.get(cadastro.get_absolute_url())
         self.assertEqual(request.status_code, 200)
 
     def test_nome_do_objeto_do_context_eh_cadastro(self):
         self.client.login(username="usertest", password="passtest")
-        request = self.client.get(self.URL)
-        self.assertIn("cadastros", request.context)
+        cadastro = CadastroFactory()
+        request = self.client.get(cadastro.get_absolute_url())
+        self.assertIn("cadastro", request.context)

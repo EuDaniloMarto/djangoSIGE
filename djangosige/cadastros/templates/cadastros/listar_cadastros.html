@@ -5,7 +5,7 @@
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#"><i class="bi bi-house"></i></a></li>
+    <li class="breadcrumb-item"><a href="{% url 'djangosige:pagina_inicial' %}"><i class="bi bi-house"></i></a></li>
     <li class="breadcrumb-item active" aria-current="page">Cadastros</li>
   </ol>
 </nav>
@@ -25,7 +25,7 @@
 </div>
 <div class="card card-body mb-3">
   <div class="row gap-2 align-items-center mb-3">
-    <div class="d-md-none col-12 col-md-6">
+    <div class="d-lg-none col-12 col-md-6">
       <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           {{ relacionamento|default:"Todos" }}
@@ -38,7 +38,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-6 d-none d-md-block">
+    <div class="col-md-6 d-none d-lg-block">
       <ul class="nav nav-underline">
         <li class="nav-item">
           <a
@@ -89,29 +89,31 @@
         <tr>
           <th scope="col">#</th>
           <th>Descrição</th>
-          <th>É Cliente</th>
-          <th>É Fornecedor</th>
-          <th>É Transportadora</th>
+          <th class="text-center">É Cliente</th>
+          <th class="text-center">É Fornecedor</th>
+          <th class="text-center">É Transportadora</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
         {% for cadastro in cadastros %}
         <tr>
           <td scope="col">{{ cadastro.id }}</td>
-          <td>{{ cadastro.descricao }}</td>
           <td>
+            <a href="{{ cadastro.get_absolute_url }}">{{ cadastro.descricao }}</a>
+          </td>
+          <td class="text-center">
             {% if cadastro.eh_cliente %}
-            <i class="bi bi-check"></i>
+            <i class="bi bi-check text-success"></i>
             {% endif %}
           </td>
-          <td>
+          <td class="text-center">
             {% if cadastro.eh_fornecedor %}
-            <i class="bi bi-check"></i>bi-
+            <i class="bi bi-check text-success"></i>bi-
             {% endif %}
           </td>
-          <td>
+          <td class="text-center">
             {% if cadastro.eh_transportadora %}
-            <i class="bi bi-check"></i>
+            <i class="bi bi-check text-success"></i>
             {% endif %}
           </td>
         </tr>
