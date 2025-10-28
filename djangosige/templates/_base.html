@@ -56,12 +56,14 @@
       {% include "_navmenu.html" %}
     </div>
   </div>
-  <div class="container-xxl mb-3 d-none d-lg-flex justify-content-between">
+  <div class="container-xxl mb-3 d-none d-md-flex justify-content-between">
+    {% block breadcrumb %}
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-house"></i></li>
       </ol>
     </nav>
+    {% endblock breadcrumb %}
     <div class="d-flex">
       {{ request.user.username }}
     </div>

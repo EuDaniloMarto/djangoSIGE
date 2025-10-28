@@ -15,7 +15,18 @@ urlpatterns = [
     path("compras/", include("djangosige.compras.urls")),
     path("financeiro/", include("djangosige.financeiro.urls")),
     path("estoque/", include("djangosige.estoque.urls")),
-    path("n/", include("djangosige.urls", namespace="djangosige")),
+    path(
+        "n/",
+        include(
+            [
+                path("", include("djangosige.urls", namespace="djangosige")),
+                path(
+                    "cadastros/",
+                    include("djangosige.cadastros.urls", namespace="cadastros"),
+                ),
+            ],
+        ),
+    ),
 ]
 
 if settings.DEBUG:
