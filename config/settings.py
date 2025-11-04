@@ -18,10 +18,8 @@ DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
-DATABASES = {
-    "default": config("DATABASE_URL", cast=dburl),
-}
-
+DATABASES = {"default": config("DATABASE_URL", cast=dburl)}
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Application definition
 
