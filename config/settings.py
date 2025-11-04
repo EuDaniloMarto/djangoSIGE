@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "djangosige",
     "djangosige.base",
     "djangosige.login",
     "djangosige.cadastro",
@@ -57,7 +58,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(APP_ROOT / "templates")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -115,13 +116,9 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    str(APP_ROOT / "static"),
-]
+STATICFILES_DIRS = []
 
-FIXTURE_DIRS = [
-    str(APP_ROOT / "fixtures"),
-]
+# FIXTURE_DIRS = [str(APP_ROOT / "fixtures")]
 
 MEDIA_ROOT = str(APP_ROOT / "media/")
 MEDIA_URL = "media/"
