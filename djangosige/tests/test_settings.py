@@ -9,6 +9,4 @@ warnings.filterwarnings(
     r"django\.db\.models\.fields",
 )
 
-settings.FIXTURE_DIRS.append(
-    str(settings.APP_ROOT / "tests" / "fixtures")
-)
+settings.FIXTURE_DIRS.append(str(settings.APP_ROOT / "tests" / "fixtures"))
