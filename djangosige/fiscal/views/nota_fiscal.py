@@ -1,52 +1,51 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import (
-    CustomView,
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
-    CustomUpdateView,
     CustomTemplateView,
+    CustomUpdateView,
+    CustomView,
 )
-from djangosige.apps.base.views_mixins import FormValidationMessageMixin
-
-from djangosige.apps.fiscal.forms import (
-    NotaFiscalSaidaForm,
-    NotaFiscalEntradaForm,
+from djangosige.base.views_mixins import FormValidationMessageMixin
+from djangosige.cadastro.models import MinhaEmpresa
+from djangosige.fiscal.forms import (
     AutXMLFormSet,
-    ConfiguracaoNotaFiscalForm,
-    EmissaoNotaFiscalForm,
-    CancelamentoNotaFiscalForm,
-    ConsultarCadastroForm,
-    InutilizarNotasForm,
-    ConsultarNotaForm,
     BaixarNotaForm,
+    CancelamentoNotaFiscalForm,
+    ConfiguracaoNotaFiscalForm,
+    ConsultarCadastroForm,
+    ConsultarNotaForm,
+    EmissaoNotaFiscalForm,
+    InutilizarNotasForm,
     ManifestacaoDestinatarioForm,
+    NotaFiscalEntradaForm,
+    NotaFiscalSaidaForm,
 )
-from djangosige.apps.fiscal.models import (
-    NotaFiscalSaida,
-    NotaFiscalEntrada,
-    NotaFiscal,
-    ConfiguracaoNotaFiscal,
+from djangosige.fiscal.models import (
     AutXML,
+    ConfiguracaoNotaFiscal,
     ErrosValidacaoNotaFiscal,
+    NotaFiscal,
+    NotaFiscalEntrada,
+    NotaFiscalSaida,
     RespostaSefazNotaFiscal,
 )
-from djangosige.apps.cadastro.models import MinhaEmpresa
-from djangosige.apps.login.models import Usuario
-from djangosige.apps.vendas.models import PedidoVenda, ItensVenda
+from djangosige.login.models import Usuario
+from djangosige.vendas.models import ItensVenda, PedidoVenda
 
 try:
     from .processador_nf import ProcessadorNotaFiscal
 except ImportError:
     pass
 
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
 
 
 class NotaFiscalViewMixin(object):

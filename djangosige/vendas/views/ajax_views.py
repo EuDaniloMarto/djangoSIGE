@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import View
-from django.http import HttpResponse
-
 import json
 
-from djangosige.apps.vendas.models import PedidoVenda
+from django.http import HttpResponse
+from django.views.generic import View
+
+from djangosige.vendas.models import PedidoVenda
 
 
 class InfoVenda(View):

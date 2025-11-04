@@ -1,30 +1,29 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
-
-from itertools import chain
 from datetime import datetime
 from decimal import Decimal
+from itertools import chain
 
-from djangosige.apps.base.custom_views import (
-    CustomDetailView,
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+
+from djangosige.base.custom_views import (
     CustomCreateView,
+    CustomDetailView,
     CustomListView,
 )
-
-from djangosige.apps.estoque.forms import (
+from djangosige.estoque.forms import (
     EntradaEstoqueForm,
+    ItensMovimentoFormSet,
     SaidaEstoqueForm,
     TransferenciaEstoqueForm,
-    ItensMovimentoFormSet,
 )
-from djangosige.apps.estoque.models import (
-    MovimentoEstoque,
+from djangosige.estoque.models import (
     EntradaEstoque,
+    MovimentoEstoque,
+    ProdutoEstocado,
     SaidaEstoque,
     TransferenciaEstoque,
-    ProdutoEstocado,
 )
 
 

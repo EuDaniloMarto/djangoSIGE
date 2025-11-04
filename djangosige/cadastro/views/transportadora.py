@@ -2,10 +2,10 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.cadastro.forms import TransportadoraForm, VeiculoFormSet
-from djangosige.apps.cadastro.models import Transportadora, Veiculo
+from djangosige.cadastro.forms import TransportadoraForm, VeiculoFormSet
+from djangosige.cadastro.models import Transportadora, Veiculo
 
-from .base import AdicionarPessoaView, PessoasListView, EditarPessoaView
+from .base import AdicionarPessoaView, EditarPessoaView, PessoasListView
 
 
 class AdicionarTransportadoraView(AdicionarPessoaView):

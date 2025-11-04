@@ -4,14 +4,14 @@ from django import forms
 from django.forms import inlineformset_factory
 from django.utils.translation import gettext_lazy as _
 
-from djangosige.apps.estoque.models import (
-    MovimentoEstoque,
-    ItensMovimento,
+from djangosige.cadastro.models import Produto
+from djangosige.estoque.models import (
     EntradaEstoque,
+    ItensMovimento,
+    MovimentoEstoque,
     SaidaEstoque,
     TransferenciaEstoque,
 )
-from djangosige.apps.cadastro.models import Produto
 
 
 class MovimentoForm(forms.ModelForm):

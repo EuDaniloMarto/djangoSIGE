@@ -2,24 +2,23 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.apps.base.custom_views import (
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomUpdateView,
 )
-
-from djangosige.apps.fiscal.forms import (
+from djangosige.cadastro.models import MinhaEmpresa
+from djangosige.fiscal.forms import (
+    COFINSForm,
     GrupoFiscalForm,
     ICMSForm,
     ICMSSNForm,
     ICMSUFDestForm,
     IPIForm,
     PISForm,
-    COFINSForm,
 )
-from djangosige.apps.fiscal.models import GrupoFiscal, ICMS, ICMSSN, ICMSUFDest, IPI
-from djangosige.apps.cadastro.models import MinhaEmpresa
-from djangosige.apps.login.models import Usuario
+from djangosige.fiscal.models import ICMS, ICMSSN, IPI, GrupoFiscal, ICMSUFDest
+from djangosige.login.models import Usuario
 
 
 class AdicionarGrupoFiscalView(CustomCreateView):

@@ -1,33 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from django.urls import reverse_lazy
-from django.db.models import F
+from datetime import datetime
 
-from djangosige.apps.base.custom_views import (
+from django.db.models import F
+from django.urls import reverse_lazy
+
+from djangosige.base.custom_views import (
     CustomCreateView,
     CustomListView,
     CustomUpdateView,
 )
-from djangosige.apps.cadastro.forms import (
-    ProdutoForm,
-    CategoriaForm,
-    UnidadeForm,
-    MarcaForm,
-)
-from djangosige.apps.cadastro.models import (
-    Produto,
-    Categoria,
-    Unidade,
-    Marca,
-    Fornecedor,
-)
-from djangosige.apps.estoque.models import (
-    ItensMovimento,
-    EntradaEstoque,
-    ProdutoEstocado,
-)
-
-from datetime import datetime
+from djangosige.cadastro.forms import CategoriaForm, MarcaForm, ProdutoForm, UnidadeForm
+from djangosige.cadastro.models import Categoria, Fornecedor, Marca, Produto, Unidade
+from djangosige.estoque.models import EntradaEstoque, ItensMovimento, ProdutoEstocado
 
 
 class AdicionarProdutoView(CustomCreateView):

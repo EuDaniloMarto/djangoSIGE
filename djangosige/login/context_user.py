@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from djangosige.cadastro.models import MinhaEmpresa
+
 from .models import Usuario
-from djangosige.apps.cadastro.models import MinhaEmpresa
 
 # Manter foto do perfil na sidebar
 

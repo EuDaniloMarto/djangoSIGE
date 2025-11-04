@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import TemplateView
-from django.shortcuts import render
+from datetime import datetime
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
+from django.shortcuts import render
+from django.views.generic import TemplateView
 
-from djangosige.apps.cadastro.models import (
+from djangosige.cadastro.models import (
     Cliente,
+    Empresa,
     Fornecedor,
     Produto,
-    Empresa,
     Transportadora,
 )
-from djangosige.apps.vendas.models import OrcamentoVenda, PedidoVenda
-from djangosige.apps.compras.models import OrcamentoCompra, PedidoCompra
-from djangosige.apps.financeiro.models import MovimentoCaixa, Entrada, Saida
-
-from datetime import datetime
+from djangosige.compras.models import OrcamentoCompra, PedidoCompra
+from djangosige.financeiro.models import Entrada, MovimentoCaixa, Saida
+from djangosige.vendas.models import OrcamentoVenda, PedidoVenda
 
 
 class IndexView(TemplateView):

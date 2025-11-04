@@ -4,14 +4,14 @@ from django import forms
 from django.forms import inlineformset_factory
 from django.utils.translation import gettext_lazy as _
 
-from djangosige.apps.cadastro.models import (
-    Pessoa,
-    Endereco,
-    Telefone,
-    Email,
-    Site,
+from djangosige.cadastro.models import (
     Banco,
     Documento,
+    Email,
+    Endereco,
+    Pessoa,
+    Site,
+    Telefone,
 )
 
 

@@ -7,10 +7,10 @@ from djangosige.fiscal.models import (
     COFINS,
     ICMS,
     ICMSSN,
-    ICMSUFDest,
     IPI,
     PIS,
-    COFINS,
+    GrupoFiscal,
+    ICMSUFDest,
 )
 
 
