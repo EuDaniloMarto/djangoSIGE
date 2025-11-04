@@ -116,7 +116,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = []
+STATICFILES_DIRS = [BASE_DIR / "node_modules"]
 
 # FIXTURE_DIRS = [str(APP_ROOT / "fixtures")]
 

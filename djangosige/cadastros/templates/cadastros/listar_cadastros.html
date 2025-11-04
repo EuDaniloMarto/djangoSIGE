@@ -1,0 +1,79 @@
+{% extends "djangosige/base.html" %}
+
+{% block titulo %}
+Listar Cadastros
+{% endblock titulo %}
+
+{% block base %}
+<header class="d-none d-md-block">
+  <form class="card card-body border-0 shadow-lg mb-3">
+    <div class="d-flex align-items-center justify-content-between gap-2">
+      <input type="text" class="form-control">
+      <button type="submit" class="btn btn-outline-secondary">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </form>
+</header>
+
+<main class="card card-body border-0 shadow-lg mb-3">
+  <header class="row gap-2">
+
+    <section class="d-none d-lg-block col-6">
+      <nav class="nav nav-underline">
+        <a href="" class="nav-link">Todos</a>
+        <a href="" class="nav-link">Clientes</a>
+        <a href="" class="nav-link">Fornecedores</a>
+        <a href="" class="nav-link">Transportadoras</a>
+      </nav>
+    </section>
+
+    <section class="d-lg-none col-12 col-md-6">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Todos
+        </button>
+        <ul class="dropdown-menu w-100">
+          <li><a class="dropdown-item" href="#">Todos</a></li>
+          <li><a class="dropdown-item" href="#">Clientes</a></li>
+          <li><a class="dropdown-item" href="#">Fornecedores</a></li>
+          <li><a class="dropdown-item" href="#">Transportadoras</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="col-12 col-md">
+      <div class="d-flex align-items-center justify-content-center justify-content-md-end gap-2">
+        <button class="btn btn-outline-secondary">
+          <i class="bi bi-plus"></i>
+        </button>
+        <button type="button" class="d-md-none btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalSearch">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </section>
+  </header>
+
+  <main class="">
+
+  </main>
+</main>
+
+<section class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="modalSearchLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <form class="modal-content">
+      <header class="modal-header border-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </header>
+      <main class="modal-body">
+        <input type="text" class="form-control">
+      </main>
+      <footer class="modal-footer border-0">
+        <button type="submit" class="btn btn-outline-secondary w-100">
+          <i class="bi bi-search"></i>
+        </button>
+      </footer>
+    </form>
+  </div>
+</section>
+{% endblock base %}
