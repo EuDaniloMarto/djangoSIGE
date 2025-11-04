@@ -2,8 +2,8 @@
 
 from django.urls import reverse_lazy
 
-from djangosige.base.custom_views import CustomListView
 from djangosige.cadastro.models import Produto
+from djangosige.custom_views import CustomListView
 from djangosige.estoque.models import LocalEstoque
 
 
