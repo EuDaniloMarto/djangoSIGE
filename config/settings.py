@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "djangosige",
     "djangosige.cadastros",
+    "djangosige.cadastros.pessoas",
     "djangosige.login",
     "djangosige.cadastro",
     "djangosige.vendas",
