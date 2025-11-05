@@ -1,25 +1,262 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import resolve, reverse
+
+from djangosige.cadastros.pessoas.models import Pessoa
+from djangosige.cadastros.pessoas.tests.factories import PessoaFactory
+from djangosige.cadastros.views import ListarCadastros
 
 
-class TestListarCadastros(TestCase):
+class TestUrlListarCadastros(TestCase):
+    def setUp(self):
+        self.resolver = resolve(reverse("cadastros:listar_cadastros"))
+
+    def test_a_URL_deve_resolver_para_a_classe_de_view_correta(self):
+        self.assertEqual(self.resolver.func.view_class, ListarCadastros)
+
+    def test_o_nome_da_URL_deve_ser_listar_cadatros(self):
+        self.assertEqual(self.resolver.url_name, "listar_cadastros")
+
+    def test_o_namespace_deve_ser_cadastros(self):
+        self.assertEqual(self.resolver.app_name, "cadastros")
+
+    def test_a_rota_da_URL_quando_listar_todos_os_cadastros(self):
+        self.assertEqual(self.resolver.route, "n/cadastros/")
+
+
+class TestUrlListarCadastrosPorRelacionamento(TestCase):
+    def setUp(cls):
+        cls.resolver = resolve(
+            reverse(
+                "cadastros:listar_cadastros_por_relacionamento",
+                kwargs={"relacionamento": "clientes"},
+            )
+        )
+
+    def test_a_URL_deve_resolver_para_a_classe_de_view_correta(self):
+        self.assertEqual(self.resolver.func.view_class, ListarCadastros)
+
+    def test_o_nome_da_URL_deve_ser_listar_cadatros(self):
+        self.assertEqual(self.resolver.url_name, "listar_cadastros_por_relacionamento")
+
+    def test_o_namespace_deve_ser_cadastros(self):
+        self.assertEqual(self.resolver.app_name, "cadastros")
+
+    def test_a_rota_da_URL_quando_listar_os_cadastros_por_relacionamento(self):
+        self.assertEqual(self.resolver.route, "n/cadastros/r/<str:relacionamento>/")
+
+
+class TestAcessoListarCadastro(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.credenciais = {"username": "johndoe", "password": "john@doe.test"}
-        get_user_model().objects.create_user(**cls.credenciais)
-        return super().setUpTestData()
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
+        cls.url = reverse("cadastros:listar_cadastros")
 
-    def test_usuario_nao_esta_logado(self):
-        request = self.client.get(reverse("cadastros:listar_cadastros"))
-        self.assertEqual(request.status_code, 302)
+    def test_o_usuario_nao_autenticado_deve_receber_codigo_de_redirecionamento(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 302)
 
-    def test_usuario_esta_logado(self):
-        self.client.login(**self.credenciais)
-        request = self.client.get(reverse("cadastros:listar_cadastros"))
-        self.assertEqual(request.status_code, 200)
+    def test_o_usuario_nao_autenticado_deve_ser_redirecionado_para_a_tela_de_login(
+        self,
+    ):
+        response = self.client.get(self.url)
+        self.assertIn("/login/", response.url)
 
-    def test_nome_template_usado(self):
-        self.client.login(**self.credenciais)
+    def test_a_view_deve_retornar_HTTP_200_para_usuarios_autenticados(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+
+class TestAcessoListarCadastroPorRelacionamento(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
+        cls.url = reverse(
+            "cadastros:listar_cadastros_por_relacionamento",
+            kwargs={"relacionamento": "cliente"},
+        )
+
+    def test_o_usuario_nao_autenticado_deve_receber_codigo_de_redirecionamento(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 302)
+
+    def test_o_usuario_nao_autenticado_deve_ser_redirecionado_para_a_tela_de_login(
+        self,
+    ):
+        response = self.client.get(self.url)
+        self.assertIn("/login/", response.url)
+
+    def test_a_view_deve_retornar_HTTP_200_para_usuarios_autenticados(self):
+        self.client.force_login(self.user)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+
+class TestContextoListarCadastros(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
+        cls.url = reverse("cadastros:listar_cadastros")
+
+    def setUp(self):
+        self.client.force_login(self.user)
+        self.request = self.client.get(self.url)
+
+    def test_o_nome_do_template_usado(self):
+        self.assertTemplateUsed(self.request, "cadastros/listar_cadastros.html")
+
+    def test_a_palavra_chave_pagina_deve_estar_no_contexto(self):
+        self.assertIn("pagina", self.request.context)
+
+    def test_o_valor_da_palavra_chave_pagina_eh_cadastro(self):
+        self.assertEqual(self.request.context["pagina"], "cadastros")
+
+    def test_a_palavra_chave_cadastros_deve_estar_no_contexto(self):
+        self.assertIn("cadastros", self.request.context)
+
+
+class TestContextoListarCadastrosPorRelacionamento(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
+        cls.url = reverse(
+            "cadastros:listar_cadastros_por_relacionamento",
+            kwargs={"relacionamento": "cliente"},
+        )
+
+    def setUp(self):
+        self.client.force_login(self.user)
+        self.request = self.client.get(self.url)
+
+    def test_o_nome_do_template_usado(self):
+        self.assertTemplateUsed(self.request, "cadastros/listar_cadastros.html")
+
+    def test_a_palavra_chave_pagina_deve_estar_no_contexto(self):
+        self.assertIn("pagina", self.request.context)
+
+    def test_o_valor_da_palavra_chave_pagina_eh_cadastro(self):
+        self.assertEqual(self.request.context["pagina"], "cadastros")
+
+    def test_a_palavra_chave_cadastros_deve_estar_no_contexto(self):
+        self.assertIn("cadastros", self.request.context)
+
+
+class TestQuerySetListarCadastros(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
+
+    def setUp(self):
+        self.client.force_login(self.user)
+        PessoaFactory.create_batch(
+            1,
+            colaborador=self.user,
+            eh_cliente=True,
+            eh_fornecedor=True,
+            eh_transportadora=True,
+        )
+        PessoaFactory.create_batch(
+            1,
+            colaborador=self.user,
+            eh_cliente=True,
+            eh_fornecedor=False,
+            eh_transportadora=False,
+        )
+        PessoaFactory.create_batch(
+            1,
+            colaborador=self.user,
+            eh_cliente=False,
+            eh_fornecedor=True,
+            eh_transportadora=False,
+        )
+        PessoaFactory.create_batch(
+            1,
+            colaborador=self.user,
+            eh_cliente=False,
+            eh_fornecedor=False,
+            eh_transportadora=True,
+        )
+
+    def test_todos_os_objetos_da_query_deve_ser_uma_instancia_de_Pessoa(self):
         request = self.client.get(reverse("cadastros:listar_cadastros"))
-        self.assertTemplateUsed(request, "cadastros/listar_cadastros.html")
+        pessoas = request.context["cadastros"]
+        self.assertTrue(all(isinstance(pessoa, Pessoa) for pessoa in pessoas))
+
+    def test_todos_os_objetos_sao_listados(self):
+        request = self.client.get(reverse("cadastros:listar_cadastros"))
+        queryset = request.context["cadastros"]
+        self.assertEqual(queryset.count(), 4)
+
+    def test_lista_apenas_os_clientes(self):
+        request = self.client.get(
+            reverse(
+                "cadastros:listar_cadastros_por_relacionamento",
+                kwargs={"relacionamento": "cliente"},
+            )
+        )
+        queryset = request.context["cadastros"]
+        self.assertEqual(queryset.count(), 2)
+
+    def test_lista_apenas_os_fornecedores(self):
+        request = self.client.get(
+            reverse(
+                "cadastros:listar_cadastros_por_relacionamento",
+                kwargs={"relacionamento": "fornecedor"},
+            )
+        )
+        queryset = request.context["cadastros"]
+        self.assertEqual(queryset.count(), 2)
+
+    def test_lista_apenas_os_transportadoras(self):
+        request = self.client.get(
+            reverse(
+                "cadastros:listar_cadastros_por_relacionamento",
+                kwargs={"relacionamento": "transportadora"},
+            )
+        )
+        queryset = request.context["cadastros"]
+        self.assertEqual(queryset.count(), 2)
+
+
+class TestMetodosGetQuerySetListarCadastros(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
+
+    def setUp(self):
+        self.client.force_login(self.user)
+        self.view = ListarCadastros()
+
+    def test_o_metodo_get_relacionamento_deve_retornar_cliente_ou_fornecedor_ou_transportadora_para_os_respectivos_argumentos_na_URL(
+        self,
+    ):
+        listar_relacionamentos = ("cliente", "fornecedor", "transportadora")
+
+        for relacionamento in listar_relacionamentos:
+            self.view.kwargs = {"relacionamento": relacionamento}
+            self.assertIn(self.view.get_relacionamento(), listar_relacionamentos)
+
+    def test_o_metodo_get_relacionamento_deve_retornar_None_se_o_argumento_na_URL_nao_for_cliente_ou_fornecedor_ou_transportadora(
+        self,
+    ):
+        self.view.kwargs = {"relacionamento": "invalido"}
+        self.assertIsNone(self.view.get_relacionamento())
+
+    def test_o_metodo_get_relacionamento__deve_retornar_None_quando_nao_houver_argumento_na_URL(
+        self,
+    ):
+        self.view.kwargs = {}
+        self.assertIsNone(self.view.get_relacionamento())

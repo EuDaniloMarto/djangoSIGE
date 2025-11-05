@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "crispy_forms",
+    "crispy_bootstrap5",
     "djangosige",
     "djangosige.cadastros",
     "djangosige.cadastros.pessoas",
@@ -42,6 +44,10 @@ INSTALLED_APPS = [
     "djangosige.estoque",
 ]
 
+if DEBUG:
+    INSTALLED_APPS += [
+        "django_extensions",
+    ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -73,6 +79,11 @@ TEMPLATES = [
         },
     },
 ]
+
+# DJANGO CRISPY FORM
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 WSGI_APPLICATION = "config.wsgi.application"
 

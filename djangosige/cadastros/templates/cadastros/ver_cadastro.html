@@ -1,0 +1,175 @@
+{% extends "djangosige/base.html" %}
+
+{% block titulo %}
+{{ cadastro.descricao }}
+{% endblock titulo %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#"><i class="bi bi-house"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'cadastros:listar_cadastros' %}">Cadastros</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ cadastro.descricao }}</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block base %}
+<main class="card card-body border-0 shadow-lg mb-3">
+  <header class="row gap-2 mb-3">
+
+    <section class="d-none d-lg-block col-6">
+      <nav class="nav nav-underline">
+        <a
+          href=""
+          class="nav-link text-capitalize {% if not relacionamento %}text-black{% endif %}"
+        >
+          Geral
+        </a>
+        <a
+          href=""
+          class="nav-link text-capitalize {% if relacionamento == 'cliente' %}text-secondary{% endif %} disabled"
+        >
+          Contatos
+        </a>
+        <a
+          href=""
+          class="nav-link text-capitalize {% if relacionamento == 'fornecedor' %}text-secondary{% endif %} disabled"
+        >
+          Endereços
+        </a>
+        <a
+          href=""
+          class="nav-link text-capitalize {% if relacionamento == 'transportadora' %}text-secondary{% endif %} disabled"
+        >
+          Relacionamentos
+        </a>
+      </nav>
+    </section>
+
+    <section class="d-lg-none col-12 col-md-6">
+      <div class="dropdown">
+        <button
+          class="btn btn-outline-secondary dropdown-toggle w-100 text-capitalize"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Geral
+        </button>
+        <ul class="dropdown-menu w-100">
+          <li>
+            <a
+              class="dropdown-item"
+              href=""
+            >
+              Geral
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href=""
+            >
+              Contatos
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href=""
+            >
+              Endereços
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href=""
+            >
+              Relacionamentos
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="col-12 col-md">
+      <div class="d-flex align-items-center justify-content-center justify-content-md-end gap-2">
+        <a
+          href="{% url 'cadastros:listar_cadastros' %}" class="btn btn-outline-secondary">
+          <i class="bi bi-chevron-left"></i>
+        </a>
+        <a
+          href="{{ cadastro.get_absolute_update_url }}" class="btn btn-outline-secondary">
+          <i class="bi bi-pencil"></i>
+        </a>
+        <a
+          href="{% url 'cadastros:criar_cadastro' %}" class="btn btn-outline-secondary">
+          <i class="bi bi-plus"></i>
+        </a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <form action="" class="row">
+      <div class="mb-3 col-12 col-md-8 col-lg-10">
+        <label for="descricao" class="form-label">Descrição</label>
+        <input type="text" name="descricao" class="form-control" value="{{ cadastro.descricao }}" disabled>
+      </div>
+
+      <div class="mb-3 col-12 col-md-4 col-lg-2">
+        <label for="tipo_pessoa" class="form-label">Tipo de Pessoa</label>
+        <select class="form-select" disabled>
+          <option selected>{{ cadastro.get_tipo_pessoa_display }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3 col-12 d-flex justify-content-between">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" {% if cadastro.eh_cliente %}checked{% endif %} disabled>
+          <label class="form-check-label" for="checkChecked">
+            É Cliente
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" {% if cadastro.eh_fornecedor %}checked{% endif %} disabled>
+          <label class="form-check-label" for="checkChecked">
+            É Fornecedor
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" {% if cadastro.eh_transportadora %}checked{% endif %} disabled>
+          <label class="form-check-label" for="checkChecked">
+            É Transportadora
+          </label>
+        </div>
+      </div>
+
+      <div class="mb-3 col-12">
+        <label for="observacoes" class="form-label">Observações</label>
+        <textarea name="observacao" class="textarea form-control" col="40" rows="10" disabled>
+          {{ cadastro.observacoes }}
+        </textarea>
+      </div>
+
+      <div class="mb-3 col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" {% if cadastro.ativo %}checked{% endif %} disabled>
+          <label class="form-check-label" for="checkChecked">
+            Ativo
+          </label>
+        </div>
+      </div>
+    </form>
+  </main>
+</main>
+
+{% endblock base %}

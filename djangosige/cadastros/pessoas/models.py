@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from djangosige.db.models import TimeSpampedModel
@@ -36,3 +37,9 @@ class Pessoa(TimeSpampedModel):
 
     def __str__(self):
         return str(self.descricao)
+
+    def get_absolute_url(self):
+        return reverse("cadastros:ver_cadastro", kwargs={"pk": self.pk})
+
+    def get_absolute_update_url(self):
+        return reverse("cadastros:editar_cadastro", kwargs={"pk": self.pk})

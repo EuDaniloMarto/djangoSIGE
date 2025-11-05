@@ -1,8 +1,28 @@
 {% extends "djangosige/base.html" %}
 
 {% block titulo %}
-Listar Cadastros
+Listar
+{% if relacionamento == "cliente" %}
+Clientes
+{% elif relacionamento == "fornecedor" %}
+Fornecedores
+{% elif relacionamento == "transportadora" %}
+Transportadora
+{% else %}
+Todos os Cadastros
+{% endif %}
 {% endblock titulo %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#"><i class="bi bi-house"></i></a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Cadastros</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
 
 {% block base %}
 <header class="d-none d-md-block">
@@ -17,37 +37,96 @@ Listar Cadastros
 </header>
 
 <main class="card card-body border-0 shadow-lg mb-3">
-  <header class="row gap-2">
+  <header class="row gap-2 mb-3">
 
     <section class="d-none d-lg-block col-6">
       <nav class="nav nav-underline">
-        <a href="" class="nav-link">Todos</a>
-        <a href="" class="nav-link">Clientes</a>
-        <a href="" class="nav-link">Fornecedores</a>
-        <a href="" class="nav-link">Transportadoras</a>
+        <a
+          href="{% url 'cadastros:listar_cadastros' %}"
+          class="nav-link text-capitalize {% if not relacionamento %}text-black{% endif %}"
+        >
+          Todos
+        </a>
+        <a
+          href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='cliente' %}"
+          class="nav-link text-capitalize {% if relacionamento == 'cliente' %}text-black{% endif %}"
+        >
+          Clientes
+        </a>
+        <a
+          href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='fornecedor' %}"
+          class="nav-link text-capitalize {% if relacionamento == 'fornecedor' %}text-black{% endif %}"
+        >
+          Fornecedores
+        </a>
+        <a
+          href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='transportadora' %}"
+          class="nav-link text-capitalize {% if relacionamento == 'transportadora' %}text-black{% endif %}"
+        >
+          Transportadoras
+        </a>
       </nav>
     </section>
 
     <section class="d-lg-none col-12 col-md-6">
       <div class="dropdown">
-        <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Todos
+        <button
+          class="btn btn-outline-secondary dropdown-toggle w-100 text-capitalize"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ relacionamento|default:"Todos"}}
         </button>
         <ul class="dropdown-menu w-100">
-          <li><a class="dropdown-item" href="#">Todos</a></li>
-          <li><a class="dropdown-item" href="#">Clientes</a></li>
-          <li><a class="dropdown-item" href="#">Fornecedores</a></li>
-          <li><a class="dropdown-item" href="#">Transportadoras</a></li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="{% url 'cadastros:listar_cadastros' %}"
+            >
+              Todos
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='cliente' %}"
+            >
+              Clientes
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='fornecedor' %}"
+            >
+              Fornecedores
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='transportadora' %}"
+            >
+              Transportadoras
+            </a>
+          </li>
         </ul>
       </div>
     </section>
 
     <section class="col-12 col-md">
       <div class="d-flex align-items-center justify-content-center justify-content-md-end gap-2">
-        <button class="btn btn-outline-secondary">
+        <a
+          href="{% url 'cadastros:criar_cadastro' %}" class="btn btn-outline-secondary">
           <i class="bi bi-plus"></i>
-        </button>
-        <button type="button" class="d-md-none btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalSearch">
+        </a>
+        <button
+          type="button"
+          class="d-md-none btn btn-outline-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#modalSearch"
+        >
           <i class="bi bi-search"></i>
         </button>
       </div>
@@ -55,6 +134,59 @@ Listar Cadastros
   </header>
 
   <main class="">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descrição</th>
+            <th scope="col" class="text-center text-nowrap">Tipo de Pessoa</th>
+            <th scope="col" class="text-center">Cliente</th>
+            <th scope="col" class="text-center">Fornecedor</th>
+            <th scope="col" class="text-center">Transportadora</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          {% for cadastro in cadastros %}
+          <tr>
+            <td scope="row">{{ cadastro.pk }}</td>
+            <td class="text-nowrap">
+              <a href="{{ cadastro.get_absolute_url }}"
+                class="{% if cadastro.ativo %}link-body-emphasis{% else %}link-secondary{% endif %} link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
+                {{ cadastro.descricao }}
+              </a>
+            </td>
+            <td class="text-center {% if not cadastro.ativo %}text-secondary{% endif %}">{{ cadastro.get_tipo_pessoa_display }}</td>
+            <td class="text-center">
+              {% if cadastro.eh_cliente %}
+                <i class="bi bi-check {% if cadastro.ativo %}text-success{% else %}text-secondary{% endif %}"></i>
+              {% else %}
+                <i class="bi bi-x {% if cadastro.ativo %}text-danger{% else %}text-secondary{% endif %}"></i>
+              {% endif %}
+            </td>
+            <td class="text-center">
+              {% if cadastro.eh_fornecedor %}
+                <i class="bi bi-check {% if cadastro.ativo %}text-success{% else %}text-secondary{% endif %}"></i>
+              {% else %}
+                <i class="bi bi-x {% if cadastro.ativo %}text-danger{% else %}text-secondary{% endif %}"></i>
+              {% endif %}
+            </td>
+            <td class="text-center">
+              {% if cadastro.eh_transportadora %}
+                <i class="bi bi-check {% if cadastro.ativo %}text-success{% else %}text-secondary{% endif %}"></i>
+              {% else %}
+                <i class="bi bi-x {% if cadastro.ativo %}text-danger{% else %}text-secondary{% endif %}"></i>
+              {% endif %}
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="text-center text-muted fst-italic">Nenhum cadastro encontrado</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
   </main>
 </main>

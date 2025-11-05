@@ -1,0 +1,152 @@
+{% extends "djangosige/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+Criar cadastro
+{% endblock titulo %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="#"><i class="bi bi-house"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'cadastros:listar_cadastros' %}">Cadastros</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Editar {{ cadastro.descricao }}</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block base %}
+<main class="card card-body border-0 shadow-lg mb-3">
+  <header class="row gap-2 mb-3">
+
+    <section class="d-none d-lg-block col-6">
+      <nav class="nav nav-underline">
+        <a
+          href=""
+          class="nav-link text-capitalize {% if not relacionamento %}text-black{% endif %}"
+        >
+          Geral
+        </a>
+        <a
+          href=""
+          class="nav-link text-capitalize {% if relacionamento == 'cliente' %}text-secondary{% endif %} disabled"
+        >
+          Contatos
+        </a>
+        <a
+          href=""
+          class="nav-link text-capitalize {% if relacionamento == 'fornecedor' %}text-secondary{% endif %} disabled"
+        >
+          Endereços
+        </a>
+        <a
+          href=""
+          class="nav-link text-capitalize {% if relacionamento == 'transportadora' %}text-secondary{% endif %} disabled"
+        >
+          Relacionamentos
+        </a>
+      </nav>
+    </section>
+
+    <section class="d-lg-none col-12 col-md-6">
+      <div class="dropdown">
+        <button
+          class="btn btn-outline-secondary dropdown-toggle w-100 text-capitalize"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Geral
+        </button>
+        <ul class="dropdown-menu w-100">
+          <li>
+            <a
+              class="dropdown-item"
+              href=""
+            >
+              Geral
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href=""
+            >
+              Contatos
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href=""
+            >
+              Endereços
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href=""
+            >
+              Relacionamentos
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="col-12 col-md">
+      <div class="d-flex align-items-center justify-content-center justify-content-md-end gap-2">
+        <a
+          href="{% url 'cadastros:listar_cadastros' %}" class="btn btn-outline-secondary">
+          <i class="bi bi-chevron-double-left"></i>
+        </a>
+        <a
+          href="{{ cadastro.get_absolute_url }}" class="btn btn-outline-secondary">
+          <i class="bi bi-chevron-left"></i>
+        </a>
+        <a
+          href="{% url 'cadastros:criar_cadastro' %}" class="btn btn-outline-secondary">
+          <i class="bi bi-plus"></i>
+        </a>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <form action="{{ request.path }}" method="post"  class="row">
+      {% csrf_token %}
+      <div class="col-12 col-md-8 col-lg-10">
+        {{ form.descricao|as_crispy_field }}
+      </div>
+
+      <div class="col-12 col-md-4 col-lg-2">
+        {{ form.tipo_pessoa|as_crispy_field }}
+      </div>
+
+      <div class="col-12 d-flex justify-content-between">
+        {{ form.eh_cliente|as_crispy_field }}
+        {{ form.eh_fornecedor|as_crispy_field }}
+        {{ form.eh_transportadora|as_crispy_field }}
+      </div>
+
+      <div class="col-12">
+        {{ form.observacoes|as_crispy_field }}
+      </div>
+
+      <div class="col-12">
+        {{ form.ativo|as_crispy_field }}
+      </div>
+
+      <button type="submit" class="btn btn-outline-success">
+        Editar {{ cadastro.descricao }}
+      </button>
+    </form>
+  </main>
+</main>
+
+{% endblock base %}
