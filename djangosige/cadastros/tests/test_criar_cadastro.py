@@ -7,7 +7,7 @@ from djangosige.cadastros.pessoas.models import Pessoa
 from djangosige.cadastros.views import CriarCadastro
 
 
-class TestUrlCriarCadastros(TestCase):
+class TestUrlCriarCadastro(TestCase):
     def setUp(self):
         self.resolver = resolve(reverse("cadastros:criar_cadastro"))
 
@@ -24,7 +24,7 @@ class TestUrlCriarCadastros(TestCase):
         self.assertEqual(self.resolver.route, "n/cadastros/criar/")
 
 
-class TestAcessoCriarCadastros(TestCase):
+class TestAcessoCriarCadastro(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = get_user_model().objects.create_user(
@@ -70,7 +70,7 @@ class TestContextoCriarCadastro(TestCase):
         self.assertEqual(self.request.context["pagina"], "cadastros")
 
 
-class TestFormularioCriarCadastros(TestCase):
+class TestFormularioCriarCadastro(TestCase):
     def test_o_form_class_deve_ser_uma_ModelForm_de_Pessoa(self):
         form_class = CriarCadastro.form_class
         self.assertTrue(issubclass(form_class, forms.ModelForm))
@@ -88,7 +88,7 @@ class TestFormularioCriarCadastros(TestCase):
         self.assertListEqual(list(form_class().fields), expected_fields)
 
 
-class TestCriarCadastros(TestCase):
+class TestCriarCadastro(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = get_user_model().objects.create_user(
@@ -96,11 +96,7 @@ class TestCriarCadastros(TestCase):
         )
         cls.url = reverse("cadastros:criar_cadastro")
 
-    def setUp(self):
-        self.client.force_login(self.user)
-
-    def test_um_cadastro_eh_realizado_com_sucesso(self):
-        data = {
+        cls.data = {
             "descricao": "Cliente XPTO",
             "tipo_pessoa": "PJ",
             "eh_cliente": True,
@@ -108,11 +104,26 @@ class TestCriarCadastros(TestCase):
             "eh_transportadora": False,
             "observacoes": "Teste",
         }
-        self.client.post(reverse("cadastros:criar_cadastro"), data)
+
+    def setUp(self):
+        self.client.force_login(self.user)
+
+    def test_um_cadastro_eh_realizado_com_sucesso(self):
+        self.client.post(reverse("cadastros:criar_cadastro"), self.data)
         self.assertEqual(Pessoa.objects.count(), 1)
 
+    def test_redirecionamento_apos_sucesso(self):
+        response = self.client.post(self.url, self.data, follow=False)
+        pessoa = Pessoa.objects.first()
+        self.assertRedirects(response, pessoa.get_absolute_url())
 
-class TestCriarCadastrosFormularioInvalido(TestCase):
+    def test_colaborador_eh_associado_ao_usuario_autenticado(self):
+        self.client.post(self.url, self.data)
+        pessoa = Pessoa.objects.first()
+        self.assertEqual(pessoa.colaborador, self.user)
+
+
+class TestCriarCadastroFormularioInvalido(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = get_user_model().objects.create_user(

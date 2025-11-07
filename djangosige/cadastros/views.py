@@ -4,6 +4,10 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from djangosige.cadastros.pessoas.models import Pessoa
 
+# >>>
+# CREATE
+# <<<
+
 
 class CriarCadastro(LoginRequiredMixin, CreateView):
     extra_context = {"pagina": "cadastros"}
@@ -25,27 +29,32 @@ class CriarCadastro(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+# >>>
+# READ
+# <<<
+
+
 class ListarCadastros(LoginRequiredMixin, ListView):
     extra_context = {"pagina": "cadastros"}
     model = Pessoa
     template_name = "cadastros/listar_cadastros.html"
     context_object_name = "cadastros"
+    paginate_by = 25
 
     def get_relacionamento(self):
         relacionamento = self.kwargs.get("relacionamento")
-        lista_relacionamento = ("cliente", "fornecedor", "transportadora")
-        return relacionamento if relacionamento in lista_relacionamento else None
+        return (
+            relacionamento
+            if relacionamento in {"cliente", "fornecedor", "transportadora"}
+            else None
+        )
 
     def get_queryset(self):
+        queryset = super().get_queryset()
         relacionamento = self.get_relacionamento()
-        queryset = Pessoa.objects.all()
 
-        if relacionamento == "cliente":
-            queryset = queryset.filter(eh_cliente=True)
-        elif relacionamento == "fornecedor":
-            queryset = queryset.filter(eh_fornecedor=True)
-        elif relacionamento == "transportadora":
-            queryset = queryset.filter(eh_transportadora=True)
+        if relacionamento:
+            queryset = queryset.filter(**{f"eh_{relacionamento}": True})
 
         return queryset
 
@@ -60,6 +69,11 @@ class VerCadastro(LoginRequiredMixin, DetailView):
     template_name = "cadastros/ver_cadastro.html"
     model = Pessoa
     context_object_name = "cadastro"
+
+
+# >>>
+# UPDATE
+# <<<
 
 
 class EditarCadastro(LoginRequiredMixin, UpdateView):
@@ -79,3 +93,8 @@ class EditarCadastro(LoginRequiredMixin, UpdateView):
     )
     model = Pessoa
     context_object_name = "cadastro"
+
+
+# >>>
+# DELETE
+# <<<

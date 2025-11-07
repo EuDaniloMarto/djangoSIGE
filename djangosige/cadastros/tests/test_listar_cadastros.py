@@ -14,7 +14,7 @@ class TestUrlListarCadastros(TestCase):
     def test_a_URL_deve_resolver_para_a_classe_de_view_correta(self):
         self.assertEqual(self.resolver.func.view_class, ListarCadastros)
 
-    def test_o_nome_da_URL_deve_ser_listar_cadatros(self):
+    def test_o_nome_da_URL_deve_ser_listar_cadastros(self):
         self.assertEqual(self.resolver.url_name, "listar_cadastros")
 
     def test_o_namespace_deve_ser_cadastros(self):
@@ -25,18 +25,18 @@ class TestUrlListarCadastros(TestCase):
 
 
 class TestUrlListarCadastrosPorRelacionamento(TestCase):
-    def setUp(cls):
-        cls.resolver = resolve(
+    def setUp(self):
+        self.resolver = resolve(
             reverse(
                 "cadastros:listar_cadastros_por_relacionamento",
-                kwargs={"relacionamento": "clientes"},
+                kwargs={"relacionamento": "cliente"},
             )
         )
 
     def test_a_URL_deve_resolver_para_a_classe_de_view_correta(self):
         self.assertEqual(self.resolver.func.view_class, ListarCadastros)
 
-    def test_o_nome_da_URL_deve_ser_listar_cadatros(self):
+    def test_o_nome_da_URL_deve_ser_listar_cadastros(self):
         self.assertEqual(self.resolver.url_name, "listar_cadastros_por_relacionamento")
 
     def test_o_namespace_deve_ser_cadastros(self):
@@ -205,8 +205,8 @@ class TestQuerySetListarCadastros(TestCase):
                 kwargs={"relacionamento": "cliente"},
             )
         )
-        queryset = request.context["cadastros"]
-        self.assertEqual(queryset.count(), 2)
+        for pessoa in request.context["cadastros"]:
+            self.assertTrue(pessoa.eh_cliente)
 
     def test_lista_apenas_os_fornecedores(self):
         request = self.client.get(
@@ -215,8 +215,8 @@ class TestQuerySetListarCadastros(TestCase):
                 kwargs={"relacionamento": "fornecedor"},
             )
         )
-        queryset = request.context["cadastros"]
-        self.assertEqual(queryset.count(), 2)
+        for pessoa in request.context["cadastros"]:
+            self.assertTrue(pessoa.eh_fornecedor)
 
     def test_lista_apenas_os_transportadoras(self):
         request = self.client.get(
@@ -225,8 +225,18 @@ class TestQuerySetListarCadastros(TestCase):
                 kwargs={"relacionamento": "transportadora"},
             )
         )
-        queryset = request.context["cadastros"]
-        self.assertEqual(queryset.count(), 2)
+        for pessoa in request.context["cadastros"]:
+            self.assertTrue(pessoa.eh_transportadora)
+
+    def test_lista_todos_quando_relacionamento_invalido(self):
+        response = self.client.get(
+            reverse(
+                "cadastros:listar_cadastros_por_relacionamento",
+                kwargs={"relacionamento": "invalido"},
+            )
+        )
+        queryset = response.context["cadastros"]
+        self.assertEqual(queryset.count(), Pessoa.objects.count())
 
 
 class TestMetodosGetQuerySetListarCadastros(TestCase):

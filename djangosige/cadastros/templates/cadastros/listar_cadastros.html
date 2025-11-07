@@ -1,5 +1,7 @@
 {% extends "djangosige/base.html" %}
 
+{% load djangosige %}
+
 {% block titulo %}
 Listar
 {% if relacionamento == "cliente" %}
@@ -186,6 +188,10 @@ Todos os Cadastros
           {% endfor %}
         </tbody>
       </table>
+      <div class="d-flex align-items-center justify-content-between">
+        {% contador_registros page_obj %}
+        {% paginacao page_obj %}
+      </div>
     </div>
 
   </main>

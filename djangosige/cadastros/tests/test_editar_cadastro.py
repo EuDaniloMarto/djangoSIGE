@@ -13,7 +13,9 @@ class TestUrlEditarCadastro(TestCase):
         cls.pessoa = PessoaFactory.create()
 
     def setUp(self):
-        self.resolver = resolve(reverse("cadastros:editar_cadastro", kwargs={"pk": self.pessoa.pk}))
+        self.resolver = resolve(
+            reverse("cadastros:editar_cadastro", kwargs={"pk": self.pessoa.pk})
+        )
 
     def test_a_URL_deve_resolver_para_a_classe_de_view_correta(self):
         self.assertEqual(self.resolver.func.view_class, EditarCadastro)
@@ -31,7 +33,9 @@ class TestUrlEditarCadastro(TestCase):
 class TestAcessoEditarCadastro(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = get_user_model().objects.create_user(username="johndoe", password="john@doe.test")
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
         cls.pessoa = PessoaFactory.create(colaborador=cls.user)
         cls.url = reverse("cadastros:editar_cadastro", kwargs={"pk": cls.pessoa.pk})
 
@@ -39,7 +43,9 @@ class TestAcessoEditarCadastro(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 302)
 
-    def test_o_usuario_nao_autenticado_deve_ser_redirecionado_para_a_tela_de_login(self):
+    def test_o_usuario_nao_autenticado_deve_ser_redirecionado_para_a_tela_de_login(
+        self,
+    ):
         response = self.client.get(self.url)
         self.assertIn("/login/", response.url)
 
@@ -52,7 +58,9 @@ class TestAcessoEditarCadastro(TestCase):
 class TestContextoEditarCadastro(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = get_user_model().objects.create_user(username="johndoe", password="john@doe.test")
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
         cls.pessoa = PessoaFactory.create(colaborador=cls.user)
         cls.url = reverse("cadastros:editar_cadastro", kwargs={"pk": cls.pessoa.pk})
 
@@ -98,19 +106,15 @@ class TestFormularioEditarCadastro(TestCase):
 class TestEditarCadastroPost(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = get_user_model().objects.create_user(username="johndoe", password="john@doe.test")
+        cls.user = get_user_model().objects.create_user(
+            username="johndoe", password="john@doe.test"
+        )
         cls.pessoa = PessoaFactory.create(
             descricao="Pessoa Antiga",
             tipo_pessoa="PJ",
             colaborador=cls.user,
         )
-        cls.url = reverse("cadastros:editar_cadastro", kwargs={"pk": cls.pessoa.pk})
-
-    def setUp(self):
-        self.client.force_login(self.user)
-
-    def test_um_cadastro_eh_editado_com_sucesso(self):
-        data = {
+        cls.data = {
             "descricao": "Pessoa Atualizada",
             "tipo_pessoa": "PF",
             "eh_cliente": True,
@@ -119,9 +123,52 @@ class TestEditarCadastroPost(TestCase):
             "ativo": True,
             "observacoes": "Atualizado via teste",
         }
-        self.client.post(self.url, data)
+
+        cls.url = reverse("cadastros:editar_cadastro", kwargs={"pk": cls.pessoa.pk})
+
+    def setUp(self):
+        self.client.force_login(self.user)
+
+    def test_um_cadastro_eh_editado_com_sucesso(self):
+        self.client.post(self.url, self.data)
         self.pessoa.refresh_from_db()
         self.assertEqual(self.pessoa.descricao, "Pessoa Atualizada")
+
+    def test_redirecionamento_apos_edicao_sucesso(self):
+        response = self.client.post(self.url, self.data, follow=False)
+        self.pessoa.refresh_from_db()
+        self.assertRedirects(response, self.pessoa.get_absolute_url())
+
+
+class TestColaboradorNaoEhAlteradoNaEdicao(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user1 = get_user_model().objects.create_user(
+            username="owner", password="owner@test"
+        )
+        cls.user2 = get_user_model().objects.create_user(
+            username="intruso", password="intruso@test"
+        )
+        cls.pessoa = PessoaFactory(colaborador=cls.user1)
+        cls.url = reverse("cadastros:editar_cadastro", kwargs={"pk": cls.pessoa.pk})
+
+    def setUp(self):
+        # Loga como outro usuário (que não é o colaborador original)
+        self.client.force_login(self.user2)
+
+    def test_colaborador_permanece_inalterado_apos_edicao(self):
+        data = {
+            "descricao": "Tentativa de alteração",
+            "tipo_pessoa": "PF",
+            "eh_cliente": True,
+            "eh_fornecedor": False,
+            "eh_transportadora": False,
+            "ativo": True,
+            "observacoes": "Tentando trocar colaborador",
+        }
+        self.client.post(self.url, data)
+        self.pessoa.refresh_from_db()
+        self.assertEqual(self.pessoa.colaborador, self.user1)
 
 
 class TestEditarCadastroFormularioInvalido(TestCase):
@@ -156,7 +203,9 @@ class TestEditarCadastroFormularioInvalido(TestCase):
     def test_o_status_code_deve_ser_200_para_formulario_invalido(self):
         self.assertEqual(self.response.status_code, 200)
 
-    def test_o_template_usado_para_formulario_invalido_deve_ser_editar_cadastro_html(self):
+    def test_o_template_usado_para_formulario_invalido_deve_ser_editar_cadastro_html(
+        self,
+    ):
         self.assertTemplateUsed(self.response, "cadastros/editar_cadastro.html")
 
     def test_o_formulario_deve_conter_erros(self):
@@ -167,6 +216,8 @@ class TestEditarCadastroFormularioInvalido(TestCase):
         form = self.response.context["form"]
         self.assertIn("descricao", form.errors)
 
-    def test_o_erro_do_campo_descricao_deve_ser_mensagem_padrao_de_obrigatoriedade(self):
+    def test_o_erro_do_campo_descricao_deve_ser_mensagem_padrao_de_obrigatoriedade(
+        self,
+    ):
         form = self.response.context["form"]
         self.assertIn("Este campo é obrigatório.", form.errors["descricao"])

@@ -7,7 +7,7 @@ from djangosige.cadastros.pessoas.tests.factories import PessoaFactory
 from djangosige.cadastros.views import VerCadastro
 
 
-class TestUrlVerCadastros(TestCase):
+class TestUrlVerCadastro(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.pessoa = PessoaFactory.create()
@@ -18,7 +18,7 @@ class TestUrlVerCadastros(TestCase):
     def test_a_URL_deve_resolver_para_a_classe_de_view_correta(self):
         self.assertEqual(self.resolver.func.view_class, VerCadastro)
 
-    def test_o_nome_da_URL_deve_ser_ver_cadastros(self):
+    def test_o_nome_da_URL_deve_ser_ver_cadastro(self):
         self.assertEqual(self.resolver.url_name, "ver_cadastro")
 
     def test_o_namespace_deve_ser_cadastros(self):
@@ -28,7 +28,7 @@ class TestUrlVerCadastros(TestCase):
         self.assertEqual(self.resolver.route, "n/cadastros/<int:pk>/")
 
 
-class TestAcessoVerCadastros(TestCase):
+class TestAcessoVerCadastro(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = get_user_model().objects.create_user(
@@ -51,8 +51,15 @@ class TestAcessoVerCadastros(TestCase):
         response = self.client.get(self.pessoa.get_absolute_url())
         self.assertEqual(response.status_code, 200)
 
+    def test_view_deve_retornar_404_se_o_usuario_tentar_acessar_um_cadastro_que_nao_existe(
+        self,
+    ):
+        self.client.force_login(self.user)
+        response = self.client.get("/n/cadastros/9999/")
+        self.assertEqual(response.status_code, 404)
 
-class TestContextoVerCadastros(TestCase):
+
+class TestContextoVerCadastro(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = get_user_model().objects.create_user(
