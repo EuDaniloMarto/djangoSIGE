@@ -63,3 +63,12 @@ def contador_registros(page_obj):
         "fim": page_obj.end_index(),
         "total": page_obj.paginator.count,
     }
+
+
+@register.simple_tag(takes_context=True)
+def order(context, **novos_params):
+    request = context["request"]
+    params = request.GET.copy()
+    for k, v in novos_params.items():
+        params[k] = v
+    return f"?{params.urlencode()}"

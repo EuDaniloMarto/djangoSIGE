@@ -60,6 +60,10 @@ class ListarCadastros(LoginRequiredMixin, FilterView):
 
         return queryset
 
+    def get_ordering(self):
+        ordering = self.request.GET.get("ordering")
+        return ordering if ordering else "descricao"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.setdefault("relacionamento", self.get_relacionamento())
