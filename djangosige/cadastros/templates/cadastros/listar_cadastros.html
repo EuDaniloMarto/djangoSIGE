@@ -1,4 +1,5 @@
 {% extends "djangosige/base.html" %}
+{% load crispy_forms_filters %}
 
 {% load djangosige %}
 
@@ -28,9 +29,9 @@ Todos os Cadastros
 
 {% block base %}
 <header class="d-none d-md-block">
-  <form class="card card-body border-0 shadow-lg mb-3">
+  <form method="get" class="card card-body border-0 shadow-lg mb-3">
     <div class="d-flex align-items-center justify-content-between gap-2">
-      <input type="text" class="form-control">
+      <input type="text" name="descricao" class="textinput form-control" id="id_descricao" placeholder="Quem está procurando?">
       <button type="submit" class="btn btn-outline-secondary">
         <i class="bi bi-search"></i>
       </button>
@@ -199,12 +200,12 @@ Todos os Cadastros
 
 <section class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="modalSearchLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <form class="modal-content">
+    <form method="get" class="modal-content">
       <header class="modal-header border-0">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </header>
       <main class="modal-body">
-        <input type="text" class="form-control">
+        <input type="text" name="descricao" class="textinput form-control" id="id_descricao" placeholder="Quem está procurando?">
       </main>
       <footer class="modal-footer border-0">
         <button type="submit" class="btn btn-outline-secondary w-100">

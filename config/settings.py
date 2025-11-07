@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_filters",
     "djangosige",
     "djangosige.cadastros",
     "djangosige.cadastros.pessoas",

@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView
+from django_filters.views import FilterView
 
 from djangosige.cadastros.pessoas.models import Pessoa
-
+from djangosige.cadastros.pessoas.filters import FiltrarPessoa
 # >>>
 # CREATE
 # <<<
@@ -34,12 +35,13 @@ class CriarCadastro(LoginRequiredMixin, CreateView):
 # <<<
 
 
-class ListarCadastros(LoginRequiredMixin, ListView):
+class ListarCadastros(LoginRequiredMixin, FilterView):
     extra_context = {"pagina": "cadastros"}
     model = Pessoa
     template_name = "cadastros/listar_cadastros.html"
     context_object_name = "cadastros"
     paginate_by = 25
+    filterset_class = FiltrarPessoa
 
     def get_relacionamento(self):
         relacionamento = self.kwargs.get("relacionamento")
@@ -51,8 +53,8 @@ class ListarCadastros(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        relacionamento = self.get_relacionamento()
 
+        relacionamento = self.get_relacionamento()
         if relacionamento:
             queryset = queryset.filter(**{f"eh_{relacionamento}": True})
 

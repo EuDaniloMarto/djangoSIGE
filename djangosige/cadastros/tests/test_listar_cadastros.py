@@ -270,3 +270,28 @@ class TestMetodosGetQuerySetListarCadastros(TestCase):
     ):
         self.view.kwargs = {}
         self.assertIsNone(self.view.get_relacionamento())
+
+
+class TestFiltroDescricao(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = get_user_model().objects.create_user(
+            username="user", password="pass"
+        )
+        PessoaFactory(descricao="Cliente Alfa")
+        PessoaFactory(descricao="Fornecedor Beta")
+        PessoaFactory(descricao="Transportadora Gama")
+
+    def setUp(self):
+        self.client.force_login(self.user)
+        self.url = reverse("cadastros:listar_cadastros")
+
+    def test_filtro_retorna_apenas_itens_correspondentes(self):
+        response = self.client.get(self.url, {"descricao": "cliente"})
+        cadastros = response.context["cadastros"]
+        self.assertEqual(cadastros.count(), 1)
+
+    def test_filtro_sem_parametro_retorna_todos(self):
+        response = self.client.get(self.url)
+        cadastros = response.context["cadastros"]
+        self.assertEqual(cadastros.count(), Pessoa.objects.count())
