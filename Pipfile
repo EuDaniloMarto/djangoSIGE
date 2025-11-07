@@ -10,7 +10,7 @@ geraldo = {file = "https://github.com/thiagopena/geraldo/archive/master.zip"}
 pysignfe = {file = "https://github.com/thiagopena/PySIGNFe/archive/master.zip"}
 signxml = "==2.5.*"
 reportlab = "==3.5.68"
-django = "<3.3,>=3.2"
+django = "<4.3,>=4.2"
 
 [dev-packages]
 
