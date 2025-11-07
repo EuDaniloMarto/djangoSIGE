@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "==3.1.*"
 python-decouple = "==3.1"
 dj-database-url = "==0.5.*"
 geraldo = {file = "https://github.com/thiagopena/geraldo/archive/master.zip"}
 pysignfe = {file = "https://github.com/thiagopena/PySIGNFe/archive/master.zip"}
 signxml = "==2.5.*"
 reportlab = "==3.5.68"
+django = "<3.3,>=3.2"
 
 [dev-packages]
 
