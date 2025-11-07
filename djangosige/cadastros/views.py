@@ -3,8 +3,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_filters.views import FilterView
 
-from djangosige.cadastros.pessoas.models import Pessoa
 from djangosige.cadastros.pessoas.filters import FiltrarPessoa
+from djangosige.cadastros.pessoas.models import Pessoa
+
 # >>>
 # CREATE
 # <<<
@@ -43,31 +44,28 @@ class ListarCadastros(LoginRequiredMixin, FilterView):
     paginate_by = 25
     filterset_class = FiltrarPessoa
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.setdefault("relacionamento", self.get_relacionamento())
+        return context
+
+    def get_ordering(self):
+        return self.request.GET.get("ordering", "descricao")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        relacionamento = self.get_relacionamento()
+        if relacionamento:
+            queryset = queryset.filter(**{f"eh_{relacionamento}": True})
+        return queryset
+
     def get_relacionamento(self):
-        relacionamento = self.kwargs.get("relacionamento")
+        relacionamento = self.request.GET.get("relacionamento")
         return (
             relacionamento
             if relacionamento in {"cliente", "fornecedor", "transportadora"}
             else None
         )
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-
-        relacionamento = self.get_relacionamento()
-        if relacionamento:
-            queryset = queryset.filter(**{f"eh_{relacionamento}": True})
-
-        return queryset
-
-    def get_ordering(self):
-        ordering = self.request.GET.get("ordering")
-        return ordering if ordering else "descricao"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.setdefault("relacionamento", self.get_relacionamento())
-        return context
 
 
 class VerCadastro(LoginRequiredMixin, DetailView):
@@ -103,4 +101,5 @@ class EditarCadastro(LoginRequiredMixin, UpdateView):
 
 # >>>
 # DELETE
+# <<<
 # <<<

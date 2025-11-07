@@ -45,25 +45,25 @@ Todos os Cadastros
     <section class="d-none d-lg-block col-6">
       <nav class="nav nav-underline">
         <a
-          href="{% url 'cadastros:listar_cadastros' %}"
+          href="{%  querystring relacionamento='' %}"
           class="nav-link text-capitalize {% if not relacionamento %}text-black{% endif %}"
         >
           Todos
         </a>
         <a
-          href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='cliente' %}"
+          href="{%  querystring relacionamento='cliente' %}"
           class="nav-link text-capitalize {% if relacionamento == 'cliente' %}text-black{% endif %}"
         >
           Clientes
         </a>
         <a
-          href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='fornecedor' %}"
+          href="{%  querystring relacionamento='fornecedor' %}"
           class="nav-link text-capitalize {% if relacionamento == 'fornecedor' %}text-black{% endif %}"
         >
           Fornecedores
         </a>
         <a
-          href="{% url 'cadastros:listar_cadastros_por_relacionamento' relacionamento='transportadora' %}"
+          href="{%  querystring relacionamento='transportadora' %}"
           class="nav-link text-capitalize {% if relacionamento == 'transportadora' %}text-black{% endif %}"
         >
           Transportadoras
