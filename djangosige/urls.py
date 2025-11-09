@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import url, include
-from django.contrib import admin
 from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include
+from django.urls import re_path as url
+
 from .configs.settings import DEBUG, MEDIA_ROOT, MEDIA_URL
 
 urlpatterns = [
