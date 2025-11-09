@@ -20,10 +20,10 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
 if not DEFAULT_DATABASE_URL:
     DEFAULT_DATABASE_URL = 'sqlite:///' + os.path.join(APP_ROOT, 'db.sqlite3')
-
 DATABASES = {
     'default': config('DATABASE_URL', default=DEFAULT_DATABASE_URL, cast=dburl),
 }
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Application definition
