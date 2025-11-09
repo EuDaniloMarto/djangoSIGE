@@ -1,3 +1,9 @@
-# -*- coding: utf-8 -*-
+"""
+!!! ATENÇÃO !!!
 
-from .settings import *
+Esse pacote está mantido temporariamente apenas para
+manter compatibilidade com o código atual porque alguns
+trechos de código importam-no diretamente.
+"""
+
+from config.settings import *
