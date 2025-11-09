@@ -10,8 +10,26 @@ dj-database-url = "==3.0.1"
 signxml = "==4.2.0"
 geraldo = {file = "https://github.com/thiagopena/geraldo/archive/master.zip"}
 pysignfe = {file = "https://github.com/thiagopena/PySIGNFe/archive/master.zip"}
+django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
+django-compressor = "*"
 
 [dev-packages]
+black = "*"
+isort = "*"
+flake8 = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-cov = "*"
+pytest-sugar = "*"
+factory-boy = "*"
+mypy = "*"
+django-stubs = {extras = ["compatible-mypy"], version = "*"}
+sphinx = "*"
+pre-commit = "*"
+django-debug-toolbar = "*"
+django-extensions = "*"
+django-coverage-plugin = "*"
 
 [requires]
 python_version = "3.12"
