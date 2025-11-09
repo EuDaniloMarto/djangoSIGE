@@ -1,0 +1,38 @@
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--ds=config.settings --reuse-db --import-mode=importlib"
+python_files = [
+    "tests.py",
+    "test_*.py",
+]
+norecursedirs = ["node_modules"]
+
+[tool.coverage.run]
+include = ["djangosige/**"]
+omit = ["*/migrations/*", "*/tests/*"]
+plugins = ["django_coverage_plugin"]
+
+[tool.mypy]
+python_version = "3.9"
+check_untyped_defs = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+plugins = [
+    "mypy_django_plugin.main",
+]
+
+[[tool.mypy.overrides]]
+# Django migrations should not produce any errors:
+module = "*.migrations.*"
+ignore_errors = true
+
+[tool.django-stubs]
+django_settings_module = "djangosige.configs"
+
+[tool.black]
+line-length = "120"
+
+[tool.isort]
+profile = "black"
