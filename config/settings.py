@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "djangosige.apps.fiscal",
     "djangosige.apps.financeiro",
     "djangosige.apps.estoque",
+    "djangosige.cadastros",
 ]
 
 if DEBUG:
