@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 from django.forms import inlineformset_factory
+from django.utils.translation import gettext_lazy as _
 
-from djangosige.apps.vendas.models import OrcamentoVenda, PedidoVenda, ItensVenda, Venda
+from djangosige.apps.vendas.models import ItensVenda, OrcamentoVenda, PedidoVenda, Venda
 
 
 class VendaForm(forms.ModelForm):

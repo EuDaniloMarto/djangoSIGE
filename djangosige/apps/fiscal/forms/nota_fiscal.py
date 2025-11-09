@@ -2,13 +2,25 @@
 
 from django import forms
 from django.forms import inlineformset_factory
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
-from djangosige.apps.fiscal.models import NotaFiscalSaida, NotaFiscalEntrada, AutXML, ConfiguracaoNotaFiscal, TP_AMB_ESCOLHAS, MOD_NFE_ESCOLHAS
 from djangosige.apps.cadastro.models import Empresa
+from djangosige.apps.fiscal.models import (
+    MOD_NFE_ESCOLHAS,
+    TP_AMB_ESCOLHAS,
+    AutXML,
+    ConfiguracaoNotaFiscal,
+    NotaFiscalEntrada,
+    NotaFiscalSaida,
+)
 
 try:
-    from pysignfe.nfe.manifestacao_destinatario import MD_CONFIRMACAO_OPERACAO, MD_DESCONHECIMENTO_OPERACAO, MD_OPERACAO_NAO_REALIZADA, MD_CIENCIA_OPERACAO
+    from pysignfe.nfe.manifestacao_destinatario import (
+        MD_CIENCIA_OPERACAO,
+        MD_CONFIRMACAO_OPERACAO,
+        MD_DESCONHECIMENTO_OPERACAO,
+        MD_OPERACAO_NAO_REALIZADA,
+    )
 except ImportError:
     MD_CONFIRMACAO_OPERACAO = u'210200'
     MD_DESCONHECIMENTO_OPERACAO = u'210220'

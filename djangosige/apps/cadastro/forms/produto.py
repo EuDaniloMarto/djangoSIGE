@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from django import forms
-from django.utils.translation import ugettext_lazy as _
-
-from djangosige.apps.cadastro.models import Produto, Unidade, Marca, Categoria, Fornecedor
-from djangosige.apps.estoque.models import LocalEstoque
-
 from decimal import Decimal
+
+from django import forms
+from django.utils.translation import gettext_lazy as _
+
+from djangosige.apps.cadastro.models import (
+    Categoria,
+    Fornecedor,
+    Marca,
+    Produto,
+    Unidade,
+)
+from djangosige.apps.estoque.models import LocalEstoque
 
 
 class ProdutoForm(forms.ModelForm):

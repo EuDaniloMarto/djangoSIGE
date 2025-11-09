@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 from django.forms import inlineformset_factory
+from django.utils.translation import gettext_lazy as _
 
-from djangosige.apps.estoque.models import MovimentoEstoque, ItensMovimento, EntradaEstoque, SaidaEstoque, TransferenciaEstoque
 from djangosige.apps.cadastro.models import Produto
+from djangosige.apps.estoque.models import (
+    EntradaEstoque,
+    ItensMovimento,
+    MovimentoEstoque,
+    SaidaEstoque,
+    TransferenciaEstoque,
+)
 
 
 class MovimentoForm(forms.ModelForm):

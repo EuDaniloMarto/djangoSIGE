@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
-from djangosige.apps.fiscal.models import GrupoFiscal, ICMS, ICMSSN, ICMSUFDest, IPI, PIS, COFINS
+from django.utils.translation import gettext_lazy as _
+
+from djangosige.apps.fiscal.models import (
+    COFINS,
+    ICMS,
+    ICMSSN,
+    IPI,
+    PIS,
+    GrupoFiscal,
+    ICMSUFDest,
+)
 
 
 class GrupoFiscalForm(forms.ModelForm):
