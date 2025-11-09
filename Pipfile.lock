@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "095d97c3f1f599118e03b98018200d5cfc510ede46343558be393343f3938c34"
+            "sha256": "0bf698f1677b04f90411abb3819b05ccad6c432dd8c073c8cfcc191e1064dae4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -311,12 +311,12 @@
         },
         "django": {
             "hashes": [
-                "sha256:7ca38a78654aee72378594d63e51636c04b8e28574f5505dff630895b5472777",
-                "sha256:a52ea7fcf280b16f7b739cec38fa6d3f8953a5456986944c3ca97e79882b4e38"
+                "sha256:9398e487bcb55e3f142cb56d19fbd9a83e15bb03a97edc31f408361ee76d9d7a",
+                "sha256:c96e64fc3c359d051a6306871bd26243db1bd02317472a62ffdbe6c3cae14280"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.6'",
-            "version": "==3.2.25"
+            "markers": "python_version >= '3.8'",
+            "version": "==4.2.26"
         },
         "geraldo": {
             "file": "https://github.com/thiagopena/geraldo/archive/master.zip"
@@ -597,13 +597,6 @@
             ],
             "index": "pypi",
             "version": "==3.8"
-        },
-        "pytz": {
-            "hashes": [
-                "sha256:360b9e3dbb49a209c21ad61809c7fb453643e048b38924c765813546746e81c3",
-                "sha256:5ddf76296dd8c44c26eb8f4b6f35488f3ccbf6fbbd7adee0b7262d43f0ec2f00"
-            ],
-            "version": "==2025.2"
         },
         "reportlab": {
             "hashes": [

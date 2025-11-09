@@ -9,7 +9,7 @@ dj-database-url = "==0.5.0"
 signxml = "==4.2.0"
 geraldo = {file = "https://github.com/thiagopena/geraldo/archive/master.zip"}
 pysignfe = {file = "https://github.com/thiagopena/PySIGNFe/archive/master.zip"}
-django = "<=3.3,>=3.2"
+django = "<4.3,>=4.2"
 
 [dev-packages]
 
