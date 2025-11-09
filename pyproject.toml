@@ -29,7 +29,7 @@ module = "*.migrations.*"
 ignore_errors = true
 
 [tool.django-stubs]
-django_settings_module = "djangosige.configs"
+django_settings_module = "config.settings"
 
 [tool.black]
 line-length = "120"

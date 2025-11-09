@@ -31,7 +31,7 @@ urlpatterns = [
     path("compras/", include("djangosige.apps.compras.urls")),
     path("financeiro/", include("djangosige.apps.financeiro.urls")),
     path("estoque/", include("djangosige.apps.estoque.urls")),
-    path("cadastros", include("djangosige.cadastros.urls", namespace="cadastros")),
+    path("cadastros/", include("djangosige.cadastros.urls", namespace="cadastros")),
 ]
 
 if settings.DEBUG:
