@@ -3,14 +3,70 @@
 <div class="table-responsive">
   <table class="table table-striped table-hover">
     <thead>
-      <tr>
-        <th class="text-nowrap" scope="col">#</th>
-        <th class="text-nowrap" scope="col">Descrição</th>
-        <th class="text-nowrap text-center" scope="col">T. Pessoa</th>
-        <th class="text-nowrap text-center" scope="col">Cliente</th>
-        <th class="text-nowrap text-center" scope="col">Fornecedor</th>
-        <th class="text-nowrap text-center" scope="col">Transportadora</th>
-      </tr>
+      {% with current_order=request.GET.ordering %}
+        <tr>
+          <th scope="col">
+            {% if current_order == 'pk' %}
+              <a href="?{% querystring ordering='-pk' %}"># ▲</a>
+            {% elif current_order == '-pk' %}
+              <a href="?{% querystring ordering='pk' %}"># ▼</a>
+            {% else %}
+              <a href="?{% querystring ordering='pk' %}">#</a>
+            {% endif %}
+          </th>
+
+          <th scope="col">
+            {% if current_order == 'descricao' %}
+              <a href="?{% querystring ordering='-descricao' %}">Descrição ▲</a>
+            {% elif current_order == '-descricao' %}
+              <a href="?{% querystring ordering='descricao' %}">Descrição ▼</a>
+            {% else %}
+              <a href="?{% querystring ordering='descricao' %}">Descrição</a>
+            {% endif %}
+          </th>
+
+          <th scope="col" class="text-center text-nowrap">
+            {% if current_order == 'tipo_pessoa' %}
+              <a href="?{% querystring ordering='-tipo_pessoa' %}">Tipo de Pessoa ▲</a>
+            {% elif current_order == '-tipo_pessoa' %}
+              <a href="?{% querystring ordering='tipo_pessoa' %}">Tipo de Pessoa ▼</a>
+            {% else %}
+              <a href="?{% querystring ordering='tipo_pessoa' %}">Tipo de Pessoa</a>
+            {% endif %}
+          </th>
+
+          <th scope="col" class="text-center text-nowrap">
+            {% if current_order == 'e_cliente' %}
+              <a href="?{% querystring ordering='-e_cliente' %}">Cliente ▲</a>
+            {% elif current_order == '-e_cliente' %}
+              <a href="?{% querystring ordering='e_cliente' %}">Cliente ▼</a>
+            {% else %}
+              <a href="?{% querystring ordering='-e_cliente' %}">Cliente</a>
+            {% endif %}
+          </th>
+
+          <th scope="col" class="text-center text-nowrap">
+            {% if current_order == 'e_fornecedor' %}
+              <a href="?{% querystring ordering='-e_fornecedor' %}">Fornecedor ▲</a>
+            {% elif current_order == '-e_fornecedor' %}
+              <a href="?{% querystring ordering='e_fornecedor' %}">Fornecedor ▼</a>
+            {% else %}
+              <a href="?{% querystring ordering='-e_fornecedor' %}">Fornecedor</a>
+            {% endif %}
+          </th>
+
+          <th scope="col" class="text-center text-nowrap">
+            {% if current_order == 'e_transportadora' %}
+              <a href="?{% querystring ordering='-e_transportadora' %}">Transportadora ▲</a>
+            {% elif current_order == '-e_transportadora' %}
+              <a href="?{% querystring ordering='e_transportadora' %}">Transportadora ▼</a>
+            {% else %}
+              <a href="?{% querystring ordering='-e_transportadora' %}">Transportadora</a>
+            {% endif %}
+          </th>
+
+        </tr>
+      {% endwith %}
     </thead>
     <tbody class="table-group-divider">
       {% for cadastro in cadastros %}

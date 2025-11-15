@@ -21,6 +21,9 @@ class ListarCadastros(LoginRequiredMixin, PaginaMixin, FilteredPaginationMixin, 
         context["relacionamento"] = self.get_relacionamento()
         return context
 
+    def get_ordering(self):
+        return self.request.GET.get("ordering", "descricao")
+
     def get_queryset(self):
         queryset = super().get_queryset()
         relacionamento = self.get_relacionamento()
