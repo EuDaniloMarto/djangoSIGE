@@ -16,15 +16,15 @@
 {% endblock breadcrumb %}
 
 {% block formulario_busca %}
-  {% include "cadastros/partials/_form_busca.html" %}
+  {% include "cadastros/_form_busca.html" %}
 {% endblock formulario_busca %}
 
 {% block menu_mobile %}
-  {% include "cadastros/partials/_menu_dropdown_da_listagem.html" with relacionamento=relacionamento %}
+  {% include "cadastros/_menu_dropdown_da_listagem.html" with relacionamento=relacionamento %}
 {% endblock menu_mobile %}
 
 {% block menu_desktop %}
-  {% include "cadastros/partials/_menu_da_listagem.html" with relacionamento=relacionamento %}
+  {% include "cadastros/_menu_da_listagem.html" with relacionamento=relacionamento %}
 {% endblock menu_desktop %}
 
 {% block barra_comandos %}
@@ -42,9 +42,9 @@
 {% endblock barra_comandos %}
 
 {% block context %}
-  {% include "cadastros/partials/_tabela.html" with cadastros=cadastros only %}
+  {% include "cadastros/_tabela.html" with cadastros=cadastros only %}
 {% endblock context %}
 
 {% block modal %}
-  {% include "cadastros/partials/_form_busca_avancada.html" %}
+  {% include "cadastros/_form_busca_avancada.html" %}
 {% endblock modal %}

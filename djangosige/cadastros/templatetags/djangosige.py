@@ -32,3 +32,41 @@ def querystring(context, **kwargs):
 
     # Converte os parâmetros de volta para uma string de consulta e retorna
     return updated_params.urlencode()
+
+
+@register.inclusion_tag("partials/pagination.html", takes_context=True)
+def bootstrap_pagination(context, page_obj, base_url="?page="):
+    """
+    Renderiza paginação estilo Bootstrap 5 com elipses (...).
+
+    Args:
+        context: Contexto atual do template (mantém variáveis globais).
+        page_obj: Objeto de página do Django (Paginator.page).
+        base_url: Prefixo da URL (pode incluir parâmetros de busca).
+
+    Retorna:
+        Contexto com:
+            - page_obj: página atual
+            - pages: lista de páginas e elipses
+            - base_url: prefixo da URL (para montar links)
+    """
+    paginator = page_obj.paginator
+    total_pages = paginator.num_pages
+    current = page_obj.number
+
+    # Lógica de exibição de páginas
+    if total_pages <= 7:
+        pages = range(1, total_pages + 1)
+    else:
+        if current <= 4:
+            pages = [1, 2, 3, 4, 5, "...", total_pages - 1, total_pages]
+        elif current >= total_pages - 3:
+            pages = [1, 2, "...", total_pages - 4, total_pages - 3, total_pages - 2, total_pages - 1, total_pages]
+        else:
+            pages = [1, 2, "...", current - 1, current, current + 1, "...", total_pages - 1, total_pages]
+
+    return {
+        "page_obj": page_obj,
+        "pages": pages,
+        "base_url": base_url,
+    }

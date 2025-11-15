@@ -33,11 +33,11 @@
 {% endblock formulario_busca %}
 
 {% block menu_mobile %}
-  {% include "cadastros/partials/_dropdown_cliente.html" with item=relacionamento only %}
+  {% include "cadastros/_dropdown_cliente.html" with item=relacionamento only %}
 {% endblock menu_mobile %}
 
 {% block menu_desktop %}
-  {% include "cadastros/partials/_menu_cliente.html" with item=relacionamento only %}
+  {% include "cadastros/_menu_cliente.html" with item=relacionamento only %}
 {% endblock menu_desktop %}
 
 {% block barra_comandos %}
@@ -61,7 +61,7 @@
 {% block context %}
   <form method="POST" action="{{ request.path }}" class="row">
     {% csrf_token %}
-    {% include "cadastros/partials/_form.html" with form=form cadastro=cadastro only %}
+    {% include "cadastros/_form.html" with form=form cadastro=cadastro only %}
     <div class="order-last order-0">
       <button type="submit" class="btn btn-outline-secondary">
         {% if cadastro %}
