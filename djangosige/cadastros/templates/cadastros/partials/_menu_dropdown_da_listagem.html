@@ -1,0 +1,13 @@
+{% load djangosige %}
+
+<div class="dropdown">
+  <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ relacionamento|default:"todos"|capfirst }}
+  </button>
+  <ul class="dropdown-menu w-100">
+    <li><a class="dropdown-item text-capitalize" href="?{% querystring relacionamento=None %}">todos</a></li>
+    <li><a class="dropdown-item text-capitalize" href="?{% querystring relacionamento='cliente' %}">clientes</a></li>
+    <li><a class="dropdown-item text-capitalize" href="?{% querystring relacionamento='fornecedor' %}">fornecedores</a></li>
+    <li><a class="dropdown-item text-capitalize" href="?{% querystring relacionamento='transportadora' %}">transportadora</a></li>
+  </ul>
+</div>

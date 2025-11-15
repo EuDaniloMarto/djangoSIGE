@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from .choices import EscolherBanco
+from .querysets import PessoaQuerySet
 from .validators import validate_cnpj, validate_cpf
 
 
@@ -64,6 +65,7 @@ class Pessoa(TimeStampedModel):
     e_transportadora = models.BooleanField(_("É Transportadora"), default=False)
     esta_ativo = models.BooleanField(_("Está ativo"), default=True)
     observacoes = models.TextField(_("Observações"), blank=True)
+    objects = PessoaQuerySet.as_manager()
 
     class Meta:
         ordering = ("descricao",)

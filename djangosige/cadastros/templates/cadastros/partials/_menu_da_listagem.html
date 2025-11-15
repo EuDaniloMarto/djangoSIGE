@@ -1,0 +1,44 @@
+{% load djangosige %}
+
+<nav class="nav nav-underline">
+  <a
+    class="
+      text-capitalize {% if not relacionamento %}text-primary{% else %}text-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    href="?{% querystring relacionamento=None %}"
+    {% if not relacionamento %}aria-current="tab"{% endif %}
+  >
+    todos
+  </a>
+  <a
+    class="
+      text-capitalize {% if relacionamento == 'cliente' %}text-primary{% else %}text-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    href="?{% querystring relacionamento='cliente' %}"
+    {% if relacionamento == 'cliente' %}aria-current="tab"{% endif %}
+  >
+    clientes
+  </a>
+  <a
+    class="
+      text-capitalize {% if relacionamento == 'fornecedor' %}text-primary{% else %}text-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    href="?{% querystring relacionamento='fornecedor' %}"
+    {% if relacionamento == 'fornecedor' %}aria-current="tab"{% endif %}
+  >
+    fornecedores
+  </a>
+  <a
+    class="
+      text-capitalize {% if relacionamento == 'transportadora' %}text-primary{% else %}text-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    href="?{% querystring relacionamento='transportadora' %}"
+    {% if relacionamento == 'transportadora' %}aria-current="tab"{% endif %}
+  >
+    transportadoras
+  </a>
+</nav>

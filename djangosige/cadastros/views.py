@@ -1,34 +1,62 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic.edit import ModelFormMixin
+from django_filters.views import FilterView
 
-from .forms import FormularioCriarPessoa, FormularioEditarPessoa
+from .filtros import FiltroPessoa
+from .forms import FormCriarPessoa, FormEditarPessoa, FormVerPessoa
+from .mixins import PaginaMixin
 from .models import Pessoa
 
 
-class ListarCadastros(LoginRequiredMixin, ListView):
-    extra_context = {"pagina": "cadastros"}
+class ListarCadastros(LoginRequiredMixin, PaginaMixin, FilterView):
+    model = Pessoa
     template_name = "cadastros/listar.html"
-    queryset = Pessoa.objects.all()
+    paginate_by = 25
+    context_object_name = "cadastros"
+    filterset_class = FiltroPessoa
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["relacionamento"] = self.get_relacionamento()
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        relacionamento = self.get_relacionamento()
+        filtro = {
+            "cliente": queryset.clientes,
+            "fornecedor": queryset.fornecedores,
+            "transportadora": queryset.transportadoras,
+        }
+        if relacionamento:
+            queryset = filtro[relacionamento]()
+
+        return queryset
+
+    def get_relacionamento(self):
+        relacionamento = self.request.GET.get("relacionamento")
+        return relacionamento if relacionamento in ("cliente", "fornecedor", "transportadora") else None
 
 
-class VerCadastro(LoginRequiredMixin, DetailView):
-    extra_context = {"pagina": "cadastros"}
-    template_name = "cadastros/listar.html"
-    queryset = Pessoa.objects.all()
+class VerCadastro(LoginRequiredMixin, PaginaMixin, ModelFormMixin, DetailView):
+    model = Pessoa
+    template_name = "cadastros/ver.html"
+    form_class = FormVerPessoa
+    context_object_name = "cadastro"
 
 
-class CriarCadastro(LoginRequiredMixin, CreateView):
-    extra_context = {"pagina": "cadastros"}
-    template_name = "cadastros/listar.html"
-    form_class = FormularioCriarPessoa
+class CriarCadastro(LoginRequiredMixin, PaginaMixin, CreateView):
+    template_name = "cadastros/form.html"
+    form_class = FormCriarPessoa
 
     def form_valid(self, form):
-        self.form.instance.colaborador = self.request.user
-        return super().form_valid()
+        form.instance.colaborador = self.request.user
+        return super().form_valid(form)
 
 
-class EditarCadastro(LoginRequiredMixin, UpdateView):
-    extra_context = {"pagina": "cadastros"}
-    template_name = "cadastros/listar.html"
-    form_class = FormularioEditarPessoa
-    queryset = Pessoa.objects.all()
+class EditarCadastro(LoginRequiredMixin, PaginaMixin, UpdateView):
+    model = Pessoa
+    template_name = "cadastros/form.html"
+    form_class = FormEditarPessoa
+    context_object_name = "cadastro"

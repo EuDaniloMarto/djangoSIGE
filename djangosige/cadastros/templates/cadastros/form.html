@@ -1,0 +1,75 @@
+{% extends "cadastros/index.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {% if cadastro %}
+    Editar {{ cadastro.descricao }}
+  {% else %}
+    Criar cadastro
+  {% endif %}
+{% endblock title %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">
+    <a href="#">
+      <i class="bi bi-house"></i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="{% url "cadastros:listar" %}">
+      {{ pagina|capfirst}}
+    </a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    {% if cadastro %}
+      Editar {{ cadastro.descricao }}
+    {% else %}
+      Criar
+    {% endif %}
+  </li>
+{% endblock breadcrumb %}
+
+{% block formulario_busca %}
+{% endblock formulario_busca %}
+
+{% block menu_mobile %}
+  {% include "cadastros/partials/_dropdown_cliente.html" with item=relacionamento only %}
+{% endblock menu_mobile %}
+
+{% block menu_desktop %}
+  {% include "cadastros/partials/_menu_cliente.html" with item=relacionamento only %}
+{% endblock menu_desktop %}
+
+{% block barra_comandos %}
+  {% if cadastro %}
+    <a href="{% url "cadastros:listar" %}" class="btn btn-outline-secondary">
+      <i class="bi bi-chevron-double-left"></i>
+    </a>
+    <a href="{{ cadastro.get_absolute_url }}" class="btn btn-outline-secondary">
+      <i class="bi bi-chevron-left"></i>
+    </a>
+    <a href="{% url "cadastros:criar" %}" class="btn btn-outline-secondary">
+      <i class="bi bi-plus"></i>
+    </a>
+  {% else %}
+    <a href="{% url "cadastros:listar" %}" class="btn btn-outline-secondary">
+      <i class="bi bi-chevron-left"></i>
+    </a>
+  {% endif %}
+{% endblock barra_comandos %}
+
+{% block context %}
+  <form method="POST" action="{{ request.path }}" class="row">
+    {% csrf_token %}
+    {% include "cadastros/partials/_form.html" with form=form cadastro=cadastro only %}
+    <div class="order-last order-0">
+      <button type="submit" class="btn btn-outline-secondary">
+        {% if cadastro %}
+            <i class="bi bi-pencil"></i> {{ cadastro.descricao }}
+          {% else %}
+            <i class="bi bi-plus"></i> Criar cadastro
+          {% endif %}
+      </button>
+    </div>
+  </form>
+{% endblock context %}

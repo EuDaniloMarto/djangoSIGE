@@ -11,3 +11,5 @@ signxml==4.2.0
 crispy-bootstrap5==2025.6
 django-crispy-forms==2.5
 django-compressor==4.5.1
+
+django-filter==25.1; python_version >= '3.9'

@@ -1,0 +1,50 @@
+{% extends "cadastros/index.html" %}
+
+{% block title %}
+  {{ cadastro.descricao }}
+{% endblock title %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">
+    <a href="#">
+      <i class="bi bi-house"></i>
+    </a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="{% url "cadastros:listar" %}">
+      {{ pagina|capfirst}}
+    </a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    {{ cadastro.descricao }}
+  </li>
+{% endblock breadcrumb %}
+
+{% block formulario_busca %}
+{% endblock formulario_busca %}
+
+{% block menu_mobile %}
+  {% include "cadastros/partials/_dropdown_cliente.html" with item=relacionamento only %}
+{% endblock menu_mobile %}
+
+{% block menu_desktop %}
+  {% include "cadastros/partials/_menu_cliente.html" with item=relacionamento only %}
+{% endblock menu_desktop %}
+
+{% block barra_comandos %}
+  <a href="{% url "cadastros:listar" %}" class="btn btn-outline-secondary">
+    <i class="bi bi-chevron-left"></i>
+  </a>
+  <a href="{{ cadastro.get_absolute_update_url }}" class="btn btn-outline-secondary">
+    <i class="bi bi-pencil"></i>
+  </a>
+  <a href="{% url "cadastros:criar" %}" class="btn btn-outline-secondary">
+    <i class="bi bi-plus"></i>
+  </a>
+{% endblock barra_comandos %}
+
+{% block context %}
+  <form class="row">
+    {% include "cadastros/partials/_form.html" with form=form cadastro=cadastro only %}
+  </form>
+{% endblock context %}

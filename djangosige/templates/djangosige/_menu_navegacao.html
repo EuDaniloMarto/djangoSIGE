@@ -1,0 +1,62 @@
+<nav class="nav nav-underline flex-column flex-lg-row">
+  <a
+    class="
+      nav-item text-capitalize {%if pagina == 'cadastros' %}link-primary{% else %}link-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    {% if pagina == 'cadastros' %}aria-current="page"{% endif%}
+    href="{% url "cadastros:listar" %}"
+  >
+    cadastros
+  </a>
+  <a
+    class="
+      nav-item text-capitalize {%if pagina == 'estoque' %}link-primary{% else %}link-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    {% if pagina == 'estoque' %}aria-current="page"{% endif%}
+    href=""
+  >
+    estoque
+  </a>
+  <a
+    class="
+      nav-item text-capitalize {%if pagina == 'vendas' %}link-primary{% else %}link-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    {% if pagina == 'vendas' %}aria-current="page"{% endif%}
+    href=""
+  >
+    vendas
+  </a>
+  <a
+    class="
+      nav-item text-capitalize {%if pagina == 'compras' %}link-primary{% else %}link-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    {% if pagina == 'compras' %}aria-current="page"{% endif%}
+    href=""
+  >
+    compras
+  </a>
+  <a
+    class="
+      nav-item text-capitalize {%if pagina == 'fiscal' %}link-primary{% else %}link-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    {% if pagina == 'fiscal' %}aria-current="page"{% endif%}
+    href=""
+  >
+    fiscal
+  </a>
+  <a
+    class="
+      nav-item text-capitalize {%if pagina == 'financeiro' %}link-primary{% else %}link-body-emphasis{% endif %}
+      link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+    "
+    {% if pagina == 'financeiro' %}aria-current="page"{% endif%}
+    href=""
+  >
+    financeiro
+  </a>
+</nav>

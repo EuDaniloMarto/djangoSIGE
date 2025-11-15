@@ -1,0 +1,60 @@
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-nowrap" scope="col">#</th>
+        <th class="text-nowrap" scope="col">Descrição</th>
+        <th class="text-nowrap text-center" scope="col">T. Pessoa</th>
+        <th class="text-nowrap text-center" scope="col">Cliente</th>
+        <th class="text-nowrap text-center" scope="col">Fornecedor</th>
+        <th class="text-nowrap text-center" scope="col">Transportadora</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      {% for cadastro in cadastros %}
+        <tr>
+          <td>{{ cadastro.id }}</td>
+          <td class="text-nowrap">
+            <a
+              href="{{ cadastro.get_absolute_url }}"
+              class="
+                {% if cadastro.esta_ativo %}link-body-emphasis{% else %}text-secondary{% endif %}
+                link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover
+              "
+            >
+              {{ cadastro.descricao }}
+            </a>
+          </td>
+          <td>{{ cadastro.EscolherTipoPessoa.display }}</td>
+          <td class="text-center">
+            {% if cadastro.e_cliente %}
+            <i class="bi bi-check text-success"></i>
+            {% else %}
+            <i class="bi bi-x text-danger"></i>
+            {% endif %}
+          </td>
+          <td class="text-center">
+            {% if cadastro.e_fornecedor %}
+            <i class="bi bi-check text-success"></i>
+            {% else %}
+            <i class="bi bi-x text-danger"></i>
+            {% endif %}
+          </td>
+          <td class="text-center">
+            {% if cadastro.e_transportadora %}
+            <i class="bi bi-check text-success"></i>
+            {% else %}
+            <i class="bi bi-x text-danger"></i>
+            {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">
+            Nenhum cadastro encontrado.
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

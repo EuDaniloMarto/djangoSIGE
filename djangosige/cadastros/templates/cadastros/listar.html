@@ -1,0 +1,44 @@
+{% extends "cadastros/index.html" %}
+
+{% block title %}
+  Listar Cadastros
+{% endblock title %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item">
+    <a href="#">
+      <i class="bi bi-house"></i>
+    </a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    {{ pagina|capfirst}}
+  </li>
+{% endblock breadcrumb %}
+
+{% block formulario_busca %}
+  {% include "cadastros/partials/_form_busca.html" %}
+{% endblock formulario_busca %}
+
+{% block menu_mobile %}
+  {% include "cadastros/partials/_menu_dropdown_da_listagem.html" with relacionamento=relacionamento %}
+{% endblock menu_mobile %}
+
+{% block menu_desktop %}
+  {% include "cadastros/partials/_menu_da_listagem.html" with relacionamento=relacionamento %}
+{% endblock menu_desktop %}
+
+{% block barra_comandos %}
+  <a href="{% url "cadastros:criar" %}" class="btn btn-outline-secondary">
+    <i class="bi bi-plus"></i>
+  </a>
+  <button class="d-sm-none btn btn-outline-secondary">
+    <i class="bi bi-filter"></i>
+  </button>
+  <button class="d-sm-none btn btn-outline-secondary">
+    <i class="bi bi-search"></i>
+  </button>
+{% endblock barra_comandos %}
+
+{% block context %}
+  {% include "cadastros/partials/_tabela.html" with cadastros=cadastros only %}
+{% endblock context %}

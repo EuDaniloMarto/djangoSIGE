@@ -1,0 +1,17 @@
+{% load crispy_forms_tags %}
+
+<div class="col-12 col-lg-6">
+  {{ form.descricao|as_crispy_field}}
+  {{ form.tipo_pessoa|as_crispy_field}}
+  <div class="d-flex flex-column flex-sm-row justify-content-sm-between gap-sm-3 mb-3">
+    {{ form.e_cliente|as_crispy_field}}
+    {{ form.e_fornecedor|as_crispy_field}}
+    {{ form.e_transportadora|as_crispy_field}}
+  </div>
+  {% if cadastro %}
+  {{ form.esta_ativo|as_crispy_field}}
+  {% endif %}
+</div>
+<div class="col-12 col-lg-6">
+  {{ form.observacoes|as_crispy_field}}
+</div>

@@ -1,0 +1,30 @@
+{% extends "djangosige/_base.html" %}
+
+{% block content %}
+  {% block formulario_busca %}
+  {% endblock formulario_busca %}
+  <section class="card card-body border-0 shadow mb-3">
+    <header class="row gap-2 mb-3">
+      <div class="d-lg-none col-12 col-sm-8">
+        {% block menu_mobile %}
+        {% endblock menu_mobile %}
+      </div>
+
+      <div class="d-none d-lg-block col-md-8">
+        {% block menu_desktop %}
+        {% endblock menu_desktop %}
+      </div>
+
+      <div class="col-12 col-sm">
+        <div class="d-flex align-items-center justify-content-center justify-content-sm-end gap-2">
+          {% block barra_comandos %}
+          {% endblock barra_comandos %}
+        </div>
+      </div>
+    </header>
+    <main>
+      {% block context %}
+      {% endblock context %}
+    </main>
+  </section>
+{% endblock content %}

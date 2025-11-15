@@ -13,6 +13,7 @@ pysignfe = {file = "https://github.com/thiagopena/PySIGNFe/archive/master.zip"}
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 django-compressor = "*"
+django-filter = "*"
 
 [dev-packages]
 black = "*"
