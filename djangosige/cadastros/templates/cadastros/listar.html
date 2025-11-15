@@ -31,10 +31,12 @@
   <a href="{% url "cadastros:criar" %}" class="btn btn-outline-secondary">
     <i class="bi bi-plus"></i>
   </a>
-  <button class="d-sm-none btn btn-outline-secondary">
-    <i class="bi bi-filter"></i>
-  </button>
-  <button class="d-sm-none btn btn-outline-secondary">
+  <button
+    type="button"
+    class="d-sm-none btn btn-outline-secondary"
+    data-bs-toggle="modal"
+    data-bs-target="#modal"
+  >
     <i class="bi bi-search"></i>
   </button>
 {% endblock barra_comandos %}
@@ -42,3 +44,7 @@
 {% block context %}
   {% include "cadastros/partials/_tabela.html" with cadastros=cadastros only %}
 {% endblock context %}
+
+{% block modal %}
+  {% include "cadastros/partials/_form_busca_avancada.html" %}
+{% endblock modal %}

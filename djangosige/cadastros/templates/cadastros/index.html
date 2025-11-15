@@ -27,4 +27,17 @@
       {% endblock context %}
     </main>
   </section>
+
+    <section
+      class="modal fade"
+      id="modal"
+      tabindex="-1"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      {% block modal %}
+      {% endblock modal %}
+    </div>
+  </section>
 {% endblock content %}
