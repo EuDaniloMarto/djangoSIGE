@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f783f8712fc6883a7b8f46a46bffa9c1d923590847b58cad64c02e9204b39a8e"
+            "sha256": "19e5e96df1e5436b737758f687eee45a241d5266cdfff3eb5b7857913b3816f2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -352,6 +352,15 @@
             "index": "pypi",
             "markers": "python_version >= '3.9'",
             "version": "==2.5"
+        },
+        "django-filter": {
+            "hashes": [
+                "sha256:1ec9eef48fa8da1c0ac9b411744b16c3f4c31176c867886e4c48da369c407153",
+                "sha256:4fa48677cf5857b9b1347fed23e355ea792464e0fe07244d1fdfb8a806215b80"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.9'",
+            "version": "==25.1"
         },
         "geraldo": {
             "file": "https://github.com/thiagopena/geraldo/archive/master.zip"
