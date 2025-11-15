@@ -5,11 +5,11 @@ from django_filters.views import FilterView
 
 from .filtros import FiltroPessoa
 from .forms import FormCriarPessoa, FormEditarPessoa, FormVerPessoa
-from .mixins import PaginaMixin
+from .mixins import FilteredPaginationMixin, PaginaMixin
 from .models import Pessoa
 
 
-class ListarCadastros(LoginRequiredMixin, PaginaMixin, FilterView):
+class ListarCadastros(LoginRequiredMixin, PaginaMixin, FilteredPaginationMixin, FilterView):
     model = Pessoa
     template_name = "cadastros/listar.html"
     paginate_by = 25

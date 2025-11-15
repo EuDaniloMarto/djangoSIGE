@@ -34,8 +34,8 @@ def querystring(context, **kwargs):
     return updated_params.urlencode()
 
 
-@register.inclusion_tag("partials/pagination.html", takes_context=True)
-def bootstrap_pagination(context, page_obj, base_url="?page="):
+@register.inclusion_tag("djangosige/_paginacao.html", takes_context=True)
+def paginacao(context, page_obj, base_url="?page="):
     """
     Renderiza paginação estilo Bootstrap 5 com elipses (...).
 
@@ -69,4 +69,16 @@ def bootstrap_pagination(context, page_obj, base_url="?page="):
         "page_obj": page_obj,
         "pages": pages,
         "base_url": base_url,
+    }
+
+
+@register.inclusion_tag("djangosige/_contar_registros.html")
+def contar_registros(page_obj):
+    """
+    Exibe contador tipo 'Exibindo 26–50 de 99 registros'
+    """
+    return {
+        "inicio": page_obj.start_index(),
+        "fim": page_obj.end_index(),
+        "total": page_obj.paginator.count,
     }

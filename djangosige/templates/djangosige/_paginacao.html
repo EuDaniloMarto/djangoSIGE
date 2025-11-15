@@ -1,0 +1,64 @@
+{% if page_obj.has_other_pages %}
+<nav aria-label="Navegação de página">
+  <ul class="pagination justify-content-center">
+
+    {# << Primeira #}
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="{{ base_url }}1" aria-label="Primeira">&laquo;&laquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">&laquo;&laquo;</span>
+      </li>
+    {% endif %}
+
+    {# < Anterior #}
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="{{ base_url }}{{ page_obj.previous_page_number }}" aria-label="Anterior">&laquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">&laquo;</span>
+      </li>
+    {% endif %}
+
+    {# Números com elipses #}
+    {% for p in pages %}
+      {% if p == '...' %}
+        <li class="page-item disabled"><span class="page-link">...</span></li>
+      {% elif p == page_obj.number %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">{{ p }}</span>
+        </li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="{{ base_url }}{{ p }}">{{ p }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {# > Próxima #}
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{{ base_url }}{{ page_obj.next_page_number }}" aria-label="Próxima">&raquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">&raquo;</span>
+      </li>
+    {% endif %}
+
+    {# >> Última #}
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{{ base_url }}{{ page_obj.paginator.num_pages }}" aria-label="Última">&raquo;&raquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">&raquo;&raquo;</span>
+      </li>
+    {% endif %}
+
+  </ul>
+</nav>
+{% endif %}
