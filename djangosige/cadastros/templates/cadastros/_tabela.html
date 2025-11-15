@@ -83,7 +83,7 @@
               {{ cadastro.descricao }}
             </a>
           </td>
-          <td>{{ cadastro.EscolherTipoPessoa.display }}</td>
+          <td class="text-center">{{ cadastro.get_tipo_pessoa_display }}</td>
           <td class="text-center">
             {% if cadastro.e_cliente %}
             <i class="bi bi-check text-success"></i>
