@@ -88,7 +88,7 @@ class Pessoa(TimeStampedModel):
 class PessoaFisica(TimeStampedModel):
     pessoa = models.OneToOneField("cadastros.Pessoa", on_delete=models.CASCADE, related_name="fisica")
     rg = models.CharField(_("RG"), max_length=16, blank=True)
-    cpf = models.CharField(_("CPF"), max_length=11, blank=True, unique=True, validators=[validate_cpf])
+    cpf = models.CharField(_("CPF"), max_length=11, blank=True, validators=[validate_cpf])
     nascimento = models.DateField(_("Data de Nascimento"), blank=True, null=True)
 
     class Meta:
@@ -109,7 +109,7 @@ class PessoaJuridica(TimeStampedModel):
 
     pessoa = models.OneToOneField("cadastros.Pessoa", on_delete=models.CASCADE, related_name="juridica")
     nome_fantasia = models.CharField(_("Nome Fantasia"), max_length=36, blank=True)
-    cnpj = models.CharField(_("CNPJ"), max_length=14, blank=True, unique=True, validators=[validate_cnpj])
+    cnpj = models.CharField(_("CNPJ"), max_length=14, blank=True, validators=[validate_cnpj])
     inscricao_municipal = models.CharField(_("Inscrição Municipal"), max_length=36, blank=True)
     inscricao_estadual = models.CharField(_("Inscrição Estadual"), max_length=36, blank=True)
     proprietario = models.CharField(_("Proprietário"), max_length=64, blank=True)
