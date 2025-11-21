@@ -10,7 +10,6 @@ from .models import Pessoa
 
 
 class ListarCadastros(LoginRequiredMixin, PaginaMixin, FilteredPaginationMixin, FilterView):
-    model = Pessoa
     template_name = "cadastros/listar.html"
     paginate_by = 25
     context_object_name = "cadastros"
@@ -25,15 +24,19 @@ class ListarCadastros(LoginRequiredMixin, PaginaMixin, FilteredPaginationMixin, 
         return self.request.GET.get("ordering", "descricao")
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = Pessoa.objects.only(
+            "pk", "descricao", "tipo_pessoa", "e_cliente", "e_fornecedor", "e_transportadora", "esta_ativo"
+        )
         relacionamento = self.get_relacionamento()
-        filtro = {
-            "cliente": queryset.clientes,
-            "fornecedor": queryset.fornecedores,
-            "transportadora": queryset.transportadoras,
-        }
-        if relacionamento:
-            queryset = filtro[relacionamento]()
+
+        if relacionamento == "cliente":
+            queryset = queryset.clientes()
+        elif relacionamento == "fornecedor":
+            queryset = queryset.fornecedores()
+        elif relacionamento == "transportadora":
+            queryset = queryset.transportadoras()
+        else:
+            queryset = queryset
 
         return queryset
 
